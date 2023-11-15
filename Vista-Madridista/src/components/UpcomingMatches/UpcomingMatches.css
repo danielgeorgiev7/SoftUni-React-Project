@@ -1,0 +1,21 @@
+.upcoming-matches {
+  margin: 5rem 30rem;
+}
+
+.matches-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 5rem;
+}
+.previous-matches-form {
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  padding-bottom: 3rem;
+  padding-left: 1rem;
+  gap: 1rem;
+}
+
+.previous-matches-form label {
+  font-size: 2.5rem;
+}

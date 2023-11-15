@@ -40,8 +40,12 @@
   text-transform: uppercase;
   text-decoration: none;
   color: #00529f;
+  position: relative;
+  transition: all 0.2s;
 }
 
 .header a:hover {
+  left: 0;
+  bottom: 2px;
   color: #cc9600;
 }
