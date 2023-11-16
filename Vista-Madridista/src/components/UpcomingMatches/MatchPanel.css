@@ -1,22 +1,9 @@
 .match-panel {
   list-style: none;
-  background-color: #eee;
+  background-color: #fff;
   border-radius: 1rem;
   display: grid;
-  box-shadow: 0 0.5rem 3rem 1rem rgba(0, 0, 0, 0.15);
-}
-
-.match-panel.ft {
-  background-color: #e5e5e5;
-  box-shadow: 0 0.25rem 2.75rem 0.33rem rgba(0, 0, 0, 0.25);
-}
-
-.match-panel.ft .info {
-  color: #333;
-}
-
-.match-panel.ft .teams {
-  border-right: 2px solid #bbb;
+  box-shadow: 0 0.25rem 2rem 0.5rem rgba(0, 0, 0, 0.12);
 }
 
 .info {
@@ -28,10 +15,7 @@
   text-transform: uppercase;
   font-weight: 500;
   color: #555;
-  border-top-left-radius: 1rem;
-  border-top-right-radius: 1rem;
-
-  border-bottom: 2px solid #00529f;
+  border-bottom: 2px solid #999;
 }
 
 .results {
@@ -58,7 +42,11 @@
 .away-team {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1.2rem;
+}
+
+.real-blue {
+  color: #00529f;
 }
 
 .stats {
@@ -71,15 +59,15 @@
   position: relative;
 }
 
-.stats.loser {
+.loser .stats {
   color: #777;
 }
 
-.stats.winner {
+.winner {
   font-weight: 600;
 }
 
-.stats.winner::after {
+.winner .stats::after {
   content: "▶";
   position: absolute;
   top: 0;
@@ -118,7 +106,7 @@ p.tbd-grey {
 .details-btn {
   margin-top: 1.5rem;
   font-size: 1.4rem;
-  padding: 0.5rem 1.5rem;
+  padding: 0.6rem 1.7rem;
   border: none;
   background-color: #00529f;
   color: #eee;

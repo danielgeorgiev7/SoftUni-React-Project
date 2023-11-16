@@ -1,7 +1,11 @@
 import "./matchPanel.css";
 import { formatDate, checkSameMonth } from "../../utils/DateFormatting";
 function MatchPanel({ match }) {
-  console.log(match);
+  if (match.fixture.id === 1097382) {
+    console.log(match);
+    return;
+  }
+  // console.log(match);
   let display1 = null;
   let display2 = null;
   if (match.league.name === "UEFA Champions League") {
@@ -27,7 +31,9 @@ function MatchPanel({ match }) {
     >
       <div className="info">
         <p>
-          {match.league.name}
+          {display1 !== "Club Friendlies" &&
+            display2 !== "" &&
+            match.league.name}
           {display1 !== null && display2 !== null
             ? display1 + display2
             : " - " + match.league.round}
@@ -35,28 +41,24 @@ function MatchPanel({ match }) {
       </div>
       <div className="results">
         <div className="teams">
-          <div className="home-team">
+          <div
+            className={`home-team ${
+              match.teams.home.id === 541 && "real-blue"
+            } ${match.teams.home.winner ? "winner" : "loser"}`}
+          >
             <img src={match.teams.home.logo} alt="Home team logo" />
             <p>{match.teams.home.name}</p>
-            <div
-              className={`stats ${
-                match.teams.home.winner ? "winner" : "loser"
-              }`}
-            >
-              {match.goals.home}
-            </div>
+            <div className="stats">{match.goals.home}</div>
           </div>
 
-          <div className="away-team">
+          <div
+            className={`away-team ${
+              match.teams.away.id === 541 && "real-blue"
+            } ${match.teams.away.winner ? "winner" : "loser"}`}
+          >
             <img src={match.teams.away.logo} alt="Away team logo" />
             <p>{match.teams.away.name}</p>
-            <div
-              className={`stats ${
-                match.teams.away.winner ? "winner" : "loser"
-              }`}
-            >
-              {match.goals.away}
-            </div>
+            <div className="stats">{match.goals.away}</div>
           </div>
         </div>
         <div className="time">
@@ -72,7 +74,7 @@ function MatchPanel({ match }) {
           {match.fixture.status.short.toLowerCase() !== "ft" && (
             <>
               <p>
-                {isInSameMonth ? weekday + ", " : ""}
+                {isInSameMonth && weekday + ", "}
                 {date}
               </p>
 

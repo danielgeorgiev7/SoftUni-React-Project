@@ -14,6 +14,7 @@
   padding-bottom: 3rem;
   padding-left: 1rem;
   gap: 1rem;
+  align-items: center;
 }
 
 .previous-matches-form label {
