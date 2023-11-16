@@ -1,11 +1,11 @@
 import "./matchPanel.css";
 import { formatDate, checkSameMonth } from "../../utils/DateFormatting";
-function MatchPanel({ match }) {
+function MatchPanel({ match, detailsBtnClickHandler }) {
   if (match.fixture.id === 1097382) {
-    console.log(match);
+    // console.log(match);
     return;
   }
-  // console.log(match);
+  // console.log();
   let display1 = null;
   let display2 = null;
   if (match.league.name === "UEFA Champions League") {
@@ -23,6 +23,7 @@ function MatchPanel({ match }) {
   }
   const isInSameMonth = checkSameMonth(match.fixture.date);
   const [weekday, date, time] = formatDate(match.fixture.date).split(",");
+
   return (
     <li
       className={`match-panel ${
@@ -85,7 +86,12 @@ function MatchPanel({ match }) {
               )}
             </>
           )}{" "}
-          <button className="details-btn ">Details</button>
+          <button
+            className="details-btn"
+            onClick={() => detailsBtnClickHandler(match)}
+          >
+            Details
+          </button>
         </div>
       </div>
     </li>

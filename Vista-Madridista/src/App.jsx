@@ -1,14 +1,15 @@
 import { Routes, Route } from "react-router-dom";
-import UpcomingMatches from "./components/UpcomingMatches/UpcomingMatches";
+import Matches from "./components/Matches/Matches";
 import Players from "./components/Players/Players";
 import ChampionsLeague from "./components/ChampionsLeague/ChampionsLeague";
 import LaLiga from "./components/LaLiga/LaLiga";
 import Profile from "./components/Profile/Profile";
 import Home from "./components/Home/Home";
 import { useEffect, useState } from "react";
+import MatchModal from "./components/Matches/MatchModal";
 
 function App() {
-  const [upcomingMatches, setUpcomingMatches] = useState([]);
+  const [matches, setMatches] = useState([]);
   const [previousMatches, setPreviousMatches] = useState([]);
 
   useEffect(function () {
@@ -1513,7 +1514,7 @@ function App() {
   }, []);
 
   useEffect(function () {
-    setUpcomingMatches([
+    setMatches([
       {
         fixture: {
           id: 1038084,
@@ -3422,24 +3423,21 @@ function App() {
   }, []);
 
   return (
-    <>
-      <Routes>
-        <Route path="/" element={<Home />}></Route>
-        <Route
-          path="/upcoming-matches"
-          element={
-            <UpcomingMatches
-              upcomingMatches={upcomingMatches}
-              previousMatches={previousMatches}
-            />
-          }
-        ></Route>
-        <Route path="/players" element={<Players />}></Route>
-        <Route path="/la-liga" element={<LaLiga />}></Route>
-        <Route path="/champions-league" element={<ChampionsLeague />}></Route>
-        <Route path="/profile" element={<Profile />}></Route>
-      </Routes>
-    </>
+    <Routes>
+      <Route path="/" element={<Home />}></Route>
+      <Route
+        path="/matches"
+        element={
+          <Matches matches={matches} previousMatches={previousMatches} />
+        }
+      >
+        <Route path="/matches/:id" element={<MatchModal />} />
+      </Route>
+      <Route path="/players" element={<Players />}></Route>
+      <Route path="/la-liga" element={<LaLiga />}></Route>
+      <Route path="/champions-league" element={<ChampionsLeague />}></Route>
+      <Route path="/profile" element={<Profile />}></Route>
+    </Routes>
   );
 }
 
@@ -3448,7 +3446,7 @@ export default App;
 // let [previousMatches, setPreviousMatches] = useState([]);
 
 // useEffect(function () {
-//   async function getUpcomingMatches() {
+//   async function getMatches() {
 //     const notStartedResponse = await fetch(
 //       "https://api-football-v1.p.rapidapi.com/v3/fixtures?season=2023&team=541&status=NS",
 //       {
@@ -3477,7 +3475,7 @@ export default App;
 //     return [...toBeDatedData.response, ...notStartedData.response];
 //   }
 
-//   if (upcomingMatches.length === 0) {
-//     setUpcomingMatches(getUpcomingMatches);
+//   if (Matches.length === 0) {
+//     setMatches(getMatches);
 //   }
 // }, []);

@@ -1,0 +1,118 @@
+.modal-outside-blur {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  backdrop-filter: blur(1rem);
+}
+.hidden {
+  display: none;
+}
+.modal-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.modal {
+  transition: transform 0.3s ease-in-out;
+  transform: scale(1);
+  border-radius: 2rem;
+  background-color: #eee;
+  transition: 2s;
+  margin-top: 5rem;
+  padding: 3rem;
+}
+.stadium-img {
+  border-radius: 1rem;
+  height: 45rem;
+  width: 80rem;
+  display: block;
+  box-shadow: 0 0 3rem 1.2em rgba(0, 0, 0, 0.2);
+}
+
+.modal-venue {
+  padding: 0.8rem;
+  display: flex;
+  justify-content: center;
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #eee;
+}
+
+.modal-venue p {
+  text-align: center;
+  background-color: #00529f;
+  min-width: 60rem;
+  padding: 0.5rem;
+  clip-path: polygon(100% 0, 100% 0, 95% 100%, 5% 100%, 0 0, 0 0);
+}
+
+.modal-venue span {
+  padding-right: 0.5rem;
+}
+
+.modal-teams {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1.5fr;
+  color: #00529f;
+  font-size: 2.5rem;
+  padding: 2rem 2rem;
+}
+
+.modal-teams span {
+  font-size: 5rem;
+  letter-spacing: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-home-team,
+.modal-away-team {
+  display: flex;
+  align-items: center;
+}
+
+.modal-home-team p {
+  margin-left: auto;
+  margin-right: 1rem;
+}
+
+.modal-away-team p {
+  margin-right: auto;
+  margin-left: 1rem;
+}
+
+.modal .modal-teams img {
+  display: block;
+  height: 10rem;
+}
+
+.modal.animateOpen {
+  animation: zoomIn 0.3s ease-in-out;
+}
+
+.modal.animateClose {
+  animation: zoomOut 0.3s ease-in-out;
+}
+
+@keyframes zoomOut {
+  0% {
+    scale: 0;
+  }
+  100% {
+    scale: 1;
+  }
+}
+@keyframes zoomIn {
+  0% {
+    scale: 1;
+  }
+  100% {
+    scale: 0;
+  }
+}
