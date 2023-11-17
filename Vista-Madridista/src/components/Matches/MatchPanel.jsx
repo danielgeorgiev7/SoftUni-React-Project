@@ -5,7 +5,6 @@ function MatchPanel({ match, detailsBtnClickHandler }) {
     // console.log(match);
     return;
   }
-  // console.log();
   let display1 = null;
   let display2 = null;
   if (match.league.name === "UEFA Champions League") {
@@ -27,7 +26,7 @@ function MatchPanel({ match, detailsBtnClickHandler }) {
   return (
     <li
       className={`match-panel ${
-        match.fixture.status.short.toLowerCase() === "ft" && "ft"
+        match.fixture.status.short.toLowerCase() === "ft" ? "ft" : ""
       }`}
     >
       <div className="info">
@@ -44,7 +43,7 @@ function MatchPanel({ match, detailsBtnClickHandler }) {
         <div className="teams">
           <div
             className={`home-team ${
-              match.teams.home.id === 541 && "real-blue"
+              match.teams.home.id === 541 ? "real-blue" : ""
             } ${match.teams.home.winner ? "winner" : "loser"}`}
           >
             <img src={match.teams.home.logo} alt="Home team logo" />
@@ -54,7 +53,7 @@ function MatchPanel({ match, detailsBtnClickHandler }) {
 
           <div
             className={`away-team ${
-              match.teams.away.id === 541 && "real-blue"
+              match.teams.away.id === 541 ? "real-blue" : ""
             } ${match.teams.away.winner ? "winner" : "loser"}`}
           >
             <img src={match.teams.away.logo} alt="Away team logo" />

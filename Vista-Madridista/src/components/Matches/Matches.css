@@ -20,3 +20,17 @@
 .previous-matches-form label {
   font-size: 2.5rem;
 }
+
+.matches-heading {
+  width: 100%;
+  text-align: center;
+  font-size: 3rem;
+  color: #00529f;
+  text-transform: uppercase;
+  margin-bottom: 5rem;
+  font-weight: 500;
+}
+
+ul + .matches-heading {
+  margin-top: 5rem;
+}

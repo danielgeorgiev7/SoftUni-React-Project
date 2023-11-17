@@ -37,9 +37,27 @@ function Matches({ matches, previousMatches }) {
             setCheckboxChecked={setCheckboxChecked}
           />
         </form>
-        <ul className="matches-wrapper">
-          {checkboxChecked &&
-            previousMatches.map((match) => (
+        <div>
+          {checkboxChecked && (
+            <>
+              <h2 className="matches-heading">Past Matches</h2>
+              <ul className="matches-wrapper">
+                {previousMatches.map((match) => (
+                  <MatchPanel
+                    match={match}
+                    key={match.fixture?.id}
+                    setModalOpen={setModalOpen}
+                    id={match.fixture?.id}
+                    setCurrentMatch={setCurrentMatch}
+                    detailsBtnClickHandler={detailsBtnClickHandler}
+                  />
+                ))}
+              </ul>
+            </>
+          )}
+          <h2 className="matches-heading">Upcoming Matches</h2>
+          <ul className="matches-wrapper">
+            {matches.map((match) => (
               <MatchPanel
                 match={match}
                 key={match.fixture?.id}
@@ -49,17 +67,8 @@ function Matches({ matches, previousMatches }) {
                 detailsBtnClickHandler={detailsBtnClickHandler}
               />
             ))}
-          {matches.map((match) => (
-            <MatchPanel
-              match={match}
-              key={match.fixture?.id}
-              setModalOpen={setModalOpen}
-              id={match.fixture?.id}
-              setCurrentMatch={setCurrentMatch}
-              detailsBtnClickHandler={detailsBtnClickHandler}
-            />
-          ))}
-        </ul>
+          </ul>
+        </div>
       </div>
     </>
   );

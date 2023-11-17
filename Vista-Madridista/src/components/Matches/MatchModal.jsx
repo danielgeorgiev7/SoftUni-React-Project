@@ -4,8 +4,8 @@ import "./MatchModal.css";
 
 export function MatchModal({ modalOpen, outOfModalHandle, match }) {
   const [buttonClicked, setButtonClicked] = useState("summary");
-
-  if(!match) return;
+  // console.log(match);
+  if (!match) return;
   // const match = {
   //   fixture: {
   //     id: 1030303,
@@ -4564,7 +4564,6 @@ export function MatchModal({ modalOpen, outOfModalHandle, match }) {
     display2 = "";
   }
 
-  console.log(match);
   return (
     <>
       <div
@@ -4576,9 +4575,14 @@ export function MatchModal({ modalOpen, outOfModalHandle, match }) {
         <div className="modal">
           <img
             src={
+              (match.fixture.id === 1030303 && "/rose-bowl-california.jpg") ||
+              (match.fixture.id === 1030312 && "/nrg-stadium-texas.jpg") ||
+              (match.fixture.id === 1030323 &&
+                "/camping-stadium-florida.jpg") ||
+              (match.fixture.id === 1117081 && "/att-stadium-texas.jpg") ||
               "/" +
-              match.teams.home.name.toLowerCase().split(" ").join("-") +
-              ".jpg"
+                match.teams.home.name.toLowerCase().split(" ").join("-") +
+                ".jpg"
             }
             alt={`${match.teams.home.name} stadium`}
             className="stadium-img"
@@ -4633,19 +4637,19 @@ export function MatchModal({ modalOpen, outOfModalHandle, match }) {
           {match.fixture.status.short.toLowerCase() === "ft" && (
             <div className="modal-buttons">
               <button
-                className={buttonClicked === "summary" && "isActive"}
+                className={buttonClicked === "summary" ? "isActive" : ""}
                 onClick={() => setButtonClicked("summary")}
               >
                 Summary
               </button>
               <button
-                className={buttonClicked === "stats" && "isActive"}
+                className={buttonClicked === "stats" ? "isActive" : ""}
                 onClick={() => setButtonClicked("stats")}
               >
-                Stats
+                Statistics
               </button>
               <button
-                className={buttonClicked === "squads" && "isActive"}
+                className={buttonClicked === "squads" ? "isActive" : ""}
                 onClick={() => setButtonClicked("squads")}
               >
                 Squads
