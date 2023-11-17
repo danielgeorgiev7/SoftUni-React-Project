@@ -1,28 +1,73 @@
+import { useState } from "react";
 import "./Header.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 function Header() {
+  const location = useLocation();
+  const [isActive, setIsActive] = useState(
+    location.pathname === "/" ? "home" : location.pathname.substring(1)
+  );
   return (
     <div className="header">
-      <img className="logo" src="/logo.png" alt="Vista Madridista logo" />
+      <Link to="/" onClick={() => setIsActive("home")}>
+        <img className="logo" src="/logo.png" alt="Vista Madridista logo" />
+      </Link>
       <nav>
         <ul>
           <li>
-            <Link to="/">Home</Link>
+            <Link
+              className={`nav-btn ${isActive === "home" && "btn-active"}`}
+              onClick={() => setIsActive("home")}
+              to="/"
+            >
+              Home
+            </Link>
           </li>
           <li>
-            <Link to="/matches">Upcoming matches</Link>
+            <Link
+              className={`nav-btn ${isActive === "matches" && "btn-active"}`}
+              onClick={() => setIsActive("matches")}
+              to="/matches"
+            >
+              Upcoming matches
+            </Link>
           </li>
           <li>
-            <Link to="/players">Players</Link>
+            <Link
+              className={`nav-btn ${isActive === "players" && "btn-active"}`}
+              onClick={() => setIsActive("players")}
+              to="/players"
+            >
+              Players
+            </Link>
           </li>
           <li>
-            <Link to="/la-liga">La Liga</Link>
+            <Link
+              className={`nav-btn ${isActive === "la-liga" && "btn-active"}`}
+              onClick={() => setIsActive("la-liga")}
+              to="/la-liga"
+            >
+              La Liga
+            </Link>
           </li>
           <li>
-            <Link to="/champions-league">Champions League</Link>
+            <Link
+              className={`nav-btn ${
+                isActive === "champions-league" && "btn-active"
+              }`}
+              onClick={() => setIsActive("champions-league")}
+              to="/champions-league"
+            >
+              Champions League
+            </Link>
           </li>
           <li>
-            <Link to="/profile">Profile</Link>
+            <Link
+              className={`nav-btn ${isActive === "profile" && "btn-active"}`}
+              onClick={() => setIsActive("profile")}
+              to="/profile"
+            >
+              Profile
+            </Link>
           </li>
         </ul>
       </nav>

@@ -23,14 +23,11 @@ function Matches({ matches, previousMatches }) {
 
   return (
     <>
-      <div
-        className={`modal-container ${
-          modalOpen ? "modal-outside-blur" : "hidden"
-        }`}
-        onClick={OutOfModalHandle}
-      >
-        <MatchModal match={currentMatch} className />
-      </div>
+      <MatchModal
+        match={currentMatch}
+        modalOpen={modalOpen}
+        outOfModalHandle={OutOfModalHandle}
+      ></MatchModal>
 
       <div className="matches">
         <form name="all-matches" action="#" className="previous-matches-form">
