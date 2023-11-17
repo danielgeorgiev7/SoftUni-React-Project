@@ -12,6 +12,10 @@
 .hidden {
   display: none !important;
 }
+
+.no-scroll {
+  overflow: hidden;
+}
 .modal-wrapper {
   display: flex;
   justify-content: center;
@@ -23,15 +27,20 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #eee;
-  outline: 1.5rem solid #ccc;
+  background-color: #fff;
+  outline: 1.5rem solid #ddd;
   position: fixed;
-  top: 5rem;
+  top: 4rem;
   border-radius: 2rem;
 }
+.modal-content {
+  overflow-y: auto;
+  max-height: calc(100vh - 8rem);
+}
+
 .stadium-img {
-  height: 45rem;
   width: 80rem;
+  height: 45rem;
   display: block;
 }
 
@@ -114,6 +123,7 @@
 
 .more-info {
   text-transform: uppercase;
+  padding-bottom: 2rem;
 }
 
 .modal-upper-info .span-holder {
@@ -140,6 +150,10 @@
 
 .modal-teams .real-blue {
   color: #00529f;
+}
+.modal-buttons {
+  display: flex;
+  justify-content: center;
 }
 
 .modal-buttons > * {

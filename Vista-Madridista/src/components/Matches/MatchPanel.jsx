@@ -5,6 +5,7 @@ function MatchPanel({ match, detailsBtnClickHandler }) {
     // console.log(match);
     return;
   }
+  // console.log(match);
   let display1 = null;
   let display2 = null;
   if (match.league.name === "UEFA Champions League") {

@@ -6,7 +6,7 @@ import LaLiga from "./components/LaLiga/LaLiga";
 import Profile from "./components/Profile/Profile";
 import Home from "./components/Home/Home";
 import { useEffect, useState } from "react";
-import MatchModal from "./components/Matches/MatchModal";
+import MatchModal from "./components/Matches/MatchModal/MatchModal";
 
 function App() {
   const [matches, setMatches] = useState([]);

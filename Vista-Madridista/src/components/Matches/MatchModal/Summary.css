@@ -1,0 +1,83 @@
+.summary {
+  margin: 4rem 0;
+  font-size: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #444;
+}
+
+.half-text {
+  text-align: center;
+  font-size: 1.8rem;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: #fff;
+  background-color: #bbb;
+  width: 70rem;
+  padding: 0.4rem;
+  border-radius: 1.5rem;
+  margin: 2rem 0;
+}
+
+.score {
+  display: flex;
+  gap: 0.5rem;
+  border: 2px solid #eee;
+  background-color: #fff;
+  border-radius: 100px;
+  padding: 0.25rem;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+}
+
+.score p {
+  font-size: 1.4rem;
+  padding: 0.1rem;
+}
+
+.card {
+  width: 1.5rem;
+}
+
+.ball,
+.subst {
+  width: 1.8rem;
+  height: 1.8rem;
+}
+
+.home,
+.away {
+  padding: 0.5rem;
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.away {
+  justify-content: right;
+  flex-direction: row-reverse;
+}
+
+.away .time-elapsed,
+.away .icon {
+  margin-left: 0.25rem;
+}
+
+.home .time-elapsed,
+.home .icon {
+  margin-right: 0.25rem;
+}
+
+.time-elapsed,
+.player,
+.joining-player {
+  font-weight: 600;
+}
+
+.assist,
+.leaving-player {
+  color: #666;
+}
