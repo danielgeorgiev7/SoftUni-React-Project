@@ -1,5 +1,5 @@
 .summary {
-  margin: 4rem 0;
+  margin: 2rem 0;
   font-size: 1.6rem;
   display: flex;
   flex-direction: column;
@@ -14,6 +14,7 @@
   text-transform: uppercase;
   font-weight: 500;
   color: #fff;
+  font-weight: 500;
   background-color: #bbb;
   width: 70rem;
   padding: 0.4rem;
@@ -50,7 +51,7 @@
 
 .home,
 .away {
-  padding: 0.5rem;
+  padding: 0.75rem;
   display: flex;
   gap: 0.75rem;
   align-items: center;
@@ -79,5 +80,48 @@
 
 .assist,
 .leaving-player {
+  color: #666;
+}
+
+.coaches-wrapper {
+  width: 70rem;
+}
+.coaches {
+  margin: 3rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.home-coach,
+.away-coach {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.home-coach img,
+.away-coach img {
+  width: 7.5rem;
+  border-radius: 50%;
+  border: 4px solid #ccc;
+}
+
+.away-coach {
+  flex-direction: row-reverse;
+}
+
+.away-coach .coaches-text {
+  text-align: right;
+}
+
+.coaches-text p:nth-child(1) {
+  font-size: 2rem;
+  font-weight: 500;
+  padding-bottom: 0.5rem;
+}
+
+.coaches-text p:nth-child(2),
+.coaches-text p:nth-child(3) {
+  font-size: 1.5rem;
   color: #666;
 }

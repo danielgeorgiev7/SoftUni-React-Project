@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { formatDate } from "../../../utils/DateFormatting";
 import "./MatchModal.css";
 import Summary from "./Summary";
+import Statistics from "./Statistics";
+import Squads from "./Squads";
 
 export function MatchModal({ modalOpen, outOfModalHandle }) {
   const [buttonClicked, setButtonClicked] = useState("summary");
@@ -4558,6 +4560,12 @@ export function MatchModal({ modalOpen, outOfModalHandle }) {
   };
 
   if (!match) return;
+  const homeLineups = Object.values(
+    match.lineups.filter((lineup) => lineup.team.id === 541 && lineup)
+  )["0"];
+  const awayLineups = Object.values(
+    match.lineups.filter((lineup) => lineup.team.id === 489 && lineup)
+  )[["0"]];
   const date = formatDate(match.fixture.date);
   let display1 = null;
   let display2 = null;
@@ -4582,9 +4590,12 @@ export function MatchModal({ modalOpen, outOfModalHandle }) {
         onClick={outOfModalHandle}
       ></div>
 
-      <div className={`modal-wrapper ${!modalOpen && "hidden"}`}>
+      <div className={`modal-wrapper${!modalOpen ? " hidden" : ""}`}>
         <div className="modal">
           <div className="modal-content">
+            <a className="x-button" onClick={outOfModalHandle}>
+              ×
+            </a>
             <img
               src={
                 (match.fixture.id === 1030303 && "/rose-bowl-california.jpg") ||
@@ -4670,7 +4681,15 @@ export function MatchModal({ modalOpen, outOfModalHandle }) {
                 </button>
               </div>
             )}
-            {buttonClicked === "summary" && <Summary match={match} />}
+            {buttonClicked === "summary" && (
+              <Summary
+                match={match}
+                homeLineups={homeLineups}
+                awayLineups={awayLineups}
+              />
+            )}
+            {buttonClicked === "stats" && <Statistics match={match} />}
+            {buttonClicked === "stats" && <Squads match={match} />}
           </div>
         </div>
       </div>

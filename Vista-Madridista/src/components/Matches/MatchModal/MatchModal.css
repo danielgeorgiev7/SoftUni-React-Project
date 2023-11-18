@@ -36,12 +36,16 @@
 .modal-content {
   overflow-y: auto;
   max-height: calc(100vh - 8rem);
+  position: relative;
+  border-radius: 2rem;
 }
 
 .stadium-img {
   width: 80rem;
   height: 45rem;
   display: block;
+  border-top-right-radius: 2rem;
+  border-top-left-radius: 2rem;
 }
 
 .modal-venue {
@@ -123,7 +127,7 @@
 
 .more-info {
   text-transform: uppercase;
-  padding-bottom: 2rem;
+  padding-bottom: 3rem;
 }
 
 .modal-upper-info .span-holder {
@@ -181,4 +185,20 @@
 .isActive:hover {
   background-color: #00529f;
   cursor: auto;
+}
+
+.x-button {
+  cursor: pointer;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 2px;
+  font-size: 3.75rem;
+  height: 3.5rem;
+  width: 3.5rem;
+  border-radius: 50%;
+  background-color: #ddd;
+  top: 5rem;
+  right: 57rem;
 }
