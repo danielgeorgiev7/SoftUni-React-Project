@@ -1,12 +1,16 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { formatDate } from "../../utils/DateFormatting";
 import "./MatchModal.css";
 import Summary from "./Modal/Summary";
 import Statistics from "./Modal/Statistics";
 import Squads from "./Modal/Squads";
 
-export function MatchModal({ modalOpen, outOfModalHandle }) {
-  const [buttonClicked, setButtonClicked] = useState("summary");
+export function MatchModal({
+  modalOpen,
+  outOfModalHandle,
+  buttonClicked,
+  setButtonClicked,
+}) {
   useEffect(
     function () {
       if (modalOpen) {

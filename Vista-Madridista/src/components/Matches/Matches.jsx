@@ -10,6 +10,7 @@ function Matches({ matches, previousMatches }) {
   const [checkboxChecked, setCheckboxChecked] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [currentMatch, setCurrentMatch] = useState(null);
+  const [buttonClicked, setButtonClicked] = useState("summary");
 
   function detailsBtnClickHandler(match) {
     setModalOpen(true);
@@ -19,6 +20,7 @@ function Matches({ matches, previousMatches }) {
 
   async function OutOfModalHandle() {
     setModalOpen(false);
+    setButtonClicked("summary");
   }
 
   return (
@@ -27,6 +29,8 @@ function Matches({ matches, previousMatches }) {
         match={currentMatch}
         modalOpen={modalOpen}
         outOfModalHandle={OutOfModalHandle}
+        buttonClicked={buttonClicked}
+        setButtonClicked={setButtonClicked}
       ></MatchModal>
 
       <div className="matches">
