@@ -2,7 +2,7 @@ import { useState } from "react";
 import MatchPanel from "./MatchPanel";
 import "./Matches.css";
 import Checkbox from "./Checkbox";
-import MatchModal from "./MatchModal/MatchModal";
+import MatchModal from "./MatchModal";
 import { useNavigate } from "react-router";
 
 function Matches({ matches, previousMatches }) {

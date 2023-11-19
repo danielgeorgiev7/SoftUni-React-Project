@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import { formatDate } from "../../../utils/DateFormatting";
+import { formatDate } from "../../utils/DateFormatting";
 import "./MatchModal.css";
-import Summary from "./Summary";
-import Statistics from "./Statistics";
-import Squads from "./Squads";
+import Summary from "./Modal/Summary";
+import Statistics from "./Modal/Statistics";
+import Squads from "./Modal/Squads";
 
 export function MatchModal({ modalOpen, outOfModalHandle }) {
   const [buttonClicked, setButtonClicked] = useState("summary");
@@ -4689,7 +4689,13 @@ export function MatchModal({ modalOpen, outOfModalHandle }) {
               />
             )}
             {buttonClicked === "stats" && <Statistics match={match} />}
-            {buttonClicked === "stats" && <Squads match={match} />}
+            {buttonClicked === "squads" && (
+              <Squads
+                match={match}
+                homeLineups={homeLineups}
+                awayLineups={awayLineups}
+              />
+            )}
           </div>
         </div>
       </div>

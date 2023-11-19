@@ -1,0 +1,79 @@
+.squads {
+  margin: 2rem 0;
+  font-size: 1.8rem;
+  display: flex;
+  flex-direction: column;
+  color: #333;
+  width: 70rem;
+}
+
+h2 {
+  font-weight: 600;
+  text-transform: uppercase;
+  border-radius: 2rem;
+  font-size: 2rem;
+  padding: 0.5rem;
+  width: 70rem;
+}
+.real-madrid-squad h2,
+.other-club-squad h2 {
+  background-color: #00529f;
+  color: #fff;
+}
+
+.real-madrid-squad,
+.other-club-squad {
+  margin: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  text-align: center;
+  align-items: center;
+  padding-bottom: 1.5rem;
+}
+
+.coach {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.coach img {
+  height: 7rem;
+  width: 7rem;
+  border-radius: 50%;
+  border: 4px solid #ddd;
+}
+
+.coach-textbox {
+  font-size: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.coach-textbox p:nth-child(1) {
+  font-weight: 600;
+  font-size: 1.8rem;
+  padding-bottom: 0.3rem;
+}
+
+.coach-textbox p:not(:nth-child(1)) {
+  color: #666;
+  font-weight: 500;
+}
+
+.players {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 100%;
+  gap: 1rem;
+}
+
+.squads-subheading {
+  padding-top: 1rem;
+  color: #00529f;
+  font-size: 2.2rem;
+  text-transform: uppercase;
+  font-weight: 600;
+}

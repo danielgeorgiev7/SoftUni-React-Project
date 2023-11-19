@@ -2,8 +2,6 @@ import "./Summary.css";
 import SummaryItem from "./SummaryItem";
 function Summary({ match, homeLineups, awayLineups }) {
   if (!match) return;
-  console.log(homeLineups);
-  console.log(awayLineups);
   const homeId = match.teams.home.id;
   let scoreForSummary = { home: 0, away: 0 };
 
@@ -13,7 +11,6 @@ function Summary({ match, homeLineups, awayLineups }) {
   const eventsSecondHalf = match.events.filter(
     (event) => event.time.elapsed > 45
   );
-  // console.log(eventsFirstHalf);
   return (
     <div className="summary">
       <div className="half">
