@@ -1,0 +1,72 @@
+.players-panel {
+  display: flex;
+  box-shadow: 0 0.25rem 2rem 0.25rem rgba(0, 0, 0, 0.25);
+  padding: 1.4rem 2.2rem;
+  border-radius: 2rem;
+  position: relative;
+  width: 37.5rem;
+  color: #333;
+}
+
+.players-panel-img-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.players-panel img {
+  display: block;
+  width: 10rem;
+  height: 10rem;
+  border-radius: 50%;
+  border: 4px solid #ddd;
+}
+
+.players-panel-name {
+  font-size: 2em;
+  font-weight: 600;
+  padding-bottom: 0.6rem;
+}
+
+.players-panel-name span {
+  color: #555;
+}
+
+.players-panel-info {
+  padding: 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.players-panel-info p {
+  font-size: 1.7rem;
+  padding-bottom: 0.6rem;
+}
+
+.players-panel-info .players-panel-position {
+  font-size: 1.8rem;
+}
+
+.players-panel a {
+  cursor: pointer;
+  position: absolute;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  width: fit-content;
+  padding: 0.8rem 1.6rem;
+  font-size: 1.6rem;
+  background-color: #00529f;
+  color: #fff;
+  border-radius: 100px;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+}
+
+.players-panel a:hover {
+  background-color: #cc9600;
+  right: 1.5rem;
+  bottom: calc(1.5rem + 2px);
+}
+
+.players-panel-age span {
+  font-weight: 500;
+}
