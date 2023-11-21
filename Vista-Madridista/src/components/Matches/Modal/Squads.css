@@ -63,7 +63,7 @@ h2 {
   font-weight: 500;
 }
 
-.players {
+.squads-players {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   width: 100%;

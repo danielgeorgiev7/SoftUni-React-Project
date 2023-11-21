@@ -41,6 +41,7 @@
   max-height: calc(100vh - 8rem);
   position: relative;
   border-radius: 2rem;
+  scroll-behavior: smooth;
 }
 
 .stadium-img {

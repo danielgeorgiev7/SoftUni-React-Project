@@ -24,7 +24,7 @@ function Squads({ match, homeLineups, awayLineups }) {
         </div>
 
         <p className="squads-subheading">Starting XI</p>
-        <div className="players">
+        <div className="squads-players">
           {realMadridLineups.startXI.map(({ player }) => (
             <SquadsPlayer
               key={player.id}
@@ -35,7 +35,7 @@ function Squads({ match, homeLineups, awayLineups }) {
           ))}
         </div>
         <p className="squads-subheading">Substitutes</p>
-        <div className="players">
+        <div className="squads-players">
           {realMadridLineups.substitutes.map(({ player }) => (
             <SquadsPlayer
               key={player.id}
@@ -61,7 +61,7 @@ function Squads({ match, homeLineups, awayLineups }) {
           </div>
         </div>
         <p className="squads-subheading">Starting XI</p>
-        <div className="players">
+        <div className="squads-players">
           {otherClubLineups.startXI.map(({ player }) => (
             <SquadsPlayer
               key={player.id}
@@ -72,7 +72,7 @@ function Squads({ match, homeLineups, awayLineups }) {
           ))}
         </div>
         <p className="squads-subheading">Substitutes</p>
-        <div className="players">
+        <div className="squads-players">
           {otherClubLineups.substitutes.map(({ player }) => (
             <SquadsPlayer
               key={player.id}
