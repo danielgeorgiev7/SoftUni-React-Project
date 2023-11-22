@@ -10,7 +10,7 @@
 .previous-matches-form {
   width: 100%;
   display: flex;
-  justify-content: start;
+  justify-content: center;
   padding-bottom: 3rem;
   padding-left: 1rem;
   gap: 1rem;
@@ -18,7 +18,7 @@
 }
 
 .previous-matches-form label {
-  font-size: 2.5rem;
+  font-size: 2.7rem;
 }
 
 .matches-heading {
