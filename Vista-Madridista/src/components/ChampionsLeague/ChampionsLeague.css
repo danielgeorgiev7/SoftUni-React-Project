@@ -1,0 +1,107 @@
+.cl-groups {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  font-size: 1.6rem;
+  margin: 5rem auto 10rem;
+  width: 75%;
+  text-align: center;
+  row-gap: 5rem;
+  color: #333;
+}
+
+.cl-group-text {
+  margin-bottom: 2rem;
+  font-size: 2.7rem;
+}
+
+.cl-group-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cl-group-container h2 {
+  text-align: center;
+  color: #00529f;
+}
+
+.cl-header,
+.cl-team-card {
+  display: grid;
+  grid-template-columns: 1fr 6fr 1fr 1fr 1fr 1fr 1fr 1fr 3.5fr 1fr;
+  padding: 1rem;
+  border-bottom: 1px solid #ccc;
+  align-items: center;
+}
+
+.cl-header {
+  font-weight: 700;
+  color: #fff;
+  background-color: #00529f;
+  border-top-right-radius: 2rem;
+  border-top-left-radius: 2rem;
+  text-transform: uppercase;
+  padding: 1.5rem 1rem;
+  box-shadow: 0 0.25rem 2rem 0.25rem rgba(0, 0, 0, 0.25);
+}
+
+.cl-header,
+.cl-team-rows,
+.cl-group-text {
+  width: 90%;
+}
+
+.cl-team-card img {
+  display: block;
+  height: 3.5rem;
+  width: 3.5rem;
+  object-fit: cover;
+  object-position: center;
+}
+
+.cl-team-info {
+  font-size: 1.8rem;
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.cl-team-info span {
+  font-weight: 500;
+}
+
+.cl-form {
+  font-size: 1.5rem;
+  display: flex;
+  gap: 0.3rem;
+  justify-content: center;
+}
+
+.cl-team-rows {
+  box-shadow: 0 0.25rem 2rem 0.25rem rgba(0, 0, 0, 0.25);
+  border-bottom-right-radius: 2rem;
+  border-bottom-left-radius: 2rem;
+}
+
+.cl-team-card:last-of-type {
+  border-bottom: none;
+}
+
+.cl-real {
+  background-color: rgb(0, 82, 158, 0.15);
+  font-weight: 600;
+}
+
+.cl-real .cl-form {
+  font-weight: normal;
+}
+
+.cl-form .w,
+.cl-form .d,
+.cl-form .l {
+  color: #fff;
+  padding-top: 0.4rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.5rem;
+}

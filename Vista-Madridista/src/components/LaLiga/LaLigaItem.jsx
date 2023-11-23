@@ -1,11 +1,11 @@
-function TeamItem({ teamData }) {
+function LaLigaItem({ teamData }) {
   return (
     <div
       className={`standings-row ${
         teamData.team.id === 541 ? "standings-real" : ""
       }`}
     >
-      <span>{teamData.rank}</span>
+      <span>{teamData.rank}.</span>
       <div className="standings-team-info">
         <img src={teamData.team.logo} alt={teamData.team.name} />
         <span>{teamData.team.name}</span>
@@ -18,7 +18,7 @@ function TeamItem({ teamData }) {
         {teamData.all.goals.for}:{teamData.all.goals.against}
       </span>
       <span>{teamData.goalsDiff}</span>
-      <div className="form">
+      <div className="standings-form">
         {teamData.form.split("").map((current, index) => (
           <span
             key={`${teamData.team.name}-form-${index + 1}`}
@@ -33,4 +33,4 @@ function TeamItem({ teamData }) {
   );
 }
 
-export default TeamItem;
+export default LaLigaItem;

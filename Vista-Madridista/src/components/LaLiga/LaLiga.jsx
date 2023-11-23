@@ -1,5 +1,5 @@
 import "./LaLiga.css";
-import TeamItem from "./TeamItem";
+import LaLigaItem from "./LaLigaItem";
 function LaLiga() {
   const laLigaTable = [
     {
@@ -935,7 +935,7 @@ function LaLiga() {
       </div>
       <div className="standings-rows">
         {laLigaTable["0"].league.standings["0"].map((teamData) => (
-          <TeamItem
+          <LaLigaItem
             teamData={teamData}
             key={`la-liga-table-${teamData.team.id}`}
           />

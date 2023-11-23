@@ -3,7 +3,7 @@
   background-color: #fff;
   border-radius: 1rem;
   display: grid;
-  box-shadow: 0 0.25rem 1.5rem 0.25rem rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0.25rem 1.5rem 0.5rem rgba(0, 0, 0, 0.25);
 }
 
 .info {
@@ -11,7 +11,7 @@
   justify-content: space-between;
   padding: 1.5rem 1.5rem;
   padding-bottom: 1.25rem;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   text-transform: uppercase;
   font-weight: 500;
   color: #555;
@@ -35,7 +35,7 @@
 }
 
 .results p {
-  font-size: 1.8rem;
+  font-size: 1.9rem;
 }
 
 .home-team,
@@ -54,7 +54,7 @@
   align-items: center;
   justify-content: center;
   margin-left: auto;
-  font-size: 1.6rem;
+  font-size: 1.7rem;
   padding-right: 1.8rem;
   position: relative;
 }
@@ -70,7 +70,7 @@
 .winner .stats::after {
   content: "▶";
   position: absolute;
-  top: 0;
+  top: 0.2rem;
   left: 1.2rem;
   font-size: 1.4rem;
   transform: rotate(180deg);
@@ -121,11 +121,6 @@ p.tbd-grey {
   background-color: #cc9600;
   left: 0;
   bottom: 2px;
-}
-
-.ft {
-  background-color: #e7e7e7;
-  box-shadow: 0 0.25rem 1.5rem 0.25rem rgba(0, 0, 0, 0.3);
 }
 
 .ft .teams {
