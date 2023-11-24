@@ -4,7 +4,9 @@ import { Link, useLocation } from "react-router-dom";
 function Header() {
   const location = useLocation();
   const [isActive, setIsActive] = useState(
-    location.pathname === "/" ? "home" : location.pathname.substring(1)
+    location.pathname === "/"
+      ? "home"
+      : location.pathname.substring(1).split("/")[0]
   );
   return (
     <div className="header">

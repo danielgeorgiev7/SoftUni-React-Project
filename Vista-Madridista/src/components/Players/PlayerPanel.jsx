@@ -1,6 +1,5 @@
 import "./PlayerPanel.css";
-function PlayerPanel({ player }) {
-  console.log(player);
+function PlayerPanel({ player, detailsOnClickHandler }) {
   return (
     <div className="players-panel">
       <div className="players-panel-img-wrapper">
@@ -14,7 +13,7 @@ function PlayerPanel({ player }) {
         <p className="players-panel-age">
           Age: <span>{player.age}</span>
         </p>
-        <a>Details</a>
+        <a onClick={() => detailsOnClickHandler(player)}>Details</a>
       </div>
     </div>
   );

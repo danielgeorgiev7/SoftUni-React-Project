@@ -7,6 +7,7 @@ import Profile from "./components/Profile/Profile";
 import Home from "./components/Home/Home";
 import { useEffect, useState } from "react";
 import MatchModal from "./components/Matches/MatchModal";
+import PlayersModal from "./components/Players/PlayersModal";
 
 function App() {
   const [matches, setMatches] = useState([]);
@@ -3433,7 +3434,9 @@ function App() {
       >
         <Route path="/matches/:id" element={<MatchModal />} />
       </Route>
-      <Route path="/players" element={<Players />}></Route>
+      <Route path="/players" element={<Players />}>
+        <Route path="/players/:id" element={<PlayersModal />} />
+      </Route>
       <Route path="/la-liga" element={<LaLiga />}></Route>
       <Route path="/champions-league" element={<ChampionsLeague />}></Route>
       <Route path="/profile" element={<Profile />}></Route>

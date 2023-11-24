@@ -1,7 +1,13 @@
+import PlayersModal from "./PlayersModal";
 import PlayerPanel from "./PlayerPanel";
 import "./Players.css";
+import { useState } from "react";
+import { useNavigate } from "react-router";
 
 function Players() {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [currentPlayer, setCurrentPlayer] = useState(null);
+  const navigate = useNavigate();
   const playersInfo = [
     {
       team: {
@@ -290,41 +296,65 @@ function Players() {
     (player) => player.position === "Attacker"
   );
 
-  console.log(goalkeepers);
+  async function OutOfModalHandle() {
+    setModalOpen(false);
+  }
 
+  function detailsOnClickHandler(player) {
+    setModalOpen(true);
+    setCurrentPlayer(player.id);
+    navigate(`/players/${player.id}`);
+  }
   return (
-    <div className="players">
-      <h2 className="players-heading">Goalkeepers</h2>
-      <div className="players-panel-wrapper">
-        {goalkeepers.map((goalkeeper) => (
-          <PlayerPanel
-            player={goalkeeper}
-            key={`players-panel-${goalkeeper.id}`}
-          />
-        ))}
+    <>
+      <PlayersModal
+        playerId={currentPlayer}
+        modalOpen={modalOpen}
+        outOfModalHandle={OutOfModalHandle}
+      ></PlayersModal>
+      <div className="players">
+        <h2 className="players-heading">Goalkeepers</h2>
+        <div className="players-panel-wrapper">
+          {goalkeepers.map((goalkeeper) => (
+            <PlayerPanel
+              player={goalkeeper}
+              key={`players-panel-${goalkeeper.id}`}
+              detailsOnClickHandler={detailsOnClickHandler}
+            />
+          ))}
+        </div>
+        <h2 className="players-heading">Defenders</h2>
+        <div className="players-panel-wrapper">
+          {defenders.map((defender) => (
+            <PlayerPanel
+              player={defender}
+              key={`players-panel-${defender.id}`}
+              detailsOnClickHandler={detailsOnClickHandler}
+            />
+          ))}
+        </div>
+        <h2 className="players-heading">Midfielders</h2>
+        <div className="players-panel-wrapper">
+          {midfielders.map((midfielder) => (
+            <PlayerPanel
+              player={midfielder}
+              key={`players-panel-${midfielder.id}`}
+              detailsOnClickHandler={detailsOnClickHandler}
+            />
+          ))}
+        </div>
+        <h2 className="players-heading">Attackers</h2>
+        <div className="players-panel-wrapper">
+          {attackers.map((attacker) => (
+            <PlayerPanel
+              player={attacker}
+              key={`players-panel-${attacker.id}`}
+              detailsOnClickHandler={detailsOnClickHandler}
+            />
+          ))}
+        </div>
       </div>
-      <h2 className="players-heading">Defenders</h2>
-      <div className="players-panel-wrapper">
-        {defenders.map((defender) => (
-          <PlayerPanel player={defender} key={`players-panel-${defender.id}`} />
-        ))}
-      </div>
-      <h2 className="players-heading">Midfielders</h2>
-      <div className="players-panel-wrapper">
-        {midfielders.map((midfielder) => (
-          <PlayerPanel
-            player={midfielder}
-            key={`players-panel-${midfielder.id}`}
-          />
-        ))}
-      </div>
-      <h2 className="players-heading">Attackers</h2>
-      <div className="players-panel-wrapper">
-        {attackers.map((attacker) => (
-          <PlayerPanel player={attacker} key={`players-panel-${attacker.id}`} />
-        ))}
-      </div>
-    </div>
+    </>
   );
 }
 
