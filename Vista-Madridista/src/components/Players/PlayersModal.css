@@ -1,5 +1,6 @@
 .players-modal {
   margin: 3rem 0;
+  margin-bottom: 1.5rem;
   padding-right: 4rem;
   width: 80rem;
   display: flex;
@@ -37,4 +38,43 @@
 .players-modal-info-p-wrapper {
   display: flex;
   gap: 2rem;
+}
+
+.players-modal-position {
+  margin-left: 0.75rem;
+  margin-bottom: 0.5rem;
+  font-style: italic;
+}
+
+.players-modal-buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.players-modal-buttons > * {
+  background-color: #ddd;
+  border: 2px solid #bbb;
+  color: #333;
+  font-size: 1.8rem;
+  margin: 1rem 2rem;
+  border-radius: 100px;
+  width: 20rem;
+  padding: 0.5rem 1rem;
+  text-align: center;
+}
+
+.players-modal-buttons > *:hover {
+  background-color: #ccc;
+  cursor: pointer;
+}
+
+.isActive {
+  background-color: #00529f;
+  color: #eee;
+  border: 2px solid #00529f;
+}
+
+.isActive:hover {
+  background-color: #00529f;
+  cursor: auto;
 }

@@ -6,7 +6,10 @@ import { useNavigate } from "react-router";
 
 function Players() {
   const [modalOpen, setModalOpen] = useState(false);
-  const [currentPlayer, setCurrentPlayer] = useState(null);
+  const [currentPlayerId, setCurrentPlayerId] = useState(null);
+  const [currentPlayerPosition, setCurrentPlayerPosition] = useState(null);
+  const [buttonClicked, setButtonClicked] = useState("la-liga");
+
   const navigate = useNavigate();
   const playersInfo = [
     {
@@ -302,15 +305,19 @@ function Players() {
 
   function detailsOnClickHandler(player) {
     setModalOpen(true);
-    setCurrentPlayer(player.id);
+    setCurrentPlayerId(player.id);
     navigate(`/players/${player.id}`);
+    setCurrentPlayerPosition(player.position);
   }
   return (
     <>
       <PlayersModal
-        playerId={currentPlayer}
+        playerId={currentPlayerId}
         modalOpen={modalOpen}
         outOfModalHandle={OutOfModalHandle}
+        playerPosition={currentPlayerPosition}
+        buttonClicked={buttonClicked}
+        setButtonClicked={setButtonClicked}
       ></PlayersModal>
       <div className="players">
         <h2 className="players-heading">Goalkeepers</h2>
