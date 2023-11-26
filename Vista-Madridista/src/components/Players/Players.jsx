@@ -309,6 +309,7 @@ function Players() {
     navigate(`/players/${player.id}`);
     setCurrentPlayerPosition(player.position);
   }
+  console.log(goalkeepers);
   return (
     <>
       <PlayersModal
