@@ -1,0 +1,24 @@
+.players-modal-sections {
+  width: 80%;
+  margin: 4rem 0;
+}
+.players-modal-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 3rem 4rem;
+  text-align: center;
+}
+.players-modal-stats p {
+  font-size: 2.5rem;
+  padding: 0.5rem 0;
+  color: #00529f;
+  font-weight: 500;
+}
+.players-modal-stats span {
+  font-size: 2rem;
+  padding: 0.5rem 0;
+}
+.players-modal-stats div {
+  display: flex;
+  flex-direction: column;
+}

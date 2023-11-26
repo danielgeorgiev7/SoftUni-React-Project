@@ -11,6 +11,7 @@ function PlayersModalStatistics({ stats }) {
           <span>Rating: {stats.games.rating.toFixed(2)}</span>
         )}
       </div>
+
       <div className="players-modal-stats-goals">
         <p>Goals</p>
         {stats.games.position === "Goalkeeper" && (
@@ -26,13 +27,17 @@ function PlayersModalStatistics({ stats }) {
           </>
         )}
       </div>
+
       {stats.games.position !== "Goalkeeper" && (
-        <div className="players-modal-stats-shots">
-          <p>Shots</p>
-          <span>On target: {stats.shots.on || "0"}</span>
-          <span>Total: {stats.shots.total || "0"}</span>
-        </div>
+        <>
+          <div className="players-modal-stats-shots">
+            <p>Shots</p>
+            <span>On target: {stats.shots.on || "0"}</span>
+            <span>Total: {stats.shots.total || "0"}</span>
+          </div>
+        </>
       )}
+
       <div className="players-modal-stats-passes">
         <p>Passes</p>
         {stats.games.position !== "Goalkeeper" && (
@@ -40,31 +45,36 @@ function PlayersModalStatistics({ stats }) {
         )}
         <span>Total: {stats.passes.total || "0"}</span>
       </div>
+
       {stats.games.position !== "Goalkeeper" && (
-        <>
-          <div className="players-modal-stats-tackles">
-            <p>Tackles</p>
-            <span>Blocks: {stats.tackles.blocks || "0"}</span>
-            <span>Interceptions: {stats.tackles.interceptions || "0"}</span>
-            <span>Total: {stats.tackles.total || "0"}</span>
-          </div>
-          <div className="players-modal-stats-duels">
-            <p>Duels</p>
-            <span>Total: {stats.duels.total || "0"}</span>
-            <span>Won: {stats.duels.won || "0"}</span>
-          </div>
-          <div className="players-modal-stats-dribbles">
-            <p>Dribbles</p>
-            <span>Attempts: {stats.dribbles.attempts || "0"}</span>
-            <span>Successful: {stats.dribbles.success || "0"}</span>
-          </div>
-        </>
+        <div className="players-modal-stats-tackles">
+          <p>Tackles</p>
+          <span>Blocks: {stats.tackles.blocks || "0"}</span>
+          <span>Interceptions: {stats.tackles.interceptions || "0"}</span>
+          <span>Total: {stats.tackles.total || "0"}</span>
+        </div>
       )}
+
+      <div className="players-modal-stats-duels">
+        <p>Duels</p>
+        <span>Total: {stats.duels.total || "0"}</span>
+        <span>Won: {stats.duels.won || "0"}</span>
+      </div>
+
+      {stats.games.position !== "Goalkeeper" && (
+        <div className="players-modal-stats-dribbles">
+          <p>Dribbles</p>
+          <span>Attempts: {stats.dribbles.attempts || "0"}</span>
+          <span>Successful: {stats.dribbles.success || "0"}</span>
+        </div>
+      )}
+
       <div className="players-modal-stats-fouls">
         <p>Fouls</p>
         <span>Committed: {stats.fouls.committed || "0"}</span>
         <span>Drawn: {stats.fouls.drawn || "0"}</span>
       </div>
+
       <div className="players-modal-stats-cards">
         <p>Cards</p>
         <span>Yellow: {stats.cards.yellow || "0"}</span>
