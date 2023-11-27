@@ -1,47 +1,47 @@
 import AllStats from "./AllStats";
 import "./Statistics.css";
-function Statistics({ match }) {
-  const realStats = match.statistics.filter((each) => each.team.id === 541)[
+function Statistics({ fixture }) {
+  const realStats = fixture.statistics.filter((each) => each.team.id === 541)[
     "0"
   ];
-  const otherStats = match.statistics.filter((each) => each.team.id !== 541)[
+  const otherStats = fixture.statistics.filter((each) => each.team.id !== 541)[
     "0"
   ];
-  console.log(match);
+  console.log(fixture);
   return (
     <>
       <div className="stats-sides">
         <div className="real-stats-side">
           <img
             src={
-              match.teams.home.id === 541
-                ? match.teams.home.logo
-                : match.teams.away.logo
+              fixture.teams.home.id === 541
+                ? fixture.teams.home.logo
+                : fixture.teams.away.logo
             }
             alt="Real Madrid Logo"
           />
           <p>
-            {match.teams.home.id === 541
-              ? match.teams.home.name
-              : match.teams.away.name}
+            {fixture.teams.home.id === 541
+              ? fixture.teams.home.name
+              : fixture.teams.away.name}
           </p>
         </div>
         <div className="other-stats-side">
           <p>
-            {match.teams.home.id !== 541
-              ? match.teams.home.name
-              : match.teams.away.name}
+            {fixture.teams.home.id !== 541
+              ? fixture.teams.home.name
+              : fixture.teams.away.name}
           </p>
           <img
             src={
-              match.teams.home.id !== 541
-                ? match.teams.home.logo
-                : match.teams.away.logo
+              fixture.teams.home.id !== 541
+                ? fixture.teams.home.logo
+                : fixture.teams.away.logo
             }
             alt={`${
-              match.teams.home.id !== 541
-                ? match.teams.home.name
-                : match.teams.away.name
+              fixture.teams.home.id !== 541
+                ? fixture.teams.home.name
+                : fixture.teams.away.name
             } Logo`}
           />
         </div>

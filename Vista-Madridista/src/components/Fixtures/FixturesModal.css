@@ -53,7 +53,7 @@
   border-top-left-radius: 2rem;
 }
 
-.modal-venue {
+.fixtures-modal-venue {
   padding: 0.8rem 0;
   padding-top: 0;
   display: flex;
@@ -63,18 +63,18 @@
   color: #eee;
 }
 
-.modal-venue p {
+.fixtures-modal-venue p {
   text-align: center;
   background-color: #00529f;
   min-width: 80rem;
   padding: 0.75rem;
 }
 
-.modal-venue span {
+.fixtures-modal-venue span {
   padding-right: 0.5rem;
 }
 
-.modal-teams {
+.fixtures-modal-teams {
   display: grid;
   grid-template-columns: 5fr 1fr 5fr;
   color: #333;
@@ -82,7 +82,7 @@
   padding: 1.5rem;
 }
 
-.modal-teams span {
+.fixtures-modal-teams span {
   font-size: 4rem;
   letter-spacing: 0.5rem;
   display: flex;
@@ -90,36 +90,36 @@
   justify-content: center;
 }
 
-.modal-home-team,
-.modal-away-team {
+.fixtures-modal-home-team,
+.fixtures-modal-away-team {
   display: flex;
   align-items: center;
 }
 
-.modal-home-team span {
+.fixtures-modal-home-team span {
   padding-left: 2rem;
 }
-.modal-away-team span {
+.fixtures-modal-away-team span {
   padding-right: 2rem;
 }
 
-.modal-home-team p {
+.fixtures-modal-home-team p {
   margin-left: auto;
   margin-right: 1.5rem;
 }
 
-.modal-away-team p {
+.fixtures-modal-away-team p {
   margin-right: auto;
   margin-left: 1.5rem;
 }
 
-.modal .modal-teams img {
+.modal .fixtures-modal-teams img {
   display: block;
   height: 8rem;
 }
 
-.modal-upper-info,
-.more-info {
+.fixtures-modal-upper-info,
+.modal .more-info {
   font-size: 1.5rem;
   color: #333;
   font-weight: 600;
@@ -130,42 +130,42 @@
   gap: 1rem;
 }
 
-.more-info {
+.modal .more-info {
   text-transform: uppercase;
   padding-bottom: 3rem;
 }
 
-.modal-upper-info .span-holder {
+.fixtures-modal-upper-info .span-holder {
   display: flex;
   gap: 1.5rem;
   width: fit-content;
 }
 
-.modal-upper-info .span-holder span:nth-child(1) {
+.fixtures-modal-upper-info .span-holder span:nth-child(1) {
   text-align: right;
 }
 
-.modal-upper-info .span-holder span:nth-child(2) {
+.fixtures-modal-upper-info .span-holder span:nth-child(2) {
   text-align: left;
 }
 
-.winner {
+.modal .winner {
   font-weight: 600;
 }
 
-.loser .stats {
+.modal .loser .stats {
   color: #777;
 }
 
-.modal-teams .real-blue {
+.fixtures-modal-teams .real-blue {
   color: #00529f;
 }
-.modal-buttons {
+.fixtures-modal-buttons {
   display: flex;
   justify-content: center;
 }
 
-.modal-buttons > * {
+.fixtures-modal-buttons > * {
   background-color: #ddd;
   border: 2px solid #bbb;
   color: #333;
@@ -176,7 +176,7 @@
   padding: 0.5rem 1rem;
 }
 
-.modal-buttons > *:hover {
+.fixtures-modal-buttons > *:hover {
   background-color: #ccc;
   cursor: pointer;
 }

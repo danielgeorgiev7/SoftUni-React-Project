@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   font-size: 1.6rem;
-  margin: 5rem auto 10rem;
+  margin: 0 auto 10rem;
   width: 75%;
   text-align: center;
   row-gap: 5rem;
@@ -20,9 +20,22 @@
   align-items: center;
 }
 
-.cl-group-container h2 {
+.cl-h2 {
+  margin-top: 4rem;
+  width: 100%;
+  font-size: 3rem;
   text-align: center;
   color: #00529f;
+  padding-bottom: 4rem;
+  font-weight: 500;
+}
+
+.cl-group-container h3 {
+  text-align: center;
+  color: #00529f;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: #333;
 }
 
 .cl-header,

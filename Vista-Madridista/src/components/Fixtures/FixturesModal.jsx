@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { formatDate } from "../../utils/DateFormatting";
-import "./MatchModal.css";
+import "./FixturesModal.css";
 import Summary from "./Modal/Summary";
 import Statistics from "./Modal/Statistics";
 import Squads from "./Modal/Squads";
 
-export function MatchModal({
+export function FixturesModal({
   modalOpen,
   outOfModalHandle,
   buttonClicked,
@@ -21,8 +21,8 @@ export function MatchModal({
     },
     [modalOpen]
   );
-  // console.log(match);
-  const match = {
+  // console.log(fixture);
+  const fixture = {
     fixture: {
       id: 1030303,
       referee: "T. Ford",
@@ -4563,26 +4563,26 @@ export function MatchModal({
     ],
   };
 
-  if (!match) return;
+  if (!fixture) return;
   const homeLineups = Object.values(
-    match.lineups.filter((lineup) => lineup.team.id === 541 && lineup)
+    fixture.lineups.filter((lineup) => lineup.team.id === 541 && lineup)
   )["0"];
   const awayLineups = Object.values(
-    match.lineups.filter((lineup) => lineup.team.id === 489 && lineup)
+    fixture.lineups.filter((lineup) => lineup.team.id === 489 && lineup)
   )[["0"]];
-  const date = formatDate(match.fixture.date);
+  const date = formatDate(fixture.fixture.date);
   let display1 = null;
   let display2 = null;
-  if (match.league.name === "UEFA Champions League") {
-    [display1, display2] = match.league.round.split(" - ");
+  if (fixture.league.name === "UEFA Champions League") {
+    [display1, display2] = fixture.league.round.split(" - ");
     display1 = " - " + display1;
     display2 = " - " + display2 + " of 6";
   }
-  if (match.league.name === "La Liga") {
+  if (fixture.league.name === "La Liga") {
     display1 = " - Round ";
-    display2 = match.league.round.split(" - ")[1];
+    display2 = fixture.league.round.split(" - ")[1];
   }
-  if (match.league.name === "Friendlies Clubs") {
+  if (fixture.league.name === "Friendlies Clubs") {
     display1 = "Club Friendlies";
     display2 = "";
   }
@@ -4602,69 +4602,76 @@ export function MatchModal({
             </a>
             <img
               src={
-                (match.fixture.id === 1030303 && "/rose-bowl-california.jpg") ||
-                (match.fixture.id === 1030312 && "/nrg-stadium-texas.jpg") ||
-                (match.fixture.id === 1030323 &&
+                (fixture.fixture.id === 1030303 &&
+                  "/rose-bowl-california.jpg") ||
+                (fixture.fixture.id === 1030312 && "/nrg-stadium-texas.jpg") ||
+                (fixture.fixture.id === 1030323 &&
                   "/camping-stadium-florida.jpg") ||
-                (match.fixture.id === 1117081 && "/att-stadium-texas.jpg") ||
+                (fixture.fixture.id === 1117081 && "/att-stadium-texas.jpg") ||
                 "/" +
-                  match.teams.home.name.toLowerCase().split(" ").join("-") +
+                  fixture.teams.home.name.toLowerCase().split(" ").join("-") +
                   ".jpg"
               }
-              alt={`${match.teams.home.name} stadium`}
+              alt={`${fixture.teams.home.name} stadium`}
               className={`stadium-img ${
                 buttonClicked === "summary" ? "stadium-img-fix" : ""
               }`}
             />
-            <div className="modal-venue">
+            <div className="fixtures-modal-venue">
               <p>
                 <span>Venue: </span>
-                {match.fixture.venue.name}, {match.fixture.venue.city}
+                {fixture.fixture.venue.name}, {fixture.fixture.venue.city}
               </p>
             </div>
-            <div className="modal-upper-info">
+            <div className="fixtures-modal-upper-info">
               <div className="span-holder">
                 <span>
                   {display1 !== "Club Friendlies" &&
                     display2 !== "" &&
-                    match.league.name}
+                    fixture.league.name}
                   {display1 !== null && display2 !== null
                     ? display1 + display2
-                    : " - " + match.league.round}
+                    : " - " + fixture.league.round}
                 </span>
                 <p>
                   <span>Referee: </span>
-                  {match.fixture.referee ? match.fixture.referee : "Not Stated"}
+                  {fixture.fixture.referee
+                    ? fixture.fixture.referee
+                    : "Not Stated"}
                 </p>
               </div>
               <span>{date}</span>
             </div>
-            <div className="modal-teams">
+            <div className="fixtures-modal-teams">
               <div
-                className={`modal-home-team ${
-                  match.teams.home.id === 541 && "real-blue"
-                } ${match.teams.home.winner ? "winner" : "loser"}`}
+                className={`fixtures-modal-home-team ${
+                  fixture.teams.home.id === 541 && "real-blue"
+                } ${fixture.teams.home.winner ? "winner" : "loser"}`}
               >
-                <p className="modal-home-name">{match.teams.home.name}</p>
-                <img src={match.teams.home.logo} alt="Home team logo" />
-                <span>{match.goals.home} </span>
+                <p className="fixtures-modal-home-name">
+                  {fixture.teams.home.name}
+                </p>
+                <img src={fixture.teams.home.logo} alt="Home team logo" />
+                <span>{fixture.goals.home} </span>
               </div>
               <span>—</span>
               <div
-                className={`modal-away-team ${
-                  match.teams.away.id === 541 && "real-blue"
-                } ${match.teams.away.winner ? "winner" : "loser"}`}
+                className={`fixtures-modal-away-team ${
+                  fixture.teams.away.id === 541 && "real-blue"
+                } ${fixture.teams.away.winner ? "winner" : "loser"}`}
               >
-                <span>{match.goals.away} </span>
-                <img src={match.teams.away.logo} alt="Away team logo" />
-                <p className="modal-away-name">{match.teams.away.name}</p>
+                <span>{fixture.goals.away} </span>
+                <img src={fixture.teams.away.logo} alt="Away team logo" />
+                <p className="fixtures-modal-away-name">
+                  {fixture.teams.away.name}
+                </p>
               </div>
             </div>
             <div className="more-info">
-              <p>{match.fixture.status.long}</p>
+              <p>{fixture.fixture.status.long}</p>
             </div>
-            {match.fixture.status.short.toLowerCase() === "ft" && (
-              <div className="modal-buttons">
+            {fixture.fixture.status.short.toLowerCase() === "ft" && (
+              <div className="fixtures-modal-buttons">
                 <button
                   className={buttonClicked === "summary" ? "isActive" : ""}
                   onClick={() => setButtonClicked("summary")}
@@ -4687,15 +4694,15 @@ export function MatchModal({
             )}
             {buttonClicked === "summary" && (
               <Summary
-                match={match}
+                fixture={fixture}
                 homeLineups={homeLineups}
                 awayLineups={awayLineups}
               />
             )}
-            {buttonClicked === "stats" && <Statistics match={match} />}
+            {buttonClicked === "stats" && <Statistics fixture={fixture} />}
             {buttonClicked === "squads" && (
               <Squads
-                match={match}
+                fixture={fixture}
                 homeLineups={homeLineups}
                 awayLineups={awayLineups}
               />
@@ -4707,4 +4714,4 @@ export function MatchModal({
   );
 }
 
-export default MatchModal;
+export default FixturesModal;

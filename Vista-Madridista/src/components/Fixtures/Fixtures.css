@@ -1,13 +1,13 @@
-.matches {
-  margin: 5rem 30rem;
+.fixtures {
+  margin: 5rem 30rem 10rem;
 }
 
-.matches-wrapper {
+.fixtures-wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 5rem;
 }
-.previous-matches-form {
+.previous-fixtures-form {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -17,11 +17,11 @@
   align-items: center;
 }
 
-.previous-matches-form label {
+.previous-fixtures-form label {
   font-size: 2.7rem;
 }
 
-.matches-heading {
+.fixtures-heading {
   width: 100%;
   text-align: center;
   font-size: 3rem;
@@ -31,6 +31,6 @@
   font-weight: 500;
 }
 
-ul + .matches-heading {
+ul + .fixtures-heading {
   margin-top: 5rem;
 }

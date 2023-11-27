@@ -1,6 +1,6 @@
 import "./Squads.css";
 import SquadsPlayer from "./SquadsPlayer";
-function Squads({ match, homeLineups, awayLineups }) {
+function Squads({ fixture, homeLineups, awayLineups }) {
   const realMadridLineups =
     homeLineups.team.id === 541 ? homeLineups : awayLineups;
   const otherClubLineups =
@@ -29,7 +29,7 @@ function Squads({ match, homeLineups, awayLineups }) {
             <SquadsPlayer
               key={player.id}
               playerInfo={player}
-              match={match}
+              fixture={fixture}
               teamId={541}
             />
           ))}
@@ -40,7 +40,7 @@ function Squads({ match, homeLineups, awayLineups }) {
             <SquadsPlayer
               key={player.id}
               playerInfo={player}
-              match={match}
+              fixture={fixture}
               teamId={541}
             />
           ))}
@@ -66,7 +66,7 @@ function Squads({ match, homeLineups, awayLineups }) {
             <SquadsPlayer
               key={player.id}
               playerInfo={player}
-              match={match}
+              fixture={fixture}
               teamId={otherClubLineups.team.id}
             />
           ))}
@@ -77,7 +77,7 @@ function Squads({ match, homeLineups, awayLineups }) {
             <SquadsPlayer
               key={player.id}
               playerInfo={player}
-              match={match}
+              fixture={fixture}
               teamId={otherClubLineups.team.id}
             />
           ))}

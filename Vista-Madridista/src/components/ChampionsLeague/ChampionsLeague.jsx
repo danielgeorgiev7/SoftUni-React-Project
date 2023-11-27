@@ -1460,30 +1460,33 @@ function ChampionsLeague() {
     ],
   ];
   return (
-    <div className="cl-groups">
-      {groups.map((group, index) => (
-        <div key={index} className="cl-group-container">
-          <h2 className="cl-group-text">{group[0].group}</h2>
-          <div className="cl-header">
-            <span>#</span>
-            <span className="cl-team-text">Team</span>
-            <span>MP</span>
-            <span>W</span>
-            <span>D</span>
-            <span>L</span>
-            <span>G</span>
-            <span>GD</span>
-            <span>Form</span>
-            <span>PTS</span>
+    <>
+      <h2 className="cl-h2">Champions League Group Stage</h2>
+      <div className="cl-groups">
+        {groups.map((group, index) => (
+          <div key={index} className="cl-group-container">
+            <h3 className="cl-group-text">{group[0].group}</h3>
+            <div className="cl-header">
+              <span>#</span>
+              <span className="cl-team-text">Team</span>
+              <span>MP</span>
+              <span>W</span>
+              <span>D</span>
+              <span>L</span>
+              <span>G</span>
+              <span>GD</span>
+              <span>Form</span>
+              <span>PTS</span>
+            </div>
+            <div className="cl-team-rows">
+              {group.map((team) => (
+                <CLItem teamData={team} key={`cl-table-${team.team.id}`} />
+              ))}
+            </div>
           </div>
-          <div className="cl-team-rows">
-            {group.map((team) => (
-              <CLItem teamData={team} key={`cl-table-${team.team.id}`} />
-            ))}
-          </div>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
+    </>
   );
 }
 

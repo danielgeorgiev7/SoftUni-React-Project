@@ -921,6 +921,7 @@ function LaLiga() {
   console.log(laLigaTable["0"].league.standings["0"]);
   return (
     <div className="standings-container">
+      <h2>La Liga Standings</h2>
       <div className="standings-header">
         <span>#</span>
         <span className="standings-team-text">Team</span>

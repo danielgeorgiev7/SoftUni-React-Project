@@ -1,14 +1,14 @@
 import "./Summary.css";
 import SummaryItem from "./SummaryItem";
-function Summary({ match, homeLineups, awayLineups }) {
-  if (!match) return;
-  const homeId = match.teams.home.id;
+function Summary({ fixture, homeLineups, awayLineups }) {
+  if (!fixture) return;
+  const homeId = fixture.teams.home.id;
   let scoreForSummary = { home: 0, away: 0 };
 
-  const eventsFirstHalf = match.events.filter(
+  const eventsFirstHalf = fixture.events.filter(
     (event) => event.time.elapsed <= 45
   );
-  const eventsSecondHalf = match.events.filter(
+  const eventsSecondHalf = fixture.events.filter(
     (event) => event.time.elapsed > 45
   );
   return (
@@ -68,7 +68,7 @@ function Summary({ match, homeLineups, awayLineups }) {
             <img src={homeLineups.coach.photo} alt={homeLineups.coach.name} />
             <div className="coaches-text">
               <p>{homeLineups.coach.name}</p>
-              <p>Match formation:</p>
+              <p>fixture formation:</p>
               <p>{homeLineups.formation}</p>
             </div>
           </div>
@@ -76,7 +76,7 @@ function Summary({ match, homeLineups, awayLineups }) {
             <img src={awayLineups.coach.photo} alt={awayLineups.coach.name} />
             <div className="coaches-text">
               <p>{awayLineups.coach.name}</p>
-              <p>Match formation:</p>
+              <p>fixture formation:</p>
               <p>{awayLineups.formation}</p>
             </div>
           </div>

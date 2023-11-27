@@ -1,7 +1,7 @@
 import "./SquadsPlayer.css";
-function SquadsPlayer({ match, playerInfo, teamId }) {
+function SquadsPlayer({ fixture, playerInfo, teamId }) {
   /* eslint-disable no-unexpected-multiline */
-  const morePlayerInfo = match.players
+  const morePlayerInfo = fixture.players
     .filter((team) => team.team.id === teamId)
     ["0"].players.filter((player) => player.player.id === playerInfo.id)["0"];
   if (morePlayerInfo === undefined) return;

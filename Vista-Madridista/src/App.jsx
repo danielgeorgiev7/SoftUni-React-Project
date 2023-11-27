@@ -1,20 +1,20 @@
 import { Routes, Route } from "react-router-dom";
-import Matches from "./components/Matches/Matches";
+import Fixtures from "./components/Fixtures/Fixtures";
 import Players from "./components/Players/Players";
 import ChampionsLeague from "./components/ChampionsLeague/ChampionsLeague";
 import LaLiga from "./components/LaLiga/LaLiga";
 import Profile from "./components/Profile/Profile";
 import Home from "./components/Home/Home";
 import { useEffect, useState } from "react";
-import MatchModal from "./components/Matches/MatchModal";
+import FixturesModal from "./components/Fixtures/FixturesModal";
 import PlayersModal from "./components/Players/PlayersModal";
 
 function App() {
-  const [matches, setMatches] = useState([]);
-  const [previousMatches, setPreviousMatches] = useState([]);
+  const [fixtures, setFixtures] = useState([]);
+  const [previousFixtures, setPreviousFixtures] = useState([]);
 
   useEffect(function () {
-    setPreviousMatches([
+    setPreviousFixtures([
       {
         fixture: {
           id: 1030303,
@@ -1515,7 +1515,7 @@ function App() {
   }, []);
 
   useEffect(function () {
-    setMatches([
+    setFixtures([
       {
         fixture: {
           id: 1038084,
@@ -3427,12 +3427,12 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />}></Route>
       <Route
-        path="/matches"
+        path="/fixtures"
         element={
-          <Matches matches={matches} previousMatches={previousMatches} />
+          <Fixtures fixtures={fixtures} previousFixtures={previousFixtures} />
         }
       >
-        <Route path="/matches/:id" element={<MatchModal />} />
+        <Route path="/fixtures/:id" element={<FixturesModal />} />
       </Route>
       <Route path="/players" element={<Players />}>
         <Route path="/players/:id" element={<PlayersModal />} />

@@ -26,11 +26,11 @@ function Header() {
           </li>
           <li>
             <Link
-              className={`nav-btn ${isActive === "matches" && "btn-active"}`}
-              onClick={() => setIsActive("matches")}
-              to="/matches"
+              className={`nav-btn ${isActive === "fixtures" && "btn-active"}`}
+              onClick={() => setIsActive("fixtures")}
+              to="/fixtures"
             >
-              Upcoming matches
+              Fixtures
             </Link>
           </li>
           <li>
