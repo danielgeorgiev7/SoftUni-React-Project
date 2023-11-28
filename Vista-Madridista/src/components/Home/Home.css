@@ -1,0 +1,90 @@
+.home-section-wrapper {
+  background: url("/home-background.jpg");
+  background-size: cover;
+  background-position-y: -2rem;
+  background-repeat: no-repeat;
+  height: 90vh;
+  width: 100vw;
+}
+
+.home-section {
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+  height: 90vh;
+  width: 100vw;
+  position: relative;
+}
+
+.home-text {
+  position: absolute;
+  top: 12.5%;
+  left: 6%;
+}
+
+.home-text h2 {
+  color: #fff;
+  text-transform: none;
+  font-size: 9rem;
+  width: 120rem;
+  margin-bottom: 2.5rem;
+}
+
+.home-text p {
+  padding-bottom: 2rem;
+  padding-left: 2rem;
+  color: #fff;
+  text-transform: none;
+  font-size: 3.5rem;
+  font-style: italic;
+}
+
+.home-buttons {
+  display: flex;
+  gap: 4rem;
+  position: absolute;
+  top: 82.5%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.sign-up-btn,
+.login-btn {
+  color: #fff;
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  padding: 1rem;
+  border-radius: 100rem;
+  width: 20rem;
+  text-align: center;
+  font-weight: 500;
+  cursor: pointer;
+  color: #fff;
+  transition: all 0.2s;
+  position: relative;
+}
+
+.sign-up-btn {
+  background-color: rgba(204, 150, 0, 0.8);
+  border: 0.5rem solid #cc9600;
+}
+
+.login-btn {
+  background-color: rgba(0, 82, 158, 0.8);
+  border: 0.5rem solid #00529f;
+}
+
+.sign-up-btn:hover {
+  background-color: #cc9600;
+  color: #eee;
+  bottom: 0.1rem;
+}
+
+.login-btn:hover {
+  background-color: #00529f;
+
+  color: #eee;
+  bottom: 0.1rem;
+}
+
+.home-text .here-you-can {
+  font-style: normal;
+}

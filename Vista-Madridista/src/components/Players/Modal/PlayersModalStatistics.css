@@ -1,12 +1,17 @@
 .players-modal-sections {
-  width: 80%;
-  margin: 4rem 0;
+  width: 100%;
+  margin: 2rem 0 2rem;
 }
 .players-modal-stats {
+  width: 80%;
+  margin: 0 auto;
+  padding: 3rem 0;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 3rem 4rem;
   text-align: center;
+  border-bottom-left-radius: 3em;
+  border-bottom-right-radius: 3em;
 }
 .players-modal-stats p {
   font-size: 2.5rem;
@@ -21,4 +26,12 @@
 .players-modal-stats div {
   display: flex;
   flex-direction: column;
+}
+.players-modal-stats-heading {
+  color: #fff;
+  font-size: 1.9rem;
+  text-transform: uppercase;
+  background-color: #00529f;
+  padding: 1rem;
+  text-align: center;
 }

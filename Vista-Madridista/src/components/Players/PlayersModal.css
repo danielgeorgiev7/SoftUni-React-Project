@@ -27,16 +27,22 @@
 }
 
 .players-modal-info p::before {
+  font-weight: 600;
   content: "--";
   color: #00529f;
   margin: 0 1rem;
   font-size: 2rem;
-  letter-spacing: -1px;
+  letter-spacing: -0.33rem;
 }
 
 .players-modal-info-p-wrapper {
   display: flex;
-  gap: 2rem;
+  gap: 3rem;
+}
+
+.player-modal-info-first-col > *,
+.player-modal-info-second-col > * {
+  padding-bottom: 0.3rem;
 }
 
 .players-modal-position {
