@@ -8,6 +8,8 @@ import Home from "./components/Home/Home";
 import { useEffect, useState } from "react";
 import FixturesModal from "./components/Fixtures/FixturesModal";
 import PlayersModal from "./components/Players/PlayersModal";
+import Login from "./components/Login/Login";
+import Register from "./components/Register/Register";
 
 function App() {
   const [fixtures, setFixtures] = useState([]);
@@ -3440,6 +3442,8 @@ function App() {
       <Route path="/la-liga" element={<LaLiga />}></Route>
       <Route path="/champions-league" element={<ChampionsLeague />}></Route>
       <Route path="/profile" element={<Profile />}></Route>
+      <Route path="/register" element={<Register />}></Route>
+      <Route path="/login" element={<Login />}></Route>
     </Routes>
   );
 }

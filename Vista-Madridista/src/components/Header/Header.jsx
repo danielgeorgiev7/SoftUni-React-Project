@@ -62,13 +62,31 @@ function Header() {
               Champions League
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link
               className={`nav-btn ${isActive === "profile" && "btn-active"}`}
               onClick={() => setIsActive("profile")}
               to="/profile"
             >
               Profile
+            </Link>
+          </li> */}
+          <li>
+            <Link
+              className={`nav-btn ${isActive === "register" && "btn-active"}`}
+              onClick={() => setIsActive("register")}
+              to="/register"
+            >
+              Register
+            </Link>
+          </li>
+          <li>
+            <Link
+              className={`nav-btn ${isActive === "login" && "btn-active"}`}
+              onClick={() => setIsActive("login")}
+              to="/login"
+            >
+              Login
             </Link>
           </li>
         </ul>
