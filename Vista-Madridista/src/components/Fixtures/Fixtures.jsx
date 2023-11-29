@@ -33,15 +33,19 @@ function Fixtures({ fixtures, previousFixtures }) {
         setButtonClicked={setButtonClicked}
       ></FixturesModal>
 
-      <div className="fixtures">
-        <form name="all-fixtures" action="#" className="previous-fixtures-form">
-          <label htmlFor="all-fixtures">See all fixtures 23/24</label>
-          <Checkbox
-            checkboxChecked={checkboxChecked}
-            setCheckboxChecked={setCheckboxChecked}
-          />
-        </form>
-        <div>
+      <div className="fixtures-container">
+        <div className="fixtures">
+          <form
+            name="all-fixtures"
+            action="#"
+            className="previous-fixtures-form"
+          >
+            <label htmlFor="all-fixtures">See all fixtures 23/24</label>
+            <Checkbox
+              checkboxChecked={checkboxChecked}
+              setCheckboxChecked={setCheckboxChecked}
+            />
+          </form>
           {checkboxChecked && (
             <>
               <h2 className="fixtures-heading">Past Fixtures</h2>

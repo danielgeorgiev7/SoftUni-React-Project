@@ -94,6 +94,7 @@
   box-shadow: 0 0.25rem 2rem 0.25rem rgba(0, 0, 0, 0.25);
   border-bottom-right-radius: 2rem;
   border-bottom-left-radius: 2rem;
+  background-color: #fff;
 }
 
 .cl-team-card:last-of-type {

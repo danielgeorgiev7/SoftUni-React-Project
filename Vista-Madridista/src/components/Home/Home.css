@@ -16,14 +16,14 @@
 
 .home-text {
   position: absolute;
-  top: 12.5%;
-  left: 6%;
+  top: 14%;
+  left: 7%;
 }
 
 .home-text h2 {
   color: #fff;
   text-transform: none;
-  font-size: 9rem;
+  font-size: 8rem;
   width: 120rem;
   margin-bottom: 2.5rem;
 }
@@ -33,15 +33,13 @@
   padding-left: 2rem;
   color: #fff;
   text-transform: none;
-  font-size: 3.5rem;
+  font-size: 3rem;
   font-style: italic;
 }
 
-.home-buttons {
-  display: flex;
-  gap: 4rem;
+.home-button {
   position: absolute;
-  top: 82.5%;
+  top: 84%;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -51,7 +49,7 @@
   color: #fff;
   font-size: 2.5rem;
   text-transform: uppercase;
-  padding: 1rem;
+  padding: 1.25rem 4rem;
   border-radius: 100rem;
   width: 20rem;
   text-align: center;

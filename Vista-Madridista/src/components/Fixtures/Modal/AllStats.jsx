@@ -19,46 +19,46 @@ function AllStats({ stat, realStats, otherStats }) {
     typeof toCompareReal !== "string" &&
     typeof toCompareOther !== "string"
   ) {
-    realWidth = { width: 34 + "rem" };
+    realWidth = { width: 30 + "rem" };
     otherWidth = {
-      width: 30 / (toCompareReal / toCompareOther) + 4 + "rem",
+      width: 26 / (toCompareReal / toCompareOther) + 4 + "rem",
     };
   } else if (
     toCompareOther > toCompareReal &&
     typeof toCompareReal !== "string" &&
     typeof toCompareOther !== "string"
   ) {
-    otherWidth = { width: 34 + "rem" };
+    otherWidth = { width: 30 + "rem" };
     realWidth = {
-      width: 30 / (toCompareOther / toCompareReal) + 4 + "rem",
+      width: 26 / (toCompareOther / toCompareReal) + 4 + "rem",
     };
   } else if (
     toCompareOther === toCompareReal &&
     typeof toCompareReal !== "string" &&
     typeof toCompareOther !== "string"
   ) {
-    realWidth = { width: 25 + "rem" };
-    otherWidth = { width: 25 + "rem" };
+    realWidth = { width: 20 + "rem" };
+    otherWidth = { width: 20 + "rem" };
   }
   if (toCompareOther === null) {
     otherWidth = { width: 4 + "rem" };
     realWidth =
       toCompareReal > 8
-        ? { width: 34 + "rem" }
-        : { width: toCompareReal * 3.75 + 4 + "rem" };
+        ? { width: 30 + "rem" }
+        : { width: toCompareReal * 3.4 + 4 + "rem" };
   }
   if (toCompareReal === null) {
     realWidth = { width: 4 + "rem" };
     otherWidth =
       toCompareOther > 8
-        ? { width: 34 + "rem" }
-        : { width: toCompareOther * 3.75 + 4 + "rem" };
+        ? { width: 30 + "rem" }
+        : { width: toCompareOther * 3.4 + 4 + "rem" };
   }
   if (typeof toCompareReal === "string" && typeof toCompareOther === "string") {
     toCompareReal = toCompareReal.split("%").join("");
     toCompareOther = toCompareOther.split("%").join("");
-    realWidth = { width: (Number(toCompareReal) / 100) * 34 + "rem" };
-    otherWidth = { width: (Number(toCompareOther) / 100) * 34 + "rem" };
+    realWidth = { width: (Number(toCompareReal) / 100) * 30 + "rem" };
+    otherWidth = { width: (Number(toCompareOther) / 100) * 30 + "rem" };
   }
 
   return (

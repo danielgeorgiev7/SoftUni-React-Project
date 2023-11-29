@@ -1,8 +1,10 @@
 footer {
-  background-color: #eee;
+  background-color: #ddd;
   color: #333;
   padding: 4rem 0 3rem;
   font-size: 1.8rem;
+  text-transform: uppercase;
+  color: #00529f;
 }
 
 .footer-container {
@@ -27,7 +29,8 @@ footer {
 }
 
 .footer-section ul > * {
-  color: #333;
+  color: #00529f;
+
   cursor: pointer;
   margin-bottom: 0.5rem;
   width: fit-content;
@@ -35,7 +38,7 @@ footer {
 }
 
 .footer-section ul > *:hover {
-  color: #00529f;
+  color: #cc9600;
 }
 
 .footer-pages {

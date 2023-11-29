@@ -1,5 +1,9 @@
+.fixtures-container {
+  margin: 6rem 30rem 10rem;
+}
+
 .fixtures {
-  margin: 5rem 30rem 10rem;
+  position: relative;
 }
 
 .fixtures-wrapper {
@@ -27,10 +31,16 @@
   font-size: 3rem;
   color: #00529f;
   text-transform: uppercase;
-  margin-bottom: 5rem;
+  margin-bottom: 6rem;
   font-weight: 500;
 }
 
 ul + .fixtures-heading {
-  margin-top: 5rem;
+  margin-top: 6rem;
+}
+
+.fixtures form {
+  position: absolute;
+  top: 4.25rem;
+  left: 44.5rem;
 }

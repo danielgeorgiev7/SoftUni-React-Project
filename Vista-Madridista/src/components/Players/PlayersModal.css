@@ -9,6 +9,14 @@
   color: #333;
 }
 
+.players-modal-martop {
+  margin-top: 5rem;
+}
+
+.players-modal-martop .x-button {
+  top: 10rem;
+}
+
 .players-modal img {
   border-radius: 50%;
   border: 8px solid #eee;

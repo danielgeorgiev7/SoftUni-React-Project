@@ -426,7 +426,7 @@ function PlayersModal({
       ></div>
 
       <div className={`modal-wrapper${!modalOpen ? " hidden" : ""}`}>
-        <div className="modal">
+        <div className="modal players-modal-martop">
           <div className="modal-content">
             <a className="x-button" onClick={outOfModalHandle}>
               ×

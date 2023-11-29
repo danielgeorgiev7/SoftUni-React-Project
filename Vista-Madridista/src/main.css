@@ -9,3 +9,10 @@ html {
   font-size: 62.5%;
   font-family: "Roboto", serif;
 }
+
+body {
+  background: url("/site-background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
