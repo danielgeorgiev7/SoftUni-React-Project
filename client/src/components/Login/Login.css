@@ -41,17 +41,17 @@
   margin: 4rem 0 2.5rem;
 }
 
-.login-form > * {
+.login-form > *:not(.error-placeholder) {
   margin-bottom: 2rem;
 }
 
-.login-form input {
+.login-form input:not(.login-button) {
   width: 50rem;
   height: 3.75rem;
   border: 1px solid #00529f;
   border-radius: 100rem;
   text-align: center;
-  font-size: 2.25rem;
+  font-size: 2.2rem;
   position: relative;
 }
 
@@ -68,10 +68,10 @@
   border: none;
 }
 
-.login-section-button {
+.login-form .login-button {
   cursor: pointer;
-  margin-bottom: 5rem;
-  border: 2px solid #00529f;
+  margin: 2rem 0 4rem;
+  border: 0.2rem solid #00529f;
   font-size: 2.5rem;
   color: #fff;
   background-color: rgba(0, 82, 158, 0.8);
@@ -82,44 +82,35 @@
   z-index: 10;
 }
 
-.login-section-button:hover {
-  border: 2px solid #00529f;
-  background-color: rgba(0, 82, 158, 0.8);
-  bottom: 0.2rem;
-}
-
-.login-section-button:after {
-  content: "";
-  display: inline-block;
-  height: 100%;
-  width: 100%;
-  border-radius: 100px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-}
-
-.login-section-button:hover:after {
-  animation: fadeOut 0.3s;
+.login-button:hover {
+  border: 0.2rem solid #00529f;
+  background-color: #00529f;
   bottom: 0.2rem;
 }
 
 .error-placeholder {
+  margin: 1rem 0;
+  font-size: 2rem;
+  color: #cc0000;
+}
+
+.error-placeholder-hidden {
   display: none;
 }
 
-@keyframes fadeOut {
-  0% {
-    opacity: 1;
-    background-color: rgba(0, 82, 158, 0.3);
-  }
-  50% {
-    background-color: rgba(0, 82, 158, 0.075);
-  }
-  100% {
-    opacity: 0;
-    transform: scaleX(2) scaleY(2.25);
-    background-color: rgba(255, 255, 255, 0);
-  }
+.login-to-register {
+  font-size: 2rem;
+}
+
+.login-to-register-link:link,
+.login-to-register-link:visited {
+  color: #00529f;
+  text-decoration: none;
+  border-bottom: 1px solid #00529f;
+  transition: 0.2s;
+}
+
+.login-to-register-link:hover {
+  color: #cc9600;
+  border-color: #cc9600;
 }
