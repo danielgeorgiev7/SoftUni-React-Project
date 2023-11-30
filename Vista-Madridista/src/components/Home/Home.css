@@ -42,6 +42,7 @@
   top: 80%;
   left: 50%;
   transform: translateX(-50%);
+  animation: moveInBottomHome 1s;
 }
 
 .sign-up-btn,
@@ -65,24 +66,23 @@
   border: 0.5rem solid #cc9600;
 }
 
-.login-btn {
-  background-color: rgba(0, 82, 158, 0.8);
-  border: 0.5rem solid #00529f;
-}
-
 .sign-up-btn:hover {
   background-color: #cc9600;
   color: #eee;
   bottom: 0.1rem;
 }
 
-.login-btn:hover {
-  background-color: #00529f;
-
-  color: #eee;
-  bottom: 0.1rem;
-}
-
 .home-text .here-you-can {
   font-style: normal;
+}
+
+@keyframes moveInBottomHome {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(10rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0rem);
+  }
 }
