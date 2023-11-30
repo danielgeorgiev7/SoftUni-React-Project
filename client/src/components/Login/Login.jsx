@@ -3,20 +3,25 @@ import { Link } from "react-router-dom";
 import useForm from "../../hooks/useForm";
 import AuthContext from "../../contexts/authContext";
 import "./Login.css";
+/* eslint-disable react-hooks/exhaustive-deps */
 
 function Login() {
   const { loginSubmitHandler, errorMessage, setErrorMessage } =
     useContext(AuthContext);
-  const { values, onChange, onSubmit } = useForm(loginSubmitHandler, {
-    email: "",
-    password: "",
-  });
+  const { values, onChange, onSubmit } = useForm(
+    loginSubmitHandler,
+    {
+      email: "",
+      password: "",
+    },
+    true
+  );
 
-  useEffect(() => setErrorMessage(""), [setErrorMessage]);
+  useEffect(() => setErrorMessage(""), []);
   return (
     <div className="login-section">
       <div className="login-wrapper">
-        <h2>Welcome again!</h2>
+        <h2>Welcome back!</h2>
         <form className="login-form" id="login" onSubmit={onSubmit}>
           <label htmlFor="login-email">Email address:</label>
           <input

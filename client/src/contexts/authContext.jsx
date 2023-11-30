@@ -27,12 +27,15 @@ export const AuthProvider = ({ children }) => {
 
   const registerSubmitHandler = async (values) => {
     const result = await authService.register(values.email, values.password);
+    if (!result.code) {
+      setAuth(result);
 
-    setAuth(result);
+      localStorage.setItem("accessToken", result.accessToken);
 
-    localStorage.setItem("accessToken", result.accessToken);
-
-    navigate("/");
+      navigate("/");
+    } else {
+      setErrorMessage(result.message);
+    }
   };
 
   const logoutHandler = () => {

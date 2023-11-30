@@ -8,7 +8,7 @@
 
 .login-wrapper {
   position: absolute;
-  top: 6rem;
+  top: 1.25rem;
   width: 40%;
   box-shadow: 0 0.25rem 2rem 0.25rem rgba(0, 0, 0, 0.25);
   height: fit-content;
@@ -38,7 +38,7 @@
 }
 
 .login-form {
-  margin: 4rem 0 2.5rem;
+  margin: 3.5rem 0 2.5rem;
 }
 
 .login-form > *:not(.error-placeholder) {
@@ -70,7 +70,7 @@
 
 .login-form .login-button {
   cursor: pointer;
-  margin: 2rem 0 4rem;
+  margin: 1rem 0 3.5rem;
   border: 0.2rem solid #00529f;
   font-size: 2.5rem;
   color: #fff;

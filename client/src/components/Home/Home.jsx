@@ -1,4 +1,6 @@
+import { Link } from "react-router-dom";
 import "./Home.css";
+
 function Home() {
   return (
     <div className="home-section-wrapper">
@@ -11,7 +13,9 @@ function Home() {
           <p>- Post, Like and Comment anything regarding our favourite club</p>
         </div>
         <div className="home-button">
-          <a className="sign-up-btn">Sign Up Now</a>
+          <Link to="/register" className="sign-up-btn">
+            Sign Up Now
+          </Link>
         </div>
       </div>
     </div>

@@ -64,6 +64,7 @@
 .sign-up-btn {
   background-color: rgba(204, 150, 0, 0.8);
   border: 0.5rem solid #cc9600;
+  text-decoration: none;
 }
 
 .sign-up-btn:hover {

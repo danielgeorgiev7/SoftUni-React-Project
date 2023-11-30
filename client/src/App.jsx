@@ -10,6 +10,7 @@ import FixturesModal from "./components/Fixtures/FixturesModal";
 import PlayersModal from "./components/Players/PlayersModal";
 import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
+import Logout from "./components/Logout/logout";
 
 function App() {
   const [fixtures, setFixtures] = useState([]);
@@ -3444,6 +3445,7 @@ function App() {
       <Route path="/profile" element={<Profile />}></Route>
       <Route path="/register" element={<Register />}></Route>
       <Route path="/login" element={<Login />}></Route>
+      <Route path="/logout" element={<Logout />}></Route>
     </Routes>
   );
 }
