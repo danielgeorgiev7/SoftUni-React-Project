@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 
 function Header() {
   const location = useLocation();
-  console.log(location);
+  // console.log(location);
   const [isActiveNav, setIsActiveNav] = useState("home");
 
   useEffect(() => {

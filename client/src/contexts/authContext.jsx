@@ -1,6 +1,5 @@
 import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import * as authService from "../services/authService";
 import usePersistedState from "../hooks/usePersistedState";
 
@@ -8,6 +7,7 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
+  const [loggedIn, setLoggedIn] = useState(false);
   const [auth, setAuth] = usePersistedState("auth", {});
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -19,6 +19,7 @@ export const AuthProvider = ({ children }) => {
 
       localStorage.setItem("accessToken", result.accessToken);
 
+      setLoggedIn(true);
       navigate("/");
     } else {
       setErrorMessage(result.message);
@@ -40,6 +41,7 @@ export const AuthProvider = ({ children }) => {
 
   const logoutHandler = () => {
     setAuth({});
+    setLoggedIn(false);
     localStorage.removeItem("accessToken");
   };
 
@@ -53,6 +55,8 @@ export const AuthProvider = ({ children }) => {
     isAuthenticated: !!auth.accessToken,
     errorMessage,
     setErrorMessage,
+    loggedIn,
+    setLoggedIn,
   };
 
   return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;

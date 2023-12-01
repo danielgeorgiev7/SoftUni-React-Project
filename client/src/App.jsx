@@ -5,15 +5,17 @@ import ChampionsLeague from "./components/ChampionsLeague/ChampionsLeague";
 import LaLiga from "./components/LaLiga/LaLiga";
 import Profile from "./components/Profile/Profile";
 import Home from "./components/Home/Home";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import FixturesModal from "./components/Fixtures/FixturesModal";
 import PlayersModal from "./components/Players/PlayersModal";
 import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
 import Logout from "./components/Logout/logout";
 import Feed from "./components/Feed/Feed";
+import AuthContext from "./contexts/authContext";
 
 function App() {
+  const { loggedIn } = useContext(AuthContext);
   const [fixtures, setFixtures] = useState([]);
   const [previousFixtures, setPreviousFixtures] = useState([]);
 
@@ -3429,10 +3431,7 @@ function App() {
 
   return (
     <Routes>
-      <Route
-        path="/"
-        element={localStorage.accessToken !== undefined ? <Feed /> : <Home />}
-      ></Route>
+      <Route path="/" element={loggedIn ? <Feed /> : <Home />}></Route>
       <Route
         path="/fixtures"
         element={
