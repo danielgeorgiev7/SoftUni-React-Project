@@ -11,6 +11,7 @@ import PlayersModal from "./components/Players/PlayersModal";
 import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
 import Logout from "./components/Logout/logout";
+import Feed from "./components/Feed/Feed";
 
 function App() {
   const [fixtures, setFixtures] = useState([]);
@@ -3428,7 +3429,10 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<Home />}></Route>
+      <Route
+        path="/"
+        element={localStorage.accessToken !== undefined ? <Feed /> : <Home />}
+      ></Route>
       <Route
         path="/fixtures"
         element={

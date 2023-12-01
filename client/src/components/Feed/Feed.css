@@ -1,0 +1,85 @@
+.feed-section {
+  display: flex;
+}
+
+.feed-wrapper {
+  margin: 5rem auto;
+}
+
+.write-post {
+  display: flex;
+  flex-direction: column;
+}
+
+.write-post-label {
+  padding-right: 1rem;
+  margin-bottom: 1.5rem;
+  font-size: 2.5rem;
+  font-style: italic;
+  color: #333;
+  text-align: center;
+}
+
+.write-post textarea {
+  padding: 1rem;
+  width: 50rem;
+  border-radius: 2rem;
+  border: 2px solid #333;
+  font-size: 2rem;
+}
+
+.write-post textarea:focus,
+.link-img-input:focus {
+  border: 2px solid #00529f;
+  outline: none;
+}
+
+.write-post textarea::placeholder {
+  font-style: italic;
+}
+
+.link-post-wrapper {
+  display: flex;
+  align-items: center;
+  margin: 0.75rem 1rem;
+}
+
+.link-img-label {
+  margin-right: 1rem;
+  font-size: 2rem;
+  font-style: italic;
+  color: #333;
+  text-align: center;
+}
+
+.link-img-input {
+  padding: 0.5rem;
+  font-size: 1.8rem;
+  margin: 1rem 0;
+  height: 3.5rem;
+  border-radius: 2rem;
+  border: 2px solid #333;
+  margin-right: 1rem;
+  flex: 1;
+}
+
+.post-button {
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  font-weight: 500;
+  color: #fff;
+  font-size: 1.8rem;
+  background-color: rgba(0, 82, 158, 0.8);
+  border: 3px solid #00529f;
+  padding: 0.75rem 1.5rem;
+  padding-top: 0.8rem;
+  border-radius: 100rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+}
+
+.post-button:hover {
+  bottom: 0.1rem;
+  background-color: #00529f;
+}
