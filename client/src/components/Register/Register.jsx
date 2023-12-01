@@ -36,6 +36,8 @@ function Register() {
       setErrorMessage("Password fields are required");
     } else if (values.password === "") {
       setErrorMessage("Password field is required");
+    } else if (values.password.length < 6) {
+      setErrorMessage("Password must be at least 6 characters");
     } else if (confirmPassword === "") {
       setErrorMessage("Confirm password field is required");
     } else if (values.password !== confirmPassword) {
@@ -55,7 +57,8 @@ function Register() {
           <input
             className={
               errorMessage === "Email field is required" ||
-              errorMessage === "Provided email isn't valid"
+              errorMessage === "Provided email isn't valid" ||
+              errorMessage === "A user with the same email already exists"
                 ? "field-error"
                 : ""
             }
@@ -71,6 +74,7 @@ function Register() {
             className={
               errorMessage === "Password fields are required" ||
               errorMessage === "Password field is required" ||
+              errorMessage === "Password must be at least 6 characters" ||
               errorMessage === "Passwords don't match"
                 ? "field-error"
                 : ""
