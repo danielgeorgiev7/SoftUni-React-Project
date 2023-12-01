@@ -21,6 +21,7 @@
 }
 
 .cl-h2 {
+  text-transform: uppercase;
   margin-top: 4rem;
   width: 100%;
   font-size: 3rem;

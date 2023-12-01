@@ -1,5 +1,5 @@
 .standings-container {
-  width: 66%;
+  width: 60%;
   margin: 4rem auto 10rem;
   font-size: 1.8rem;
   display: grid;
@@ -8,6 +8,8 @@
 }
 
 .standings-container h2 {
+  text-transform: uppercase;
+
   width: 100%;
   font-size: 3rem;
   text-align: center;

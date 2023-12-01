@@ -57,11 +57,11 @@
 
 .register-form input:nth-child(2),
 .register-form input:nth-child(6) {
-  animation: moveInLeft 0.75s;
+  animation: moveInRight 0.75s;
 }
 
 .register-form input:nth-child(4) {
-  animation: moveInRight 0.75s;
+  animation: moveInLeft 0.75s;
 }
 
 .register-form input:focus {
@@ -114,4 +114,9 @@
 .register-to-login-link:hover {
   color: #cc9600;
   border-color: #cc9600;
+}
+
+.field-error {
+  outline: 2px solid #cc0000 !important;
+  border: none !important;
 }

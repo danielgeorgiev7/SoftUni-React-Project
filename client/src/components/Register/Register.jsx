@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import useForm from "../../hooks/useForm";
 import AuthContext from "../../contexts/authContext";
 import "./Register.css";
+import isValidEmail from "../../utils/isValidEmail";
 /* eslint-disable react-hooks/exhaustive-deps */
 
 function Register() {
@@ -20,12 +21,29 @@ function Register() {
 
   useEffect(() => setErrorMessage(""), []);
 
+  function onChangeConfirmPassword(e) {
+    setConfirmPassword(e.target.value);
+    setErrorMessage("");
+  }
+
   function submitHandler(e) {
     e.preventDefault();
-    if (confirmPassword === values.password) {
-      onSubmit();
-    } else {
+    if (values.email === "") {
+      setErrorMessage("Email field is required");
+    } else if (!isValidEmail(values.email)) {
+      setErrorMessage("Provided email isn't valid");
+    } else if (values.password === "" && confirmPassword === "") {
+      setErrorMessage("Password fields are required");
+    } else if (values.password === "") {
+      setErrorMessage("Password field is required");
+    } else if (confirmPassword === "") {
+      setErrorMessage("Confirm password field is required");
+    } else if (values.password !== confirmPassword) {
       setErrorMessage("Passwords don't match");
+    } else {
+      e.preventDefault();
+      setErrorMessage("");
+      onSubmit();
     }
   }
   return (
@@ -35,33 +53,50 @@ function Register() {
         <form className="register-form" id="register" onSubmit={submitHandler}>
           <label htmlFor="register-email">Email address:</label>
           <input
+            className={
+              errorMessage === "Email field is required" ||
+              errorMessage === "Provided email isn't valid"
+                ? "field-error"
+                : ""
+            }
             type="email"
             id="register-email"
             name="email"
             onChange={onChange}
             value={values.email}
             autoComplete="username"
-            required
           />
           <label htmlFor="register-password">Password:</label>
           <input
+            className={
+              errorMessage === "Password fields are required" ||
+              errorMessage === "Password field is required" ||
+              errorMessage === "Passwords don't match"
+                ? "field-error"
+                : ""
+            }
             type="password"
             id="register-password"
             name="password"
             onChange={onChange}
             value={values.password}
             autoComplete="password"
-            required
           />
           <label htmlFor="register-confirm-password">Confirm Password:</label>
           <input
+            className={
+              errorMessage === "Password fields are required" ||
+              errorMessage === "Confirm password field is required" ||
+              errorMessage === "Passwords don't match"
+                ? "field-error"
+                : ""
+            }
             type="password"
             id="register-confirm-password"
             name="password"
-            onChange={(e) => setConfirmPassword(e.target.value)}
+            onChange={onChangeConfirmPassword}
             autoComplete="off"
             value={confirmPassword}
-            required
           />
           <p
             className={
