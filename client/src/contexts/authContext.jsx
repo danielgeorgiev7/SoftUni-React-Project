@@ -1,7 +1,8 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as authService from "../services/authService";
 import usePersistedState from "../hooks/usePersistedState";
+import { getPosts } from "../services/postService";
 
 const AuthContext = createContext();
 
@@ -10,12 +11,24 @@ export const AuthProvider = ({ children }) => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [auth, setAuth] = usePersistedState("auth", {});
   const [errorMessage, setErrorMessage] = useState("");
+  const [posts, setPosts] = useState([]);
+  /* eslint-disable react-hooks/exhaustive-deps */
+
+  useEffect(
+    function () {
+      if (loggedIn) {
+        getPosts().then((posts) =>
+          posts.code ? setErrorMessage(posts.message) : setPosts(posts)
+        );
+      }
+    },
+    [loggedIn]
+  );
 
   const loginSubmitHandler = async (values) => {
     const result = await authService.login(values.email, values.password);
 
     if (!result.code) {
-      console.log(result);
       setAuth(result);
 
       localStorage.setItem("accessToken", result.accessToken);
@@ -63,6 +76,8 @@ export const AuthProvider = ({ children }) => {
     setErrorMessage,
     loggedIn,
     setLoggedIn,
+    posts,
+    setPosts,
   };
 
   return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;

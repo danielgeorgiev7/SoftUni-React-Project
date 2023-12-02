@@ -2,7 +2,7 @@ import { useContext, useState } from "react"
 import AuthContext from "../contexts/authContext";
 import formatUsername from "../utils/formatUsername";
 
-export default function useForm(submitHandler, initialValues, preventDefault) {
+export default function useForm(submitHandler, initialValues, asyncCallback) {
     const [values, setValues] = useState(initialValues);
     const { setErrorMessage } = useContext(AuthContext);
 
@@ -21,14 +21,20 @@ export default function useForm(submitHandler, initialValues, preventDefault) {
         setErrorMessage("");
     };
 
-    const onSubmit = (e) => {
-        if (preventDefault) e.preventDefault();
+    const onSubmitAsync = async () => {
+        const result = await submitHandler(values);
+        setValues(initialValues);
+        return result;
+    };
+
+    const onSubmit = () => {
         submitHandler(values);
+        setValues(initialValues);
     };
 
     return {
         values,
         onChange,
-        onSubmit,
+        onSubmit: asyncCallback ? onSubmitAsync : onSubmit,
     }
 }

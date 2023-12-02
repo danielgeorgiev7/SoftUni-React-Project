@@ -35,7 +35,6 @@ const request = async (method, url, data) => {
     if (!response.ok) {
         return result;
     }
-    console.log(result)
 
     return result;
 };
