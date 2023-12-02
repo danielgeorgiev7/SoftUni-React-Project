@@ -12,6 +12,7 @@ function Register() {
   const { values, onChange, onSubmit } = useForm(
     registerSubmitHandler,
     {
+      username: "",
       email: "",
       password: "",
     },
@@ -28,7 +29,13 @@ function Register() {
 
   function submitHandler(e) {
     e.preventDefault();
-    if (values.email === "") {
+    if (values.username === "") {
+      setErrorMessage("Username field is required");
+    } else if (values.username < 5) {
+      setErrorMessage("Username must be at least 4 characters");
+    } else if (values.username > 17) {
+      setErrorMessage("Username cannot be longer than 16 characters");
+    } else if (values.email === "") {
       setErrorMessage("Email field is required");
     } else if (!isValidEmail(values.email)) {
       setErrorMessage("Provided email isn't valid");
@@ -53,6 +60,24 @@ function Register() {
       <div className="register-wrapper">
         <h2>Welcome to our community!</h2>
         <form className="register-form" id="register" onSubmit={submitHandler}>
+          <label htmlFor="register-username">Username:</label>
+          <input
+            className={
+              errorMessage === "Username field is required" ||
+              errorMessage === "Username must be at least 4 characters" ||
+              errorMessage === "Username cannot be longer than 16 characters"
+                ? "field-error"
+                : ""
+            }
+            maxLength="17"
+            placeholder="@username"
+            type="username"
+            id="register-username"
+            name="username"
+            onChange={onChange}
+            value={values.username}
+            autoComplete="username"
+          />
           <label htmlFor="register-email">Email address:</label>
           <input
             className={
@@ -62,13 +87,15 @@ function Register() {
                 ? "field-error"
                 : ""
             }
+            placeholder="email@example.com"
             type="email"
             id="register-email"
             name="email"
             onChange={onChange}
             value={values.email}
-            autoComplete="username"
+            autoComplete="email"
           />
+
           <label htmlFor="register-password">Password:</label>
           <input
             className={

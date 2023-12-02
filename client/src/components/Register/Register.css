@@ -60,7 +60,8 @@
   animation: moveInRight 0.75s;
 }
 
-.register-form input:nth-child(4) {
+.register-form input:nth-child(4),
+.register-form input:nth-child(8) {
   animation: moveInLeft 0.75s;
 }
 
@@ -119,4 +120,10 @@
 .field-error {
   outline: 2px solid #cc0000 !important;
   border: none !important;
+}
+
+.register-section input::placeholder {
+  font-size: 2rem;
+  font-style: italic;
+  color: #aaa;
 }

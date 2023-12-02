@@ -15,6 +15,7 @@ export const AuthProvider = ({ children }) => {
     const result = await authService.login(values.email, values.password);
 
     if (!result.code) {
+      console.log(result);
       setAuth(result);
 
       localStorage.setItem("accessToken", result.accessToken);
@@ -27,12 +28,17 @@ export const AuthProvider = ({ children }) => {
   };
 
   const registerSubmitHandler = async (values) => {
-    const result = await authService.register(values.email, values.password);
+    const result = await authService.register(
+      values.username,
+      values.email,
+      values.password
+    );
     if (!result.code) {
       setAuth(result);
 
       localStorage.setItem("accessToken", result.accessToken);
 
+      setLoggedIn(true);
       navigate("/");
     } else {
       setErrorMessage(result.message);

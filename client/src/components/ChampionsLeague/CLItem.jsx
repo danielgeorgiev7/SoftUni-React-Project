@@ -1,5 +1,5 @@
 function CLItem({ teamData }) {
-  console.log(teamData);
+  // console.log(teamData);
   return (
     <div
       key={teamData.team.id}

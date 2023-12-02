@@ -1,4 +1,4 @@
-const buildOptions = (data) => {
+export const buildOptions = (data) => {
     const options = {};
 
     if (data) {
