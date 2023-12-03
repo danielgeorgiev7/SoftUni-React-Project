@@ -27,7 +27,7 @@ export const deletePost = async (id) => {
 
 export const getPosts = async () => {
     const result = await request.get(baseUrl);
-    return result;
+    return result.reverse();
 };
 
 export const editPostContent = async (id, data) => {

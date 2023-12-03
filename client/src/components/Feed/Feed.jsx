@@ -10,7 +10,7 @@ function Feed() {
       <div className="feed-wrapper">
         <WritePost />
         <div className="feed-posts">
-          {posts.reverse().map((post) => (
+          {posts.map((post) => (
             <FeedPost post={post} key={`feedPost-${post._id}`} />
           ))}
         </div>

@@ -14,6 +14,11 @@ export const AuthProvider = ({ children }) => {
   const [posts, setPosts] = useState([]);
   /* eslint-disable react-hooks/exhaustive-deps */
 
+  useEffect(function () {
+    const accessToken = localStorage.getItem("accessToken");
+    if (accessToken !== null) setLoggedIn(true);
+  }, []);
+
   useEffect(
     function () {
       if (loggedIn) {

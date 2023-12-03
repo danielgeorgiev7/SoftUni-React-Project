@@ -8,7 +8,6 @@ export function FeedPost({ post }) {
   const [postContent, setPostContent] = useState(post.content);
   const [beforeEditContent, setBeforeEditContent] = useState(post.content);
   const { setPosts } = useContext(AuthContext);
-  console.log(post);
 
   function deleteClickHandler() {
     deletePost(post._id);
@@ -37,12 +36,6 @@ export function FeedPost({ post }) {
     setEditable(false);
   }
 
-  //  function editHandler() {
-  //    editPost();
-  //    setPosts((state) =>
-  //
-  //    );
-  //  }
   return (
     <form className="feed-post-wrapper">
       <div className="feed-post-upper-layer">
@@ -53,16 +46,18 @@ export function FeedPost({ post }) {
         </p>
       </div>
       <div className="feed-post-content-wrapper">
-        <input
-          type="text"
-          readOnly={!editable}
-          disabled={!editable}
-          className={`feed-post-content ${
-            editable ? "post-input-editable" : ""
-          }`}
-          onChange={(e) => setPostContent(e.target.value)}
-          value={postContent}
-        ></input>
+        {post.content !== "" && (
+          <input
+            type="text"
+            readOnly={!editable}
+            disabled={!editable}
+            className={`feed-post-content ${
+              editable ? "post-input-editable" : ""
+            }`}
+            onChange={(e) => setPostContent(e.target.value)}
+            value={postContent}
+          ></input>
+        )}
       </div>
       <div
         className={`edit-btn-save-cancel ${

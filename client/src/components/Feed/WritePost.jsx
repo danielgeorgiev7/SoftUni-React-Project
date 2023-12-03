@@ -22,11 +22,15 @@ function WritePost() {
 
   async function onSubmitHandler(e) {
     e.preventDefault();
-    const result = await onSubmit();
-    if (!result.code) {
-      setPosts((state) => [...state, result]);
+    if (values.content === "" && values.img === "") {
+      return;
     } else {
-      setErrorMessage(result.message);
+      const result = await onSubmit();
+      if (!result.code) {
+        setPosts((state) => [result, ...state]);
+      } else {
+        setErrorMessage(result.message);
+      }
     }
   }
 

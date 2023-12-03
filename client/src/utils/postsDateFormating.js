@@ -39,14 +39,16 @@ export default function postsDateFormat(timestamp) {
 
         return 'th';
     }
-    const dateArray = targetTime.toLocaleString('en-US', {
-        month: 'long',
-        day: 'numeric',
-        hour: 'numeric',
-        minute: 'numeric',
-    }).split(' ');
 
-    dateArray.splice(1, 1, dayOfMonth + getOrdinalSuffix(dayOfMonth));
+    // Format the time manually to ensure two digits for the hour
+    const formattedHour = targetTime.getHours().toString().padStart(2, '0');
+    const formattedMinute = targetTime.getMinutes().toString().padStart(2, '0');
 
-    return dateArray.join(' ');
+    const dateArray = [
+        targetTime.toLocaleString('en-US', { month: 'long' }),
+        ` ${dayOfMonth}${getOrdinalSuffix(dayOfMonth)}`,
+        ` at ${formattedHour}:${formattedMinute}`,
+    ];
+
+    return dateArray;
 }
