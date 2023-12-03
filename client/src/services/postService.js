@@ -30,3 +30,7 @@ export const getPosts = async () => {
     return result;
 };
 
+export const editPostContent = async (id, data) => {
+    const result = await request.put(`${baseUrl}/${id}`, data);
+    return result;
+};

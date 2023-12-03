@@ -104,7 +104,6 @@
 }
 
 .feed-post-img {
-  border-radius: 1.5rem;
   margin: 0.75rem;
   width: 50rem;
 }
@@ -133,9 +132,23 @@
   font-size: 1.6rem;
 }
 
+.feed-post-content-wrapper {
+  display: flex;
+  align-items: center;
+  margin: 0 0.75rem;
+}
+
 .feed-post-content {
-  font-size: 1.7rem;
+  width: 100%;
+  font-size: 1.8rem;
+  border: none;
+  background-color: inherit;
   padding: 1rem 2rem 1rem;
+  color: black;
+}
+
+.feed-post-content:focus {
+  outline: none;
 }
 
 .feed-post-timestamp span {
@@ -146,7 +159,7 @@
 .feed-post-buttons {
   display: flex;
   justify-content: space-around;
-  padding: 1rem 2rem 0.25rem;
+  padding: 1.1rem 2rem 0.25rem;
 }
 
 .feed-post-buttons > * {
@@ -157,4 +170,55 @@
 
 .feed-post-buttons > *:hover {
   color: #00529f;
+}
+
+.post-input-editable {
+  border: 2px solid #00529f;
+  border-radius: 2rem;
+  margin: 0.75rem 0;
+}
+
+.post-button-clicked {
+  color: #00529f;
+  font-weight: 500;
+}
+
+.edit-btn-save-cancel {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.save-cancel-hidden {
+  display: none;
+}
+
+.edit-btn-save-cancel > * {
+  font-size: 1.8rem;
+  border-radius: 2rem;
+  padding: 0.5rem 1rem;
+  width: 10rem;
+  text-align: center;
+  cursor: pointer;
+}
+
+.edit-btn-save-cancel a:nth-child(1) {
+  color: #fff;
+  background-color: rgba(0, 82, 158, 0.8);
+  border: 2px solid #00529f;
+}
+
+.edit-btn-save-cancel a:nth-child(1):hover {
+  background-color: #00529f;
+}
+
+.edit-btn-save-cancel a:nth-child(2) {
+  color: #fff;
+  background-color: #888;
+  border: 2px solid #666;
+}
+
+.edit-btn-save-cancel a:nth-child(2):hover {
+  background-color: #666;
 }
