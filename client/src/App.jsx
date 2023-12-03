@@ -5,17 +5,19 @@ import ChampionsLeague from "./components/ChampionsLeague/ChampionsLeague";
 import LaLiga from "./components/LaLiga/LaLiga";
 import Profile from "./components/Profile/Profile";
 import Home from "./components/Home/Home";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import FixturesModal from "./components/Fixtures/FixturesModal";
 import PlayersModal from "./components/Players/PlayersModal";
 import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
 import Logout from "./components/Logout/logout";
-import Feed from "./components/Feed/Feed";
-import AuthContext from "./contexts/authContext";
+import UserGuard from "./guards/UserGuard";
+import GuestGuard from "./guards/GuestGuard";
+import { AuthProvider } from "./contexts/authContext";
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
 
 function App() {
-  const { loggedIn } = useContext(AuthContext);
   const [fixtures, setFixtures] = useState([]);
   const [previousFixtures, setPreviousFixtures] = useState([]);
 
@@ -3430,26 +3432,40 @@ function App() {
   }, []);
 
   return (
-    <Routes>
-      <Route path="/" element={loggedIn ? <Feed /> : <Home />}></Route>
-      <Route
-        path="/fixtures"
-        element={
-          <Fixtures fixtures={fixtures} previousFixtures={previousFixtures} />
-        }
-      >
-        <Route path="/fixtures/:id" element={<FixturesModal />} />
-      </Route>
-      <Route path="/players" element={<Players />}>
-        <Route path="/players/:id" element={<PlayersModal />} />
-      </Route>
-      <Route path="/la-liga" element={<LaLiga />}></Route>
-      <Route path="/champions-league" element={<ChampionsLeague />}></Route>
-      <Route path="/profile" element={<Profile />}></Route>
-      <Route path="/register" element={<Register />}></Route>
-      <Route path="/login" element={<Login />}></Route>
-      <Route path="/logout" element={<Logout />}></Route>
-    </Routes>
+    <AuthProvider>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />}></Route>
+        <Route
+          path="/fixtures"
+          element={
+            <Fixtures fixtures={fixtures} previousFixtures={previousFixtures} />
+          }
+        >
+          <Route path="/fixtures/:id" element={<FixturesModal />} />
+        </Route>
+        <Route path="/players" element={<Players />}>
+          <Route path="/players/:id" element={<PlayersModal />} />
+        </Route>
+        <Route path="/la-liga" element={<LaLiga />}></Route>
+        <Route path="/champions-league" element={<ChampionsLeague />}></Route>
+
+        <Route element={<UserGuard />}>
+          <>
+            <Route path="/register" element={<Register />}></Route>
+            <Route path="/login" element={<Login />}></Route>
+          </>
+        </Route>
+
+        <Route element={<GuestGuard />}>
+          <>
+            <Route path="/profile" element={<Profile />}></Route>
+            <Route path="/logout" element={<Logout />}></Route>
+          </>
+        </Route>
+      </Routes>
+      <Footer />
+    </AuthProvider>
   );
 }
 

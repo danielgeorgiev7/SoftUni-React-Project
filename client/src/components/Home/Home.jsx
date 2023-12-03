@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import "./Home.css";
+import Feed from "../Feed/Feed";
 
 function Home() {
-  return (
+  const accessToken = localStorage.getItem("accessToken");
+  return accessToken === null ? (
     <div className="home-section-wrapper">
       <div className="home-section">
         <div className="home-text">
@@ -19,6 +21,8 @@ function Home() {
         </div>
       </div>
     </div>
+  ) : (
+    <Feed />
   );
 }
 
