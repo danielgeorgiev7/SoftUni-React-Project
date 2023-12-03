@@ -49,7 +49,7 @@ function Login() {
                 ? "field-error"
                 : ""
             }
-            type="email"
+            type="text"
             id="login-email"
             name="email"
             onChange={onChange}

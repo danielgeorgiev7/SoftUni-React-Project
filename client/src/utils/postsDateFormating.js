@@ -21,11 +21,32 @@ export default function postsDateFormat(timestamp) {
     }
 
     targetTime.setHours(targetHour, targetMinute, 0, 0);
+    const dayOfMonth = targetTime.getDate();
 
-    return targetTime.toLocaleString('en-US', {
+    function getOrdinalSuffix(number) {
+        const j = number % 10;
+        const k = number % 100;
+
+        if (j === 1 && k !== 11) {
+            return 'st';
+        }
+        if (j === 2 && k !== 12) {
+            return 'nd';
+        }
+        if (j === 3 && k !== 13) {
+            return 'rd';
+        }
+
+        return 'th';
+    }
+    const dateArray = targetTime.toLocaleString('en-US', {
         month: 'long',
         day: 'numeric',
         hour: 'numeric',
         minute: 'numeric',
-    });
+    }).split(' ');
+
+    dateArray.splice(1, 1, dayOfMonth + getOrdinalSuffix(dayOfMonth));
+
+    return dateArray.join(' ');
 }

@@ -10,10 +10,11 @@ const baseUrl = 'http://localhost:3030/data/posts';
 //     return result;
 // };
 
-export const createPost = ({ ownerUsername, content, img, }) => {
+export const createPost = ({ ownerUsername, content, ownerImg, img }) => {
     const result = request.post(baseUrl, {
         ownerUsername,
         content,
+        ownerImg,
         img,
     });
     return result;
@@ -28,3 +29,4 @@ export const getPosts = async () => {
     const result = await request.get(baseUrl);
     return result;
 };
+

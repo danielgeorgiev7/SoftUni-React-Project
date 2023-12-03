@@ -7,11 +7,14 @@ import AuthContext from "../../contexts/authContext";
 function WritePost() {
   const { setPosts, setErrorMessage, errorMessage } = useContext(AuthContext);
   const ownerUsername = JSON.parse(localStorage.auth).username;
+  const ownerImg = JSON.parse(localStorage.auth).img;
+
   const { values, onChange, onSubmit } = useForm(
     createPost,
     {
       ownerUsername,
       content: "",
+      ownerImg,
       img: "",
     },
     true
@@ -41,7 +44,13 @@ function WritePost() {
         onChange={onChange}
         value={values.content}
       ></textarea>
-      <p className="error-placeholder">{errorMessage}</p>
+      <p
+        className={
+          errorMessage ? "error-placeholder" : "error-placeholder-hidden"
+        }
+      >
+        {errorMessage}
+      </p>
       <div className="link-post-wrapper">
         <label htmlFor="link-img" className="link-img-label">
           Link image:

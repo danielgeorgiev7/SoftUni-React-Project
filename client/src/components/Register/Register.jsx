@@ -15,6 +15,7 @@ function Register() {
       username: "",
       email: "",
       password: "",
+      img: "/default-user.png",
     },
     false
   );
@@ -71,7 +72,7 @@ function Register() {
             }
             maxLength="17"
             placeholder="@username"
-            type="username"
+            type="text"
             id="register-username"
             name="username"
             onChange={onChange}
@@ -88,7 +89,7 @@ function Register() {
                 : ""
             }
             placeholder="email@example.com"
-            type="email"
+            type="text"
             id="register-email"
             name="email"
             onChange={onChange}

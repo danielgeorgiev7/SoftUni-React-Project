@@ -44,7 +44,8 @@ export const AuthProvider = ({ children }) => {
     const result = await authService.register(
       values.username,
       values.email,
-      values.password
+      values.password,
+      values.img
     );
     if (!result.code) {
       setAuth(result);

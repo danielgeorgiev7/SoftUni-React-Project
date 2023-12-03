@@ -13,34 +13,40 @@ export function FeedPost({ post }) {
   }
 
   //  function editHandler() {
-  //    editPost(post._id);
+  //    editPost();
   //    setPosts((state) =>
-  //      state.filter((statePost) => statePost._id !== post._id)
+  //
   //    );
   //  }
   return (
     <div className="feed-post-wrapper">
-      <h3 className="feed-post-username">{post.ownerUsername}</h3>
+      <div className="feed-post-upper-layer">
+        <img src={post.ownerImg} alt="" />
+        <h3 className="feed-post-username">{post.ownerUsername}</h3>
+        <p className="feed-post-timestamp">
+          Posted on: <span>{postsDateFormat(post._createdOn)}</span>
+        </p>
+      </div>
       <p className="feed-post-content">{post.content}</p>
       {post.img && (
         <img
+          className="feed-post-img"
           src={post.img}
           alt={`${post.ownerUsername}'s attached to post photo`}
         />
       )}
-      <span className="feed-post-timestamp">
-        Posted on {postsDateFormat(post._createdOn)}
-      </span>
-      {post._ownerId === JSON.parse(localStorage.auth)._id && (
-        <div className="feed-post-butons">
-          <button className="feed-post-delete-btn" onClick={deleteHandler}>
-            Delete
-          </button>
-          <button className="feed-post-edit-btn" onClick={editHandler}>
-            Edit
-          </button>
-        </div>
-      )}
+      <div className="feed-post-buttons">
+        <button className="feed-post-like-btn">Like</button>
+        <button className="feed-post-comments-btn">Comments</button>
+        {post._ownerId === JSON.parse(localStorage.auth)._id && (
+          <>
+            <button className="feed-post-edit-btn">Edit</button>
+            <button className="feed-post-delete-btn" onClick={deleteHandler}>
+              Delete
+            </button>
+          </>
+        )}
+      </div>
     </div>
   );
 }
