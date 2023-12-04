@@ -1,4 +1,4 @@
-export const buildOptions = (data) => {
+export const buildOptions = (authenticationBool, data) => {
     const options = {};
 
     if (data) {
@@ -10,7 +10,8 @@ export const buildOptions = (data) => {
 
     const token = localStorage.getItem('accessToken');
 
-    if (token) {
+    if (authenticationBool) {
+
         options.headers = {
             ...options.headers,
             'X-Authorization': token
@@ -20,9 +21,9 @@ export const buildOptions = (data) => {
     return options;
 };
 
-const request = async (method, url, data) => {
+const request = async (method, url, authenticationBool, data) => {
     const response = await fetch(url, {
-        ...buildOptions(data),
+        ...buildOptions(authenticationBool, data),
         method,
     });
 

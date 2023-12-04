@@ -3,33 +3,35 @@ import useForm from "../../hooks/useForm";
 import { createPost } from "../../services/postService";
 import "./Feed.css";
 import AuthContext from "../../contexts/authContext";
+import { postLikes } from "../../services/likeService";
 
 function WritePost() {
-  const { setPosts, setErrorMessage, errorMessage } = useContext(AuthContext);
+  const { setPosts, setErrorMessage, errorMessage, setLikes } =
+    useContext(AuthContext);
   const ownerUsername = JSON.parse(localStorage.auth).username;
   const ownerImg = JSON.parse(localStorage.auth).img;
 
-  const { values, onChange, onSubmit } = useForm(
-    createPost,
-    {
-      ownerUsername,
-      content: "",
-      ownerImg,
-      img: "",
-    },
-    true
-  );
+  const { values, onChange, onSubmit } = useForm(createPost, true, {
+    ownerUsername,
+    content: "",
+    ownerImg,
+    img: "",
+  });
 
   async function onSubmitHandler(e) {
     e.preventDefault();
     if (values.content === "" && values.img === "") {
       return;
     } else {
-      const result = await onSubmit();
-      if (!result.code) {
-        setPosts((state) => [result, ...state]);
+      const postResult = await onSubmit();
+      if (!postResult.code) {
+        setPosts((state) => [postResult, ...state]);
       } else {
-        setErrorMessage(result.message);
+        setErrorMessage(postResult.message);
+      }
+      const likesResult = await postLikes(postResult._id, []);
+      if (!likesResult.code) {
+        setLikes((state) => [...state, likesResult]);
       }
     }
   }

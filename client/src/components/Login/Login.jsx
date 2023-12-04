@@ -9,14 +9,10 @@ import isValidEmail from "../../utils/isValidEmail";
 function Login() {
   const { loginSubmitHandler, errorMessage, setErrorMessage } =
     useContext(AuthContext);
-  const { values, onChange, onSubmit } = useForm(
-    loginSubmitHandler,
-    {
-      email: "",
-      password: "",
-    },
-    false
-  );
+  const { values, onChange, onSubmit } = useForm(loginSubmitHandler, false, {
+    email: "",
+    password: "",
+  });
 
   function submitHandler(e) {
     e.preventDefault();

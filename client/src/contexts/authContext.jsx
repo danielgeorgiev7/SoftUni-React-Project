@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import * as authService from "../services/authService";
 import usePersistedState from "../hooks/usePersistedState";
 import { getPosts } from "../services/postService";
+import { getLikes } from "../services/likeService";
 
 const AuthContext = createContext();
 
@@ -12,6 +13,7 @@ export const AuthProvider = ({ children }) => {
   const [auth, setAuth] = usePersistedState("auth", {});
   const [errorMessage, setErrorMessage] = useState("");
   const [posts, setPosts] = useState([]);
+  const [likes, setLikes] = useState([]);
   /* eslint-disable react-hooks/exhaustive-deps */
 
   useEffect(function () {
@@ -24,6 +26,11 @@ export const AuthProvider = ({ children }) => {
       if (loggedIn) {
         getPosts().then((posts) =>
           posts.code ? setErrorMessage(posts.message) : setPosts(posts)
+        );
+        getLikes().then((likes) =>
+          likes.code
+            ? setErrorMessage(likes.message)
+            : setLikes(Object.values(likes))
         );
       }
     },
@@ -70,6 +77,11 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("accessToken");
   };
 
+  function getCurrentPostLikes(id) {
+    const currentPostLikes = likes.filter((like) => like.postId === id);
+    return currentPostLikes;
+  }
+
   const values = {
     loginSubmitHandler,
     registerSubmitHandler,
@@ -84,6 +96,9 @@ export const AuthProvider = ({ children }) => {
     setLoggedIn,
     posts,
     setPosts,
+    likes,
+    setLikes,
+    getCurrentPostLikes,
   };
 
   return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;

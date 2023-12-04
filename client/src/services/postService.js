@@ -11,26 +11,26 @@ const baseUrl = 'http://localhost:3030/data/posts';
 // };
 
 export const createPost = ({ ownerUsername, content, ownerImg, img }) => {
-    const result = request.post(baseUrl, {
+    const result = request.post(baseUrl, true, {
         ownerUsername,
-        content,
         ownerImg,
+        content,
         img,
     });
     return result;
 };
 
 export const deletePost = async (id) => {
-    const result = await request.remove(`${baseUrl}/${id}`, request.buildOptions);
+    const result = await request.remove(`${baseUrl}/${id}`, true);
     return result;
 };
 
 export const getPosts = async () => {
-    const result = await request.get(baseUrl);
+    const result = await request.get(baseUrl, true);
     return result.reverse();
 };
 
-export const editPostContent = async (id, data) => {
-    const result = await request.put(`${baseUrl}/${id}`, data);
+export const editPost = async (id, data) => {
+    const result = await request.put(`${baseUrl}/${id}`, true, data);
     return result;
 };

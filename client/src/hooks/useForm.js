@@ -2,7 +2,7 @@ import { useContext, useState } from "react"
 import AuthContext from "../contexts/authContext";
 import formatUsername from "../utils/formatUsername";
 
-export default function useForm(submitHandler, initialValues, asyncCallback) {
+export default function useForm(submitHandler, asyncSubmitBool, initialValues) {
     const [values, setValues] = useState(initialValues);
     const { setErrorMessage } = useContext(AuthContext);
 
@@ -35,6 +35,6 @@ export default function useForm(submitHandler, initialValues, asyncCallback) {
     return {
         values,
         onChange,
-        onSubmit: asyncCallback ? onSubmitAsync : onSubmit,
+        onSubmit: asyncSubmitBool ? onSubmitAsync : onSubmit,
     }
 }

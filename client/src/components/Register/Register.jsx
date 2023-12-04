@@ -9,16 +9,12 @@ import isValidEmail from "../../utils/isValidEmail";
 function Register() {
   const { registerSubmitHandler, errorMessage, setErrorMessage } =
     useContext(AuthContext);
-  const { values, onChange, onSubmit } = useForm(
-    registerSubmitHandler,
-    {
-      username: "",
-      email: "",
-      password: "",
-      img: "/default-user.png",
-    },
-    false
-  );
+  const { values, onChange, onSubmit } = useForm(registerSubmitHandler, false, {
+    username: "",
+    email: "",
+    password: "",
+    img: "/default-user.png",
+  });
   const [confirmPassword, setConfirmPassword] = useState("");
 
   useEffect(() => setErrorMessage(""), []);
