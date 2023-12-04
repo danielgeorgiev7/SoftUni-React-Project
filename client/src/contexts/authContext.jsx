@@ -4,6 +4,7 @@ import * as authService from "../services/authService";
 import usePersistedState from "../hooks/usePersistedState";
 import { getPosts } from "../services/postService";
 import { getLikes } from "../services/likeService";
+import { getComments } from "../services/commentService";
 
 const AuthContext = createContext();
 
@@ -32,6 +33,11 @@ export const AuthProvider = ({ children }) => {
           likes.code
             ? setErrorMessage(likes.message)
             : setLikes(Object.values(likes))
+        );
+        getComments().then((comments) =>
+          comments.code
+            ? setErrorMessage(likes.message)
+            : setComments(Object.values(comments))
         );
       }
     },

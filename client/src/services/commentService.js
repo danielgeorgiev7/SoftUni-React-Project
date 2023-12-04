@@ -1,14 +1,14 @@
 import * as request from '../lib/request';
-const baseUrl = 'http://localhost:3030/data/comments';
+const baseUrl = 'http://localhost:3030/data/postcomments';
 
 export const getComments = async () => {
     const result = await request.get(`${baseUrl}`, true);
     return result;
 };
 
-export const postComments = async (id) => {
+export const postComments = async (postId, comment, ownerUsername, ownerImg) => {
     const data = {
-        postId: id, Comments: []
+        postId, comment, ownerUsername, ownerImg, edited: false,
     }
     const result = await request.post(`${baseUrl}`, true, data);
     return result;

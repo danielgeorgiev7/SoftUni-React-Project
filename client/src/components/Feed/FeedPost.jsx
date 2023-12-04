@@ -1,30 +1,44 @@
 import { useContext, useEffect, useState } from "react";
 import { deletePost, editPost } from "../../services/postService";
-import postsDateFormat from "../../utils/postsDateFormating";
 import AuthContext from "../../contexts/authContext";
 import { deleteLikes, putLikes } from "../../services/likeService";
 import CommentItem from "./CommentItem";
+import { deleteComments, postComments } from "../../services/commentService";
+import postsDateFormatting from "../../utils/postsDateFormating";
 
 export function FeedPost({ post }) {
   const userId = JSON.parse(localStorage.auth)._id;
+  const ownerUsername = JSON.parse(localStorage.auth).username;
+  const ownerImg = JSON.parse(localStorage.auth).img;
 
   const [editable, setEditable] = useState(false);
   const [postContent, setPostContent] = useState(post.content);
   const [beforeEditContent, setBeforeEditContent] = useState(post.content);
-  const { setPosts, getCurrentPostLikes, setLikes } = useContext(AuthContext);
+  const {
+    setPosts,
+    setLikes,
+    comments,
+    setComments,
+    getCurrentPostLikes,
+    getCurrentPostComments,
+  } = useContext(AuthContext);
   const [currentPostLikes, setCurrentPostLikes] = useState([]);
   const [liked, setLiked] = useState(null);
   const [currentPostComments, setCurrentPostComments] = useState([]);
   const [commentsOpen, setCommentsOpen] = useState(false);
+  const [addCommentValue, setAddCommentValue] = useState("");
 
   useEffect(() => {
-    const postLikes = getCurrentPostLikes(post._id)["0"];
-    setCurrentPostLikes(postLikes);
+    const allPostLikes = getCurrentPostLikes(post._id)["0"];
+    setCurrentPostLikes(allPostLikes);
 
-    if (postLikes?.likes) {
-      setLiked(postLikes?.likes.includes(userId));
+    const allPostComments = getCurrentPostComments(post._id);
+    setCurrentPostComments(allPostComments);
+
+    if (allPostLikes?.likes) {
+      setLiked(allPostLikes?.likes.includes(userId));
     }
-  }, [getCurrentPostLikes, post._id, userId]);
+  }, [getCurrentPostLikes, getCurrentPostComments, post._id, userId]);
 
   async function likeClickHandler(e) {
     e.preventDefault();
@@ -88,12 +102,14 @@ export function FeedPost({ post }) {
   }
 
   function commentsClickHandler(e) {
+    if (editable) editCancelClickHandler();
     e.preventDefault();
     setCommentsOpen((state) => !state);
   }
 
   function editClickHandler(e) {
     e.preventDefault();
+    setCommentsOpen(false);
     setBeforeEditContent(postContent);
     setEditable(true);
   }
@@ -114,13 +130,38 @@ export function FeedPost({ post }) {
   }
 
   async function editSaveClickHandler() {
-    const result = await editPost(post._id, {
-      ...post,
-      content: postContent,
-    });
-    if (!result.code) {
+    if (postContent !== beforeEditContent) {
+      const result = await editPost(post._id, {
+        ...post,
+        content: postContent,
+      });
+      if (!result.code) {
+        setEditable(false);
+      }
+    } else {
       setEditable(false);
     }
+  }
+
+  async function addCommentHandler() {
+    if (addCommentValue !== "") {
+      const result = await postComments(
+        post._id,
+        addCommentValue,
+        ownerUsername,
+        ownerImg
+      );
+      if (!result.code) {
+        setAddCommentValue("");
+        setCurrentPostComments((current) => [...current, result]);
+        setComments((current) => [...current, result]);
+      }
+    }
+  }
+
+  function deleteCommentHandler(id) {
+    deleteComments(id);
+    setComments((comments) => comments.filter((comment) => comment._id !== id));
   }
 
   return (
@@ -129,7 +170,7 @@ export function FeedPost({ post }) {
         <img src={post.ownerImg} alt={`${post.ownerUsername} profile photo`} />
         <h3 className="feed-post-username">{post.ownerUsername}</h3>
         <p className="feed-post-timestamp">
-          Posted on: <span>{postsDateFormat(post._createdOn)}</span>
+          Posted on: <span>{postsDateFormatting(post._createdOn)}</span>
         </p>
       </div>
       <div className="feed-post-content-wrapper">
@@ -138,7 +179,7 @@ export function FeedPost({ post }) {
             type="text"
             readOnly={!editable}
             disabled={!editable}
-            className={`feed-post-content ${
+            className={`feed-post-content${post.img ? "-with-img" : ""} ${
               editable ? "post-input-editable" : ""
             }`}
             onChange={(e) => setPostContent(e.target.value)}
@@ -163,9 +204,7 @@ export function FeedPost({ post }) {
       )}
       <div className="feed-post-buttons">
         <button
-          className={`feed-post-like-btn ${
-            liked === true && "feed-post-active-btn"
-          }`}
+          className={liked === true ? "feed-post-like-btn" : ""}
           onClick={likeClickHandler}
         >
           {liked ? "Liked" : "Like"}
@@ -173,12 +212,12 @@ export function FeedPost({ post }) {
             ` (${currentPostLikes?.likes?.length})`}
         </button>
         <button
-          className={`feed-post-like-btn ${
-            commentsOpen === true && "feed-post-active-btn"
-          }`}
+          className={commentsOpen === true ? "feed-post-active-btn" : ""}
           onClick={commentsClickHandler}
         >
           Comments
+          {currentPostComments?.length !== 0 &&
+            ` (${currentPostComments?.length})`}
         </button>
         {post._ownerId === JSON.parse(localStorage.auth)._id && (
           <>
@@ -201,7 +240,25 @@ export function FeedPost({ post }) {
       </div>
       {commentsOpen && (
         <div className="feed-comments">
-          <CommentItem />
+          {currentPostComments.map((commentObj) => (
+            <CommentItem
+              commentObj={commentObj}
+              userId={userId}
+              deleteCommentHandler={deleteCommentHandler}
+              key={`comment-item-${commentObj._id}`}
+            />
+          ))}
+          <div className="feed-post-add-comment">
+            <input
+              type="text"
+              className="feed-post-comment-input"
+              value={addCommentValue}
+              onChange={(e) => setAddCommentValue(e.target.value)}
+            />
+            <a className="feed-add-comment-button" onClick={addCommentHandler}>
+              Add comment
+            </a>
+          </div>
         </div>
       )}
     </form>

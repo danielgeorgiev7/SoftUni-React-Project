@@ -1,4 +1,4 @@
-export default function postsDateFormat(timestamp) {
+export default function postsDateFormatting(timestamp) {
     const oneWeekInMillis = 7 * 24 * 60 * 60 * 1000; // One week in milliseconds
     const currentDate = new Date();
     const targetDate = new Date(timestamp);
