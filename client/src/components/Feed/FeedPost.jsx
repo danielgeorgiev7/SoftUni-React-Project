@@ -10,7 +10,7 @@ export function FeedPost({ post }) {
   const [editable, setEditable] = useState(false);
   const [postContent, setPostContent] = useState(post.content);
   const [beforeEditContent, setBeforeEditContent] = useState(post.content);
-  const { setPosts, setLikes, getCurrentPostLikes } = useContext(AuthContext);
+  const { setPosts, getCurrentPostLikes, setLikes } = useContext(AuthContext);
   const [currentPostLikes, setCurrentPostLikes] = useState([]);
   const [liked, setLiked] = useState(null);
   useEffect(
@@ -22,18 +22,11 @@ export function FeedPost({ post }) {
   useEffect(
     function () {
       if (currentPostLikes.likes)
-        setLiked(() => currentPostLikes?.likes.includes(userId));
+        setLiked(() => currentPostLikes?.likes?.includes(userId));
     },
     [currentPostLikes?.likes, userId]
   );
-
-  console.log(currentPostLikes);
-  console.log(liked);
-
-  // console.log("Likes:");
-  // console.log(likes);
-  // console.log("CurrentPostLikes:");
-  // console.log(currentPostLikes["0"]);
+  console.log(post._id);
 
   async function likeClickHandler(e) {
     e.preventDefault();
@@ -50,11 +43,23 @@ export function FeedPost({ post }) {
           likes: [...state.likes, userId],
         };
       });
+      setLikes((state) =>
+        state.map(
+          (_, index) =>
+            (state[index] =
+              state[index].postId === post._id
+                ? {
+                    ...state[index],
+                    likes: [...state[index].likes, userId],
+                  }
+                : state[index])
+        )
+      );
       setLiked(true);
     } else {
       likeOutcome = {
         ...currentPostLikes,
-        likes: currentPostLikes.likes.filter(
+        likes: currentPostLikes?.likes?.filter(
           (likedUser) => likedUser !== userId
         ),
       };
@@ -64,9 +69,24 @@ export function FeedPost({ post }) {
           likes: state.likes.filter((likedUser) => likedUser !== userId),
         };
       });
+      setLikes((state) =>
+        state.map(
+          (_, index) =>
+            (state[index] =
+              state[index].postId === post._id
+                ? {
+                    ...state[index],
+                    likes: state[index].likes.filter(
+                      (likedUser) => likedUser !== userId
+                    ),
+                  }
+                : state[index])
+        )
+      );
+
       setLiked(false);
     }
-    putLikes(currentPostLikes._id, likeOutcome);
+    putLikes(currentPostLikes?._id, likeOutcome);
   }
 
   function editClickHandler(e) {
@@ -81,7 +101,7 @@ export function FeedPost({ post }) {
   }
 
   function deleteClickHandler() {
-    deleteLikes(currentPostLikes._id);
+    deleteLikes(currentPostLikes?._id);
     setLikes((state) => state.filter((like) => like.postId !== post._id));
 
     deletePost(post._id);
@@ -146,9 +166,8 @@ export function FeedPost({ post }) {
           onClick={likeClickHandler}
         >
           {liked ? "Liked" : "Like"}
-          {currentPostLikes?.likes &&
-            currentPostLikes?.likes?.length !== 0 &&
-            ` (${currentPostLikes.likes.length})`}
+          {currentPostLikes?.likes?.length !== 0 &&
+            ` (${currentPostLikes?.likes?.length})`}
         </button>
         <button className="feed-post-comments-btn">Comments</button>
         {post._ownerId === JSON.parse(localStorage.auth)._id && (
