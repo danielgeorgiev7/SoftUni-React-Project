@@ -13,20 +13,14 @@ export function FeedPost({ post }) {
   const { setPosts, getCurrentPostLikes, setLikes } = useContext(AuthContext);
   const [currentPostLikes, setCurrentPostLikes] = useState([]);
   const [liked, setLiked] = useState(null);
-  useEffect(
-    function () {
-      setCurrentPostLikes(() => getCurrentPostLikes(post._id)["0"]);
-    },
-    [getCurrentPostLikes, post._id]
-  );
-  useEffect(
-    function () {
-      if (currentPostLikes.likes)
-        setLiked(() => currentPostLikes?.likes?.includes(userId));
-    },
-    [currentPostLikes?.likes, userId]
-  );
-  console.log(post._id);
+  useEffect(() => {
+    const postLikes = getCurrentPostLikes(post._id)["0"];
+    setCurrentPostLikes(postLikes);
+
+    if (postLikes?.likes) {
+      setLiked(postLikes?.likes.includes(userId));
+    }
+  }, [getCurrentPostLikes, post._id, userId]);
 
   async function likeClickHandler(e) {
     e.preventDefault();

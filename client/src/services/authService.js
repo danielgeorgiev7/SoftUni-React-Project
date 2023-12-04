@@ -18,4 +18,4 @@ export const register = (username, email, password, img) => request.post(`${base
     img,
 });
 
-export const logout = () => request.get(`${baseUrl}/logout`, false);
+export const logout = () => request.get(`${baseUrl}/logout`, true);

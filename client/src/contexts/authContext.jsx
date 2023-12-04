@@ -79,7 +79,6 @@ export const AuthProvider = ({ children }) => {
 
   function getCurrentPostLikes(id) {
     const currentPostLikes = likes.filter((like) => like.postId === id);
-    console.log(likes);
     return currentPostLikes;
   }
 
