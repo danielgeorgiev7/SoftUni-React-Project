@@ -3,6 +3,7 @@ import { deletePost, editPost } from "../../services/postService";
 import postsDateFormat from "../../utils/postsDateFormating";
 import AuthContext from "../../contexts/authContext";
 import { deleteLikes, putLikes } from "../../services/likeService";
+import CommentItem from "./CommentItem";
 
 export function FeedPost({ post }) {
   const userId = JSON.parse(localStorage.auth)._id;
@@ -13,6 +14,9 @@ export function FeedPost({ post }) {
   const { setPosts, getCurrentPostLikes, setLikes } = useContext(AuthContext);
   const [currentPostLikes, setCurrentPostLikes] = useState([]);
   const [liked, setLiked] = useState(null);
+  const [currentPostComments, setCurrentPostComments] = useState([]);
+  const [commentsOpen, setCommentsOpen] = useState(false);
+
   useEffect(() => {
     const postLikes = getCurrentPostLikes(post._id)["0"];
     setCurrentPostLikes(postLikes);
@@ -81,6 +85,11 @@ export function FeedPost({ post }) {
       setLiked(false);
     }
     putLikes(currentPostLikes?._id, likeOutcome);
+  }
+
+  function commentsClickHandler(e) {
+    e.preventDefault();
+    setCommentsOpen((state) => !state);
   }
 
   function editClickHandler(e) {
@@ -155,7 +164,7 @@ export function FeedPost({ post }) {
       <div className="feed-post-buttons">
         <button
           className={`feed-post-like-btn ${
-            liked === true && "feed-post-liked"
+            liked === true && "feed-post-active-btn"
           }`}
           onClick={likeClickHandler}
         >
@@ -163,12 +172,19 @@ export function FeedPost({ post }) {
           {currentPostLikes?.likes?.length !== 0 &&
             ` (${currentPostLikes?.likes?.length})`}
         </button>
-        <button className="feed-post-comments-btn">Comments</button>
+        <button
+          className={`feed-post-like-btn ${
+            commentsOpen === true && "feed-post-active-btn"
+          }`}
+          onClick={commentsClickHandler}
+        >
+          Comments
+        </button>
         {post._ownerId === JSON.parse(localStorage.auth)._id && (
           <>
             <button
               className={`feed-post-edit-btn ${
-                editable ? "post-button-clicked" : ""
+                editable ? "feed-post-active-btn" : ""
               }`}
               onClick={editClickHandler}
             >
@@ -183,6 +199,11 @@ export function FeedPost({ post }) {
           </>
         )}
       </div>
+      {commentsOpen && (
+        <div className="feed-comments">
+          <CommentItem />
+        </div>
+      )}
     </form>
   );
 }

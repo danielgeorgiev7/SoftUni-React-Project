@@ -1,23 +1,25 @@
-// import * as request from '../lib/request';
+import * as request from '../lib/request';
+const baseUrl = 'http://localhost:3030/data/comments';
 
-// const baseUrl = 'http://localhost:3030/data/comments';
+export const getComments = async () => {
+    const result = await request.get(`${baseUrl}`, true);
+    return result;
+};
 
-// export const getAll = async (gameId) => {
-//     const query = new URLSearchParams({
-//         where: `gameId="${gameId}"`,
-//         load: `owner=_ownerId:users`,
-//     });
+export const postComments = async (id) => {
+    const data = {
+        postId: id, Comments: []
+    }
+    const result = await request.post(`${baseUrl}`, true, data);
+    return result;
+};
 
-//     const result = await request.get(`${baseUrl}?${query}`);
+export const putComments = async (id, data) => {
+    const result = await request.put(`${baseUrl}/${id}`, true, data);
+    return result;
+};
 
-//     return result;
-// };
-
-// export const create = async (gameId, text) => {
-//     const newComment = await request.post(baseUrl, {
-//         gameId,
-//         text,
-//     });
-
-//     return newComment;
-// };
+export const deleteComments = async (id) => {
+    const result = await request.remove(`${baseUrl}/${id}`, true);
+    return result;
+};

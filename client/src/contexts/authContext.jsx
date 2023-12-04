@@ -14,6 +14,7 @@ export const AuthProvider = ({ children }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [posts, setPosts] = useState([]);
   const [likes, setLikes] = useState([]);
+  const [comments, setComments] = useState([]);
   /* eslint-disable react-hooks/exhaustive-deps */
 
   useEffect(function () {
@@ -78,8 +79,15 @@ export const AuthProvider = ({ children }) => {
   };
 
   function getCurrentPostLikes(id) {
-    const currentPostLikes = likes.filter((like) => like.postId === id);
+    const currentPostLikes = likes.filter((likeObj) => likeObj.postId === id);
     return currentPostLikes;
+  }
+
+  function getCurrentPostComments(id) {
+    const currentPostComments = comments.filter(
+      (commentObj) => commentObj.postId === id
+    );
+    return currentPostComments;
   }
 
   const values = {
@@ -99,6 +107,9 @@ export const AuthProvider = ({ children }) => {
     likes,
     setLikes,
     getCurrentPostLikes,
+    comments,
+    setComments,
+    getCurrentPostComments,
   };
 
   return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;
