@@ -1,5 +1,9 @@
 import { createContext, useEffect, useState } from "react";
-import { getFixtures, getPreviousFixtures } from "../services/footballAPI";
+import {
+  getAllPlayers,
+  getFixtures,
+  getPreviousFixtures,
+} from "../services/footballAPI";
 
 const FootballContext = createContext();
 
@@ -7,21 +11,27 @@ export const FootballProvider = ({ children }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [fixtures, setFixtures] = useState(null);
   const [previousFixtures, setPreviousFixtures] = useState(null);
+  const [players, setPlayers] = useState(null);
 
   /* eslint-disable react-hooks/exhaustive-deps */
 
   useEffect(function () {
-    getFixtures().then((fixtures) =>
-      fixtures?.code || fixtures.length === "0"
-        ? setErrorMessage(fixtures.errorMessage || "Fixtures couldn't load")
-        : setFixtures(fixtures)
+    getFixtures().then((fixturesData) =>
+      fixturesData?.code || fixturesData.length === "0"
+        ? setErrorMessage(fixturesData.errorMessage || "Fixtures couldn't load")
+        : setFixtures(fixturesData)
     );
-    getPreviousFixtures().then((prevFixtures) =>
-      prevFixtures?.code || prevFixtures.length === "0"
+    getPreviousFixtures().then((prevFixturesData) =>
+      prevFixturesData?.code || prevFixturesData.length === "0"
         ? setErrorMessage(
-            prevFixtures.errorMessage || "Previous Fixtures couldn't load"
+            prevFixturesData.errorMessage || "Previous Fixtures couldn't load"
           )
-        : setPreviousFixtures(prevFixtures)
+        : setPreviousFixtures(prevFixturesData)
+    );
+    getAllPlayers().then((playersData) =>
+      playersData?.code || playersData.length === "0"
+        ? setErrorMessage(playersData.errorMessage || "Players couldn't load")
+        : setPlayers(playersData)
     );
   }, []);
 
@@ -30,6 +40,7 @@ export const FootballProvider = ({ children }) => {
     setErrorMessage,
     fixtures,
     previousFixtures,
+    players,
   };
 
   return (

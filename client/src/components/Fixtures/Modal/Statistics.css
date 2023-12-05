@@ -18,7 +18,7 @@
 .stats-sides > * {
   display: flex;
   align-items: end;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
 .stats-sides img {
@@ -27,11 +27,11 @@
 }
 
 .stats-sides p {
-  font-size: 3.5rem;
+  font-size: 3rem;
 }
 
 .real-stats-side p {
-  color: #00529f;
+  color: #333;
 }
 
 .other-stats-side p {
@@ -62,7 +62,7 @@
   padding-right: 0.75rem;
   border-top-left-radius: 2.5rem;
   border-bottom-left-radius: 2.5rem;
-  background-color: #00529f;
+  background-color: #333;
 }
 
 .stat.other {

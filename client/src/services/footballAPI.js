@@ -30,11 +30,17 @@ export async function getFixtureInfo(id) {
 }
 
 export async function getAllPlayers() {
-
+    const response = await fetch(`https://api-football-v1.p.rapidapi.com/v3/players/squads?team=541`, options);
+    const data = await response.json();
+    const final = (data.response);
+    return final;
 }
 
-export async function getPlayer() {
-
+export async function getPlayer(id) {
+    const response = await fetch(`https://api-football-v1.p.rapidapi.com/v3/players?season=2023&id=${id}`, options);
+    const data = await response.json();
+    const final = (data.response);
+    return final;
 }
 
 export async function getLaLiga() {

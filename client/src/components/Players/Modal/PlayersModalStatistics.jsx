@@ -7,6 +7,8 @@ function PlayersModalStatistics({ stats }) {
     leagueDisplay = "Champions League";
   if (stats.league.name === "Friendlies Clubs")
     leagueDisplay = "Club Friendlies";
+
+  if (!stats) return;
   return (
     <>
       <h3 className="players-modal-stats-heading">
@@ -14,12 +16,9 @@ function PlayersModalStatistics({ stats }) {
       </h3>
       <div className="players-modal-stats">
         <div className="players-modal-stats-overall">
-          <p>Overall</p>
-          <span>Appearances: {stats.games.appearances || "0"}</span>
+          <p>Participation</p>
+          <span>Appearances: {stats.games.appearences || "0"}</span>
           <span>Minutes: {stats.games.minutes || "0"}</span>
-          {stats.games.rating && (
-            <span>Rating: {stats.games.rating.toFixed(2)}</span>
-          )}
         </div>
 
         <div className="players-modal-stats-goals">
@@ -85,10 +84,15 @@ function PlayersModalStatistics({ stats }) {
 
         <div className="players-modal-stats-passes">
           <p>Passes</p>
-          {stats.games.position !== "Goalkeeper" && (
-            <span>Key passes: {stats.passes.key || "0"}</span>
-          )}
-          <span>Total: {stats.passes.total || "0"}</span>
+          {stats.games.position !== "Goalkeeper" &&
+            stats.passes.key !== null && (
+              <span>Key passes: {stats.passes.key}</span>
+            )}
+          <span>
+            Total: {stats.passes.total ? stats.passes.total : ""}
+            {!stats.passes.total &&
+              (stats.games.appearences === 0 ? "0" : "No info")}
+          </span>
         </div>
       </div>
     </>

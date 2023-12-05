@@ -1,16 +1,13 @@
+import getJerseyColor from "../../../utils/getJerseyColor";
 import Stat from "./Stat";
 import "./Statistics.css";
-function AllStats({ stat, realStats, otherStats }) {
+function AllStats({ stat, realStats, otherStats, otherTeamName }) {
   let toCompareReal = realStats.statistics.filter(
     (realStat) => realStat.type === stat.type
   )["0"].value;
   let toCompareOther = otherStats.statistics.filter(
     (realStat) => realStat.type === stat.type
   )["0"].value;
-  //   console.log(toCompareReal);
-  //   console.log(toCompareOther);
-  //   console.log(typeof toCompareReal);
-  //   console.log(typeof toCompareOther);
 
   let realWidth = "";
   let otherWidth = "";
@@ -83,7 +80,10 @@ function AllStats({ stat, realStats, otherStats }) {
             stat={stat}
             backgroundClass="bg-right"
             statClass="stat other"
-            style={otherWidth}
+            style={{
+              ...otherWidth,
+              backgroundColor: getJerseyColor(otherTeamName),
+            }}
             key={`${stat.type.split(" ").join("-").toLowerCase()}${
               otherStats.team.id
             }${index}`}

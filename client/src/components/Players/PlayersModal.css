@@ -1,6 +1,5 @@
 .players-modal {
-  margin: 3rem 0;
-  padding-right: 4rem;
+  margin: 2.5rem 0 2.5rem;
   width: 80rem;
   display: flex;
   justify-content: center;
@@ -9,11 +8,15 @@
   color: #333;
 }
 
-.players-modal-martop {
+.players-modal-martop-full {
   margin-top: 5rem;
 }
 
-.players-modal-martop .x-button {
+.players-modal-martop-none {
+  margin-top: 0;
+}
+
+.players-modal-martop-full .x-button {
   top: 10rem;
 }
 
@@ -44,6 +47,7 @@
 }
 
 .players-modal-info-p-wrapper {
+  font-size: 1.8rem;
   display: flex;
   gap: 3rem;
 }

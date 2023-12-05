@@ -27,6 +27,7 @@ function Fixtures() {
   async function OutOfModalHandle() {
     setModalOpen(false);
     setButtonClicked("summary");
+    navigate("/fixtures");
   }
 
   return (
