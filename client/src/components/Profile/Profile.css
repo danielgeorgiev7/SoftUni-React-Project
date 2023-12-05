@@ -31,7 +31,8 @@
   gap: 1rem;
   font-size: 2rem;
   width: 66rem;
-  padding: 2.5rem 0;
+  /* padding: 2.5rem 0; */
+  padding: 2.5rem 0 3.5rem;
   border-bottom-left-radius: 2rem;
   border-bottom-right-radius: 2rem;
 }

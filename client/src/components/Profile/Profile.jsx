@@ -4,6 +4,7 @@ import AuthContext from "../../contexts/authContext";
 import postsDateFormatting from "../../utils/postsDateFormating";
 import { putUser } from "../../services/userService";
 function Profile() {
+  const accessToken = localStorage.getItem("accessToken");
   const { user, setUser } = useContext(AuthContext);
   const [inputValue, setInputValue] = useState("");
   const [previewDisabled, setPreviewDisabled] = useState(false);
@@ -39,7 +40,9 @@ function Profile() {
   async function onSaveClickHandler() {
     // if (imgError) return;
     setUser({ ...user, img: customPhoto });
-    putUser(user, customPhoto);
+    putUser(user, customPhoto, accessToken);
+    setInputValue("");
+    setPreviewDisabled(false);
   }
 
   return (

@@ -31,6 +31,12 @@
   border-radius: 2rem;
   border: 2px solid #bbb;
   font-size: 2rem;
+  height: 12rem;
+  resize: none;
+  overflow: auto;
+}
+.write-post textarea::-webkit-scrollbar {
+  display: none;
 }
 
 .write-post textarea:focus,
@@ -149,6 +155,9 @@
   background-color: inherit;
   padding: 1rem 2rem 1rem;
   color: #333;
+  resize: none;
+  height: 5.5rem;
+  overflow: hidden;
 }
 
 .feed-post-content-with-img {

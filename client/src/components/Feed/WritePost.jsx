@@ -43,8 +43,6 @@ function WritePost() {
       <textarea
         id="postContent"
         name="content"
-        rows="4"
-        cols="50"
         placeholder="Type something..."
         onChange={onChange}
         value={values.content}

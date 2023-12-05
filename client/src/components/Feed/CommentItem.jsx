@@ -14,7 +14,8 @@ function CommentItem({ commentObj, userId, deleteCommentHandler }) {
   }
 
   async function editSaveClickHandler() {
-    if (comment !== beforeEdit) {
+    if (comment !== beforeEdit && comment !== "") {
+      console.log(comment);
       const result = await putComments(commentObj._id, {
         ...commentObj,
         content: comment,
@@ -24,7 +25,7 @@ function CommentItem({ commentObj, userId, deleteCommentHandler }) {
         setEdited(true);
         setEditable(false);
       }
-    } else {
+    } else if (comment !== "") {
       setEditable(false);
     }
   }

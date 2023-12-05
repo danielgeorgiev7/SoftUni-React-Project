@@ -16,6 +16,7 @@ import GuestGuard from "./guards/GuestGuard";
 import { AuthProvider } from "./contexts/authContext";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
+import NotFoundGuard from "./guards/NotFoundGuard";
 
 function App() {
   const [fixtures, setFixtures] = useState([]);
@@ -3462,6 +3463,9 @@ function App() {
             <Route path="/profile" element={<Profile />}></Route>
             <Route path="/logout" element={<Logout />}></Route>
           </>
+        </Route>
+        <Route element={<NotFoundGuard />}>
+          <Route path="*" element={<Home />}></Route>
         </Route>
       </Routes>
       <Footer />

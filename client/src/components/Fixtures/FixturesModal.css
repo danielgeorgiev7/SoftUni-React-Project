@@ -30,12 +30,21 @@
   align-items: center;
   background-color: #fff;
   outline: 1.5rem solid #ddd;
-  overflow-y: auto;
-  scroll-behavior: smooth;
   position: fixed;
   top: 4rem;
   border-radius: 2rem;
+  overflow-y: auto;
 }
+
+.modal::-webkit-scrollbar {
+  position: absolute;
+  width: 1.2rem;
+}
+
+.modal::-webkit-scrollbar-thumb {
+  background-color: rgba(153, 153, 153, 0.5);
+}
+
 .modal-content {
   display: flex;
   flex-direction: column;
@@ -49,7 +58,6 @@
   width: 80rem;
   height: 45rem;
   display: block;
-  border-top-right-radius: 2rem;
   border-top-left-radius: 2rem;
 }
 

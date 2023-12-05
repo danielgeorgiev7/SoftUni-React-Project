@@ -7,13 +7,6 @@ import { deleteComments, postComments } from "../../services/commentService";
 import postsDateFormatting from "../../utils/postsDateFormating";
 
 export function FeedPost({ post }) {
-  const userId = JSON.parse(localStorage.auth)._id;
-  const ownerUsername = JSON.parse(localStorage.auth).username;
-  const ownerImg = JSON.parse(localStorage.auth).img;
-
-  const [editable, setEditable] = useState(false);
-  const [postContent, setPostContent] = useState(post.content);
-  const [beforeEditContent, setBeforeEditContent] = useState(post.content);
   const {
     setPosts,
     setLikes,
@@ -21,6 +14,14 @@ export function FeedPost({ post }) {
     getCurrentPostLikes,
     getCurrentPostComments,
   } = useContext(AuthContext);
+
+  const userId = JSON.parse(localStorage.auth)._id;
+  const ownerUsername = JSON.parse(localStorage.auth).username;
+  const ownerImg = JSON.parse(localStorage.auth).img;
+
+  const [editable, setEditable] = useState(false);
+  const [postContent, setPostContent] = useState(post.content);
+  const [beforeEditContent, setBeforeEditContent] = useState(post.content);
   const [currentPostLikes, setCurrentPostLikes] = useState([]);
   const [liked, setLiked] = useState(null);
   const [currentPostComments, setCurrentPostComments] = useState([]);
@@ -119,8 +120,11 @@ export function FeedPost({ post }) {
   }
 
   function deleteClickHandler() {
-    deleteLikes(currentPostLikes?._id);
-    setLikes((state) => state.filter((like) => like.postId !== post._id));
+    const hasConfirmed = confirm(`Are you sure you want to delete this post?`);
+    if (hasConfirmed) {
+      deleteLikes(currentPostLikes?._id);
+      setLikes((state) => state.filter((like) => like.postId !== post._id));
+    }
 
     deletePost(post._id);
     setPosts((state) =>
@@ -129,7 +133,7 @@ export function FeedPost({ post }) {
   }
 
   async function editSaveClickHandler() {
-    if (postContent !== beforeEditContent) {
+    if (postContent !== beforeEditContent && postContent !== "") {
       const result = await editPost(post._id, {
         ...post,
         content: postContent,
@@ -137,7 +141,7 @@ export function FeedPost({ post }) {
       if (!result.code) {
         setEditable(false);
       }
-    } else {
+    } else if (postContent !== "") {
       setEditable(false);
     }
   }
@@ -159,8 +163,15 @@ export function FeedPost({ post }) {
   }
 
   function deleteCommentHandler(id) {
-    deleteComments(id);
-    setComments((comments) => comments.filter((comment) => comment._id !== id));
+    const hasConfirmed = confirm(
+      `Are you sure you want to delete this comment?`
+    );
+    if (hasConfirmed) {
+      deleteComments(id);
+      setComments((comments) =>
+        comments.filter((comment) => comment._id !== id)
+      );
+    }
   }
 
   return (
@@ -174,7 +185,7 @@ export function FeedPost({ post }) {
       </div>
       <div className="feed-post-content-wrapper">
         {post.content !== "" && (
-          <input
+          <textarea
             type="text"
             readOnly={!editable}
             disabled={!editable}
@@ -183,7 +194,7 @@ export function FeedPost({ post }) {
             }`}
             onChange={(e) => setPostContent(e.target.value)}
             value={postContent}
-          ></input>
+          ></textarea>
         )}
       </div>
       <div

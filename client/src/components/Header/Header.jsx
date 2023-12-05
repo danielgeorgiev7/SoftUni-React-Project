@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./Header.css";
 import { Link, useLocation } from "react-router-dom";
+import AuthContext from "../../contexts/authContext";
 
 function Header() {
   const location = useLocation();
   // console.log(location);
   const [isActiveNav, setIsActiveNav] = useState("home");
+  const { user, loggedIn } = useContext(AuthContext);
 
   useEffect(() => {
     let locationPath = location.pathname.substring(1).split("/")[0];
@@ -117,6 +119,9 @@ function Header() {
                 </Link>
               </li>
             </>
+          )}
+          {loggedIn && (
+            <li className="hello-user">Logged as {user?.username}</li>
           )}
         </ul>
       </nav>

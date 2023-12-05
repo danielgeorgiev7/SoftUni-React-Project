@@ -6,14 +6,16 @@ export const getUser = async () => {
     return result;
 };
 
-export const putUser = async (data, userId) => {
-    const result = await fetch(`${baseUrl}/${userId}`, {
+export const putUser = async (data, customPhoto, accessToken) => {
+    const result = await fetch(`${baseUrl}/me`, {
         headers: {
             'X-Admin': "true",
+            'X-Authorization': accessToken,
             "Content-Type": "application/json",
         },
         method: "PUT",
-        body: JSON.stringify(data)
+        body: JSON.stringify({ ...data, img: customPhoto })
     })
-    return result;
+    const resultData = await result.json();
+    return resultData;
 };

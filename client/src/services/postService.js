@@ -1,12 +1,13 @@
 import * as request from '../lib/request';
 const baseUrl = 'http://localhost:3030/data/posts';
 
-export const createPost = ({ ownerUsername, content, ownerImg, img }) => {
+export const createPost = ({ ownerUsername, content, ownerImg, img, likes }) => {
     const result = request.post(baseUrl, true, {
         ownerUsername,
         ownerImg,
         content,
         img,
+        likes,
     });
     return result;
 };

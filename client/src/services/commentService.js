@@ -14,10 +14,8 @@ export const postComments = async (postId, comment, ownerUsername, ownerImg) => 
     return result;
 };
 
-export const putComments = async (data, customPhoto) => {
-    const result = await request.put(`${baseUrl}/${data._id}`, true, {
-        ...data, img: customPhoto,
-    });
+export const putComments = async (id, data) => {
+    const result = await request.put(`${baseUrl}/${id}`, true, data);
     return result;
 };
 
