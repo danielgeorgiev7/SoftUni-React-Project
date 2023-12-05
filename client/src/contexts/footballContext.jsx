@@ -2,6 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import {
   getAllPlayers,
   getFixtures,
+  getLaLiga,
   getPreviousFixtures,
 } from "../services/footballAPI";
 
@@ -12,6 +13,7 @@ export const FootballProvider = ({ children }) => {
   const [fixtures, setFixtures] = useState(null);
   const [previousFixtures, setPreviousFixtures] = useState(null);
   const [players, setPlayers] = useState(null);
+  const [laLigaTable, setLaLigaTable] = useState(null);
 
   /* eslint-disable react-hooks/exhaustive-deps */
 
@@ -33,6 +35,13 @@ export const FootballProvider = ({ children }) => {
         ? setErrorMessage(playersData.errorMessage || "Players couldn't load")
         : setPlayers(playersData)
     );
+    getLaLiga().then((laLigaData) =>
+      laLigaData?.code || laLigaData.length === "0"
+        ? setErrorMessage(
+            laLigaData.errorMessage || "La Liga standings couldn't load"
+          )
+        : setLaLigaTable(laLigaData)
+    );
   }, []);
 
   const values = {
@@ -41,6 +50,7 @@ export const FootballProvider = ({ children }) => {
     fixtures,
     previousFixtures,
     players,
+    laLigaTable,
   };
 
   return (

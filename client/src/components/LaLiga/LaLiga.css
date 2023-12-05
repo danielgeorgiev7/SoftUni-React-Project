@@ -72,8 +72,9 @@
 .standings-form .d,
 .standings-form .l {
   color: #fff;
-  padding: 0.5rem;
   width: 2.75rem;
+  text-align: center;
+  padding-top: 0.45rem;
   height: 2.75rem;
   border-radius: 0.5rem;
 }
@@ -83,7 +84,7 @@
 }
 
 .d {
-  background-color: #ff7b00;
+  background-color: #aaa;
 }
 
 .l {

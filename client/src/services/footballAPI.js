@@ -44,6 +44,10 @@ export async function getPlayer(id) {
 }
 
 export async function getLaLiga() {
+    const response = await fetch(`https://api-football-v1.p.rapidapi.com/v3/standings?league=140&season=2023`, options);
+    const data = await response.json();
+    const final = (data.response);
+    return final;
 
 }
 

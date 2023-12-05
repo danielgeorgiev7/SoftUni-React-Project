@@ -1,6 +1,5 @@
 import "./PlayersModalStatistics.css";
 function PlayersModalStatistics({ stats }) {
-  console.log(stats);
   let leagueDisplay = "";
   leagueDisplay = stats.league.name;
   if (stats.league.name === "UEFA Champions League")
