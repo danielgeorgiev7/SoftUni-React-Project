@@ -5,6 +5,7 @@ import usePersistedState from "../hooks/usePersistedState";
 import { getPosts } from "../services/postService";
 import { getLikes } from "../services/likeService";
 import { getComments } from "../services/commentService";
+import { getUser } from "../services/userService";
 
 const AuthContext = createContext();
 
@@ -16,6 +17,8 @@ export const AuthProvider = ({ children }) => {
   const [posts, setPosts] = useState([]);
   const [likes, setLikes] = useState([]);
   const [comments, setComments] = useState([]);
+  const [user, setUser] = useState(null);
+
   /* eslint-disable react-hooks/exhaustive-deps */
 
   useEffect(function () {
@@ -38,6 +41,9 @@ export const AuthProvider = ({ children }) => {
           comments.code
             ? setErrorMessage(likes.message)
             : setComments(Object.values(comments))
+        );
+        getUser().then((user) =>
+          user.code ? setErrorMessage(user.message) : setUser(user)
         );
       }
     },
@@ -116,6 +122,8 @@ export const AuthProvider = ({ children }) => {
     comments,
     setComments,
     getCurrentPostComments,
+    user,
+    setUser,
   };
 
   return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;

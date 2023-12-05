@@ -17,7 +17,6 @@ export function FeedPost({ post }) {
   const {
     setPosts,
     setLikes,
-    comments,
     setComments,
     getCurrentPostLikes,
     getCurrentPostComments,
