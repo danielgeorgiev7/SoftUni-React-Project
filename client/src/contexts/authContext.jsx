@@ -1,11 +1,11 @@
 import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import * as authService from "../services/authService";
-import usePersistedState from "../hooks/usePersistedState";
 import { getPosts } from "../services/postService";
 import { getLikes } from "../services/likeService";
 import { getComments } from "../services/commentService";
 import { getUser } from "../services/userService";
+import * as authService from "../services/authService";
+import usePersistedState from "../hooks/usePersistedState";
 
 const AuthContext = createContext();
 

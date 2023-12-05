@@ -1,13 +1,22 @@
 import AllStats from "./AllStats";
 import "./Statistics.css";
 function Statistics({ fixture }) {
+  if (fixture === null) return;
+
+  if (fixture.statistics.length === 0) {
+    return (
+      <p className="no-statistics-available">
+        Sorry, there are no statistics available for this fixture.
+      </p>
+    );
+  }
+
   const realStats = fixture.statistics.filter((each) => each.team.id === 541)[
     "0"
   ];
   const otherStats = fixture.statistics.filter((each) => each.team.id !== 541)[
     "0"
   ];
-  console.log(fixture);
   return (
     <>
       <div className="stats-sides">

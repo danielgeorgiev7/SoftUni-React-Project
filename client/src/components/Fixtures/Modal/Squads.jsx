@@ -1,6 +1,14 @@
 import "./Squads.css";
 import SquadsPlayer from "./SquadsPlayer";
 function Squads({ fixture, homeLineups, awayLineups }) {
+  if (fixture === null) return;
+  if (fixture.players.length === 0) {
+    return (
+      <p className="no-statistics-available">
+        Sorry, there is no squads information available for this fixture.
+      </p>
+    );
+  }
   const realMadridLineups =
     homeLineups.team.id === 541 ? homeLineups : awayLineups;
   const otherClubLineups =

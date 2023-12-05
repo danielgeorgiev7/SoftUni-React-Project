@@ -108,3 +108,8 @@
   border-bottom-left-radius: 2.5rem;
   background-color: #ddd;
 }
+
+.no-statistics-available {
+  margin: 2.5rem 0 5rem;
+  font-size: 2rem;
+}

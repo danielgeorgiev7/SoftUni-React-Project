@@ -1,49 +1,51 @@
-import { useContext, useState } from "react";
-import "./Profile.css";
+// import { useContext, useState } from "react";
+// import { putUser } from "../../services/userService";
+import { useContext } from "react";
 import AuthContext from "../../contexts/authContext";
 import postsDateFormatting from "../../utils/postsDateFormating";
-import { putUser } from "../../services/userService";
-function Profile() {
-  const accessToken = localStorage.getItem("accessToken");
-  const { user, setUser } = useContext(AuthContext);
-  const [inputValue, setInputValue] = useState("");
-  const [previewDisabled, setPreviewDisabled] = useState(false);
-  const [customPhoto, setCustomPhoto] = useState(user?.img);
-  const [imgError, setImgError] = useState("");
+import "./Profile.css";
 
-  function previewClickHandler() {
-    if (inputValue !== "") {
-      setCustomPhoto(inputValue);
-      setPreviewDisabled(true);
-      setImgError(false);
-    } else {
-      setImgError("Link field is required");
-    }
-  }
+function Profile() {
+  const { user } = useContext(AuthContext);
+  // const { user, setUser } = useContext(AuthContext);
+  // const accessToken = localStorage.getItem("accessToken");
+  // const [inputValue, setInputValue] = useState("");
+  // const [previewDisabled, setPreviewDisabled] = useState(false);
+  // const [customPhoto, setCustomPhoto] = useState(user?.img);
+  // const [imgError, setImgError] = useState("");
 
   if (user === null) return;
+  // function previewClickHandler() {
+  //   if (inputValue !== "") {
+  //     setCustomPhoto(inputValue);
+  //     setPreviewDisabled(true);
+  //     setImgError(false);
+  //   } else {
+  //     setImgError("Link field is required");
+  //   }
+  // }
 
-  function cancelClickHandler() {
-    setCustomPhoto("");
-    setImgError(false);
-    setPreviewDisabled(false);
-    setInputValue("");
-  }
+  // function cancelClickHandler() {
+  //   setCustomPhoto("");
+  //   setImgError(false);
+  //   setPreviewDisabled(false);
+  //   setInputValue("");
+  // }
 
-  function imgErrorHandler() {
-    setImgError("Linked image couldn't load");
-    setCustomPhoto(""); // user?.img ?
-    setPreviewDisabled(false);
-    setInputValue("");
-  }
+  // function imgErrorHandler() {
+  //   setImgError("Linked image couldn't load");
+  //   setCustomPhoto(""); // user?.img ?
+  //   setPreviewDisabled(false);
+  //   setInputValue("");
+  // }
 
-  async function onSaveClickHandler() {
-    // if (imgError) return;
-    setUser({ ...user, img: customPhoto });
-    putUser(user, customPhoto, accessToken);
-    setInputValue("");
-    setPreviewDisabled(false);
-  }
+  // async function onSaveClickHandler() {
+  //   // if (imgError) return;
+  //   setUser({ ...user, img: customPhoto });
+  //   putUser(user, customPhoto, accessToken);
+  //   setInputValue("");
+  //   setPreviewDisabled(false);
+  // }
 
   return (
     <div className="profile-wrapper">
@@ -53,9 +55,10 @@ function Profile() {
       <div className="profile-section-wrapper">
         <div className="profile-section">
           <img
-            src={customPhoto ? customPhoto : user?.img}
+            // src={customPhoto ? customPhoto : user?.img}
+            src={user?.img}
             alt={`${user?.username}'s profile photo`}
-            onError={imgErrorHandler}
+            // onError={imgErrorHandler}
           />
           <div className="profile-info">
             <p>Username:</p>
@@ -67,7 +70,7 @@ function Profile() {
           </div>
         </div>
       </div>
-      <div className="profile-link-img">
+      {/* <div className="profile-link-img">
         <p>Link other image:</p>
         <input
           className={previewDisabled ? "profile-link-img-disabled" : ""}
@@ -101,7 +104,7 @@ function Profile() {
         <a onClick={cancelClickHandler} className="profile-button-cancel">
           Cancel
         </a>
-      </div>
+      </div> */}
     </div>
   );
 }

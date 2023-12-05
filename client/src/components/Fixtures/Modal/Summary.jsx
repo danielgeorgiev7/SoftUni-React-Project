@@ -1,7 +1,8 @@
 import "./Summary.css";
 import SummaryItem from "./SummaryItem";
 function Summary({ fixture, homeLineups, awayLineups }) {
-  if (!fixture) return;
+  if (fixture === null) return;
+
   const homeId = fixture.teams.home.id;
   let scoreForSummary = { home: 0, away: 0 };
 

@@ -1,20 +1,26 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { useNavigate } from "react-router";
 import FixturesPanel from "./FixturesPanel";
-import "./Fixtures.css";
 import Checkbox from "./Checkbox";
 import FixturesModal from "./FixturesModal";
-import { useNavigate } from "react-router";
+import FootballContext from "../../contexts/footballContext";
+import "./Fixtures.css";
+import { getFixtureInfo } from "../../services/footballAPI";
 
-function Fixtures({ fixtures, previousFixtures }) {
+function Fixtures() {
   const navigate = useNavigate();
+  const { fixtures, previousFixtures } = useContext(FootballContext);
   const [checkboxChecked, setCheckboxChecked] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [currentFixture, setCurrentFixture] = useState(null);
   const [buttonClicked, setButtonClicked] = useState("summary");
 
-  function detailsBtnClickHandler(fixture) {
+  if (fixtures === null || previousFixtures === null) return;
+
+  async function detailsBtnClickHandler(fixture) {
+    const fixtureResult = await getFixtureInfo(fixture.fixture.id);
+    setCurrentFixture(fixtureResult["0"]);
     setModalOpen(true);
-    setCurrentFixture(fixture);
     navigate(`/fixtures/${fixture.fixture.id}`);
   }
 

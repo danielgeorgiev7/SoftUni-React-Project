@@ -2,10 +2,8 @@ import "./FixturesPanel.css";
 import { formatDate, checkSameMonth } from "../../utils/DateFormatting";
 function FixturesPanel({ fixture, detailsBtnClickHandler }) {
   if (fixture.fixture.id === 1097382) {
-    // console.log(fixture);
     return;
   }
-  // console.log(fixture);
   let display1 = null;
   let display2 = null;
   if (fixture.league.name === "UEFA Champions League") {
