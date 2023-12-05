@@ -3,7 +3,7 @@
   grid-template-columns: 1fr 1fr;
   font-size: 1.6rem;
   margin: 0 auto 10rem;
-  width: 75%;
+  width: 80%;
   text-align: center;
   row-gap: 5rem;
   color: #333;
@@ -42,7 +42,7 @@
 .cl-header,
 .cl-team-card {
   display: grid;
-  grid-template-columns: 1fr 6fr 1fr 1fr 1fr 1fr 1fr 1fr 3.5fr 1fr;
+  grid-template-columns: 1fr 6fr 0.9fr 0.9fr 0.9fr 0.9fr 1.8fr 0.9fr 4.2fr 1fr;
   padding: 1rem;
   border-bottom: 1px solid #ccc;
   align-items: center;
@@ -115,8 +115,8 @@
 .cl-form .d,
 .cl-form .l {
   color: #fff;
-  padding-top: 0.4rem;
-  width: 2.5rem;
-  height: 2.5rem;
+  padding-top: 0.3rem;
+  width: 2.4rem;
+  height: 2.4rem;
   border-radius: 0.5rem;
 }

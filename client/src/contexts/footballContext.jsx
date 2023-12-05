@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import {
   getAllPlayers,
+  getChampionsLeague,
   getFixtures,
   getLaLiga,
   getPreviousFixtures,
@@ -14,6 +15,7 @@ export const FootballProvider = ({ children }) => {
   const [previousFixtures, setPreviousFixtures] = useState(null);
   const [players, setPlayers] = useState(null);
   const [laLigaTable, setLaLigaTable] = useState(null);
+  const [CLGroups, setCLGroups] = useState(null);
 
   /* eslint-disable react-hooks/exhaustive-deps */
 
@@ -42,6 +44,14 @@ export const FootballProvider = ({ children }) => {
           )
         : setLaLigaTable(laLigaData)
     );
+    getChampionsLeague().then((championsLeagueData) =>
+      championsLeagueData?.code || championsLeagueData.length === "0"
+        ? setErrorMessage(
+            championsLeagueData.errorMessage ||
+              "Champions league groups couldn't load"
+          )
+        : setCLGroups(championsLeagueData)
+    );
   }, []);
 
   const values = {
@@ -51,6 +61,7 @@ export const FootballProvider = ({ children }) => {
     previousFixtures,
     players,
     laLigaTable,
+    CLGroups,
   };
 
   return (
