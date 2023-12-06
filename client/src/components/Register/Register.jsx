@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import useForm from "../../hooks/useForm";
 import AuthContext from "../../contexts/authContext";
@@ -16,8 +16,12 @@ function Register() {
     img: "/default-user.png",
   });
   const [confirmPassword, setConfirmPassword] = useState("");
+  const registerFirstInput = useRef();
 
-  useEffect(() => setErrorMessage(""), []);
+  useEffect(function () {
+    setErrorMessage("");
+    registerFirstInput.current.focus();
+  }, []);
 
   function onChangeConfirmPassword(e) {
     setConfirmPassword(e.target.value);
@@ -74,6 +78,7 @@ function Register() {
             onChange={onChange}
             value={values.username}
             autoComplete="username"
+            ref={registerFirstInput}
           />
           <label htmlFor="register-email">Email address:</label>
           <input

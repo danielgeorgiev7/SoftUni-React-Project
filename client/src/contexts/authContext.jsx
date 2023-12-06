@@ -30,7 +30,9 @@ export const AuthProvider = ({ children }) => {
     function () {
       if (loggedIn) {
         getPosts().then((posts) =>
-          posts.code ? setErrorMessage(posts.message) : setPosts(posts)
+          posts.code
+            ? setErrorMessage(posts.message)
+            : setPosts(posts.reverse())
         );
         getLikes().then((likes) =>
           likes.code

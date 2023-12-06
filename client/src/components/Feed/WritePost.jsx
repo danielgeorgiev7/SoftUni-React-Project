@@ -5,7 +5,7 @@ import useForm from "../../hooks/useForm";
 import AuthContext from "../../contexts/authContext";
 import "./WritePost.css";
 
-function WritePost() {
+function WritePost({ WritePostField }) {
   const { setPosts, setErrorMessage, errorMessage, setLikes } =
     useContext(AuthContext);
   const ownerUsername = JSON.parse(localStorage.auth).username;
@@ -47,6 +47,7 @@ function WritePost() {
         placeholder="Type something..."
         onChange={onChange}
         value={values.content}
+        ref={WritePostField}
       ></textarea>
       <p
         className={

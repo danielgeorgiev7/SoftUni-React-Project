@@ -50,6 +50,7 @@ footer {
   column-gap: 8rem;
 }
 
-.profile-wrapper + footer {
+.profile-wrapper + footer,
+.header + footer {
   position: absolute;
 }

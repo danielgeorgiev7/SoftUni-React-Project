@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { deletePost, editPost } from "../../services/postService";
 import { deleteLikes, putLikes } from "../../services/likeService";
 import { deleteComments, postComments } from "../../services/commentService";
@@ -28,6 +28,7 @@ export function FeedPost({ post }) {
   const [currentPostComments, setCurrentPostComments] = useState([]);
   const [commentsOpen, setCommentsOpen] = useState(false);
   const [addCommentValue, setAddCommentValue] = useState("");
+  const PostEditField = useRef();
 
   useEffect(() => {
     const allPostLikes = getCurrentPostLikes(post._id)["0"];
@@ -115,6 +116,20 @@ export function FeedPost({ post }) {
     setEditable(true);
   }
 
+  useEffect(
+    function () {
+      if (editable) {
+        PostEditField.current?.focus();
+        const inputElement = PostEditField.current;
+        inputElement.setSelectionRange(
+          inputElement.value.length,
+          inputElement.value.length
+        );
+      }
+    },
+    [editable]
+  );
+
   function editCancelClickHandler() {
     setPostContent(beforeEditContent);
     setEditable(false);
@@ -195,6 +210,7 @@ export function FeedPost({ post }) {
             }`}
             onChange={(e) => setPostContent(e.target.value)}
             value={postContent}
+            ref={PostEditField}
           ></textarea>
         )}
       </div>

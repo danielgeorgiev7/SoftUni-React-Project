@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import useForm from "../../hooks/useForm";
 import AuthContext from "../../contexts/authContext";
@@ -13,6 +13,7 @@ function Login() {
     email: "",
     password: "",
   });
+  const loginFirstInput = useRef();
 
   function submitHandler(e) {
     e.preventDefault();
@@ -31,7 +32,10 @@ function Login() {
     }
   }
 
-  useEffect(() => setErrorMessage(""), []);
+  useEffect(function () {
+    setErrorMessage("");
+    loginFirstInput.current?.focus();
+  }, []);
   return (
     <div className="login-section">
       <div className="login-wrapper">
@@ -51,6 +55,7 @@ function Login() {
             onChange={onChange}
             value={values.email}
             autoComplete="username"
+            ref={loginFirstInput}
           />
           <label htmlFor="login-password">Password:</label>
           <input

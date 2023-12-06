@@ -15,11 +15,12 @@ export const createPost = ({ ownerUsername, content, ownerImg, img, likes }) => 
 export const deletePost = async (id) => {
     const result = await request.remove(`${baseUrl}/${id}`, true);
     return result;
+
 };
 
 export const getPosts = async () => {
     const result = await request.get(baseUrl, true);
-    return result.reverse();
+    return result;
 };
 
 export const editPost = async (id, data) => {

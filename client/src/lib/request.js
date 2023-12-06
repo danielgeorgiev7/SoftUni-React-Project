@@ -33,10 +33,6 @@ const request = async (method, url, authenticationBool, data) => {
 
     const result = await response.json();
 
-    if (!response.ok) {
-        return result;
-    }
-
     return result;
 };
 

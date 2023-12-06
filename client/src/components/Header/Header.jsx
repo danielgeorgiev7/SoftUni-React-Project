@@ -5,7 +5,6 @@ import AuthContext from "../../contexts/authContext";
 
 function Header() {
   const location = useLocation();
-  // console.log(location);
   const [isActiveNav, setIsActiveNav] = useState("home");
   const { user, loggedIn } = useContext(AuthContext);
 

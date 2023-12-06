@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import postsDateFormatting from "../../utils/postsDateFormating";
 import { putComments } from "../../services/commentService";
 import "./CommentItem.css";
@@ -8,6 +8,21 @@ function CommentItem({ commentObj, userId, deleteCommentHandler }) {
   const [comment, setComment] = useState(commentObj.comment);
   const [beforeEdit, setBeforeEdit] = useState(commentObj.comment);
   const [edited, setEdited] = useState(commentObj.edited);
+  const CommentEditField = useRef();
+
+  useEffect(
+    function () {
+      if (editable) {
+        CommentEditField.current?.focus();
+        const inputElement = CommentEditField.current;
+        inputElement.setSelectionRange(
+          inputElement.value.length,
+          inputElement.value.length
+        );
+      }
+    },
+    [editable]
+  );
 
   function editCommentHandler() {
     setEditable(true);
@@ -56,6 +71,7 @@ function CommentItem({ commentObj, userId, deleteCommentHandler }) {
         disabled={!editable}
         value={comment}
         onChange={(e) => setComment(e.target.value)}
+        ref={CommentEditField}
       ></input>
       <p className="comment-item-edited">{edited && !editable && "Edited"}</p>
       {editable && (
