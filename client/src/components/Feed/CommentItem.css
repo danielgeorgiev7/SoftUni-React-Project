@@ -7,7 +7,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
 }
 
 .feed-comment-item-upper {
@@ -24,14 +23,21 @@
 }
 
 .feed-comment-item-input {
+  margin-top: 0.25rem;
   width: 100%;
   border-radius: 2rem;
-  padding: 0.5rem 1rem 0.5rem;
+  padding: 0.65rem 1.3rem;
   padding-bottom: 0;
   border: none;
   color: #333;
   background-color: #eee;
   font-size: 1.7rem;
+  resize: none;
+}
+
+.feed-comment-item-input.comment-input-active {
+  border: 2px solid #00529f;
+  padding: 0.65rem 1.3rem;
 }
 
 .feed-comment-item-img {
@@ -41,6 +47,7 @@
 
 .comment-item-edited {
   padding: 0 1rem;
+  padding-bottom: 1rem;
   margin-right: auto;
   color: #999;
 }
@@ -63,47 +70,6 @@
   border: none;
   font-size: 1.6rem;
   cursor: pointer;
-}
-
-.feed-post-add-comment {
-  margin: 0 1.5rem;
-  display: flex;
-  flex-direction: column;
-  margin-top: 1.5rem;
-  align-items: center;
-  padding-bottom: 0.5rem;
-  gap: 1.5rem;
-}
-
-.feed-post-comment-input {
-  width: 95%;
-  border-radius: 2rem;
-  border: 2px solid #bbb;
-  padding: 1rem;
-  flex: 1;
-  margin-top: 0.25rem;
-  font: inherit;
-}
-
-.feed-add-comment-button {
-  background-color: rgba(0, 82, 158, 0.8);
-  border: 3px solid #00529f;
-  border-radius: 100rem;
-  font-size: 1.7rem;
-  color: #fff;
-  padding: 0.9rem 1.8rem;
-  position: relative;
-  cursor: pointer;
-}
-
-.feed-add-comment-button:hover {
-  background-color: #00529f;
-  bottom: 0.1rem;
-}
-
-.feed-comment-item-input.comment-input-active {
-  border: 2px solid #00529f;
-  padding: 1rem 2rem;
 }
 
 .comment-item-save-cancel {

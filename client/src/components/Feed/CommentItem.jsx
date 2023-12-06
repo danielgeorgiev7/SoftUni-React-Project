@@ -9,6 +9,7 @@ function CommentItem({ commentObj, userId, deleteCommentHandler }) {
   const [beforeEdit, setBeforeEdit] = useState(commentObj.comment);
   const [edited, setEdited] = useState(commentObj.edited);
   const CommentEditField = useRef();
+  const [style, setStyle] = useState({ height: 4 + "rem" });
 
   useEffect(
     function () {
@@ -22,6 +23,18 @@ function CommentItem({ commentObj, userId, deleteCommentHandler }) {
       }
     },
     [editable]
+  );
+
+  useEffect(
+    function () {
+      const length = Math.ceil(comment.length / 38);
+      if (length > 1) {
+        setStyle({ height: 4 + (length - 1) * 2 + "rem" });
+      } else {
+        setStyle({ height: 4 + "rem" });
+      }
+    },
+    [comment.length]
   );
 
   function editCommentHandler() {
@@ -63,7 +76,8 @@ function CommentItem({ commentObj, userId, deleteCommentHandler }) {
         <span>Posted on: {postsDateFormatting(commentObj._createdOn)}</span>
       </div>
 
-      <input
+      <textarea
+        style={style}
         className={`feed-comment-item-input ${
           editable ? "comment-input-active" : ""
         }`}
@@ -72,7 +86,7 @@ function CommentItem({ commentObj, userId, deleteCommentHandler }) {
         value={comment}
         onChange={(e) => setComment(e.target.value)}
         ref={CommentEditField}
-      ></input>
+      ></textarea>
       <p className="comment-item-edited">{edited && !editable && "Edited"}</p>
       {editable && (
         <div className="comment-item-save-cancel">

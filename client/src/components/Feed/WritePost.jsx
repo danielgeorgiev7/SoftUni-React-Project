@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { createPost } from "../../services/postService";
 import { postLikes } from "../../services/likeService";
 import useForm from "../../hooks/useForm";
@@ -10,13 +10,26 @@ function WritePost({ WritePostField }) {
     useContext(AuthContext);
   const ownerUsername = JSON.parse(localStorage.auth).username;
   const ownerImg = JSON.parse(localStorage.auth).img;
+  const [style, setStyle] = useState({ height: 7 + "rem" });
 
   const { values, onChange, onSubmit } = useForm(createPost, true, {
     ownerUsername,
-    content: "",
     ownerImg,
+    content: "",
     img: "",
   });
+
+  useEffect(
+    function () {
+      const length = Math.ceil(values.content.length / 40.9);
+      if (length > 2) {
+        setStyle({ height: 7 + (length - 2) * 2.3 + "rem" });
+      } else {
+        setStyle({ height: 7 + "rem" });
+      }
+    },
+    [values.content.length]
+  );
 
   async function onSubmitHandler(e) {
     e.preventDefault();
@@ -48,6 +61,7 @@ function WritePost({ WritePostField }) {
         onChange={onChange}
         value={values.content}
         ref={WritePostField}
+        style={style}
       ></textarea>
       <p
         className={
