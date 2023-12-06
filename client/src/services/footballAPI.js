@@ -5,57 +5,49 @@ const options = {
         'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com'
     }
 };
+async function apiCall(url) {
+    const response = await fetch(url, options);
+    const data = await response.json();
+    return data.response;
+}
 
 export async function getFixtures() {
-    const responseNS = await fetch('https://api-football-v1.p.rapidapi.com/v3/fixtures?season=2023&team=541&status=NS', options);
-    const dataNS = await responseNS.json();
-    const responseTBD = await fetch('https://api-football-v1.p.rapidapi.com/v3/fixtures?season=2023&team=541&status=TBD', options);
-    const dataTBD = await responseTBD.json();
-    const final = [...Object.values(dataNS.response), ...Object.values(dataTBD.response)];
-    return final;
+    const dataNS = await apiCall('https://api-football-v1.p.rapidapi.com/v3/fixtures?season=2023&team=541&status=NS');
+    const dataTBD = await apiCall('https://api-football-v1.p.rapidapi.com/v3/fixtures?season=2023&team=541&status=TBD')
+    const final = [...Object.values(dataNS), ...Object.values(dataTBD)];
+    return final.sort((a, b) => a.fixture.timestamp - b.fixture.timestamp);
 }
 
 export async function getPreviousFixtures() {
-    const response = await fetch('https://api-football-v1.p.rapidapi.com/v3/fixtures?season=2023&team=541&status=FT', options);
-    const data = await response.json();
-    const final = [...Object.values(data.response)];
-    return final;
+    const data = await apiCall('https://api-football-v1.p.rapidapi.com/v3/fixtures?season=2023&team=541&status=FT');
+    const final = [...Object.values(data)];
+    return final.sort((a, b) => a.fixture.timestamp - b.fixture.timestamp);
 }
 
 export async function getFixtureInfo(id) {
-    const response = await fetch(`https://api-football-v1.p.rapidapi.com/v3/fixtures?id=${id}`, options);
-    const data = await response.json();
-    const final = data.response;
-    return final;
+    const data = await apiCall(`https://api-football-v1.p.rapidapi.com/v3/fixtures?id=${id}`);
+    return data;
 }
 
 export async function getAllPlayers() {
-    const response = await fetch(`https://api-football-v1.p.rapidapi.com/v3/players/squads?team=541`, options);
-    const data = await response.json();
-    const final = (data.response);
-    return final;
+    const data = await apiCall('https://api-football-v1.p.rapidapi.com/v3/players/squads?team=541');
+    return data;
 }
 
 export async function getPlayer(id) {
-    const response = await fetch(`https://api-football-v1.p.rapidapi.com/v3/players?season=2023&id=${id}`, options);
-    const data = await response.json();
-    const final = (data.response);
-    return final;
+    const data = await apiCall(`https://api-football-v1.p.rapidapi.com/v3/players?season=2023&id=${id}`);
+
+    return data;
 }
 
 export async function getLaLiga() {
-    const response = await fetch(`https://api-football-v1.p.rapidapi.com/v3/standings?league=140&season=2023`, options);
-    const data = await response.json();
-    const final = (data.response);
-    return final;
+    const data = await apiCall('https://api-football-v1.p.rapidapi.com/v3/standings?league=140&season=2023');
+    return data;
 
 }
 
 export async function getChampionsLeague() {
-
-    const response = await fetch(`https://api-football-v1.p.rapidapi.com/v3/standings?league=2&season=2023`, options);
-    const data = await response.json();
-    const final = (data.response);
-    return final;
+    const data = await apiCall('https://api-football-v1.p.rapidapi.com/v3/standings?league=2&season=2023');
+    return data;
 
 }

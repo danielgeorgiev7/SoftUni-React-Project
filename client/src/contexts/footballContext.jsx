@@ -10,7 +10,7 @@ import {
 const FootballContext = createContext();
 
 export const FootballProvider = ({ children }) => {
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState({});
   const [fixtures, setFixtures] = useState(null);
   const [previousFixtures, setPreviousFixtures] = useState(null);
   const [players, setPlayers] = useState(null);
@@ -21,31 +21,31 @@ export const FootballProvider = ({ children }) => {
 
   useEffect(function () {
     getFixtures().then((fixturesData) =>
-      fixturesData?.code || fixturesData.length === "0"
+      hasError(fixturesData)
         ? setErrorMessage(fixturesData.errorMessage || "Fixtures couldn't load")
         : setFixtures(fixturesData)
     );
     getPreviousFixtures().then((prevFixturesData) =>
-      prevFixturesData?.code || prevFixturesData.length === "0"
+      hasError(prevFixturesData)
         ? setErrorMessage(
             prevFixturesData.errorMessage || "Previous Fixtures couldn't load"
           )
         : setPreviousFixtures(prevFixturesData)
     );
     getAllPlayers().then((playersData) =>
-      playersData?.code || playersData.length === "0"
+      hasError(playersData)
         ? setErrorMessage(playersData.errorMessage || "Players couldn't load")
         : setPlayers(playersData)
     );
     getLaLiga().then((laLigaData) =>
-      laLigaData?.code || laLigaData.length === "0"
+      hasError(laLigaData)
         ? setErrorMessage(
             laLigaData.errorMessage || "La Liga standings couldn't load"
           )
         : setLaLigaTable(laLigaData)
     );
     getChampionsLeague().then((championsLeagueData) =>
-      championsLeagueData?.code || championsLeagueData.length === "0"
+      hasError(championsLeagueData)
         ? setErrorMessage(
             championsLeagueData.errorMessage ||
               "Champions league groups couldn't load"
@@ -53,6 +53,16 @@ export const FootballProvider = ({ children }) => {
         : setCLGroups(championsLeagueData)
     );
   }, []);
+
+  function hasError(requestData) {
+    if (
+      requestData.code ||
+      requestData.length === 0 ||
+      requestData instanceof Promise
+    )
+      return true;
+    else return false;
+  }
 
   const values = {
     errorMessage,
@@ -62,6 +72,7 @@ export const FootballProvider = ({ children }) => {
     players,
     laLigaTable,
     CLGroups,
+    hasError,
   };
 
   return (

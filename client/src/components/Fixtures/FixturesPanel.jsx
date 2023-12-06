@@ -4,21 +4,26 @@ function FixturesPanel({ fixture, detailsBtnClickHandler }) {
   if (fixture.fixture.id === 1097382) {
     return;
   }
+
   let display1 = null;
   let display2 = null;
+
   if (fixture.league.name === "UEFA Champions League") {
     [display1, display2] = fixture.league.round.split(" - ");
     display1 = " - " + display1;
     display2 = " - " + display2 + " of 6";
   }
+
   if (fixture.league.name === "La Liga") {
     display1 = " - Round ";
     display2 = fixture.league.round.split(" - ")[1];
   }
+
   if (fixture.league.name === "Friendlies Clubs") {
     display1 = "Club Friendlies";
     display2 = "";
   }
+
   const isInSameMonth = checkSameMonth(fixture.fixture.date);
   const [weekday, date, time] = formatDate(fixture.fixture.date).split(",");
 
