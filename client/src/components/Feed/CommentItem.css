@@ -1,0 +1,123 @@
+.feed-comment-item {
+  margin: 0 1.5rem;
+  margin-top: 1.8rem;
+  border: 2px solid #bbb;
+  border-radius: 2rem;
+  padding: 1.5rem 3rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.feed-comment-item-upper {
+  width: 100%;
+  align-items: center;
+  display: flex;
+  gap: 1.25rem;
+}
+
+.feed-comment-item-upper h3 {
+  font-size: 1.8rem;
+  color: #00529f;
+  font-weight: 500;
+}
+
+.feed-comment-item-input {
+  width: 100%;
+  border-radius: 2rem;
+  padding: 0.5rem 1rem 0.5rem;
+  padding-bottom: 0;
+  border: none;
+  color: #333;
+  background-color: #eee;
+  font-size: 1.7rem;
+}
+
+.feed-comment-item-img {
+  width: 3.25rem;
+  height: 3.25rem;
+}
+
+.comment-item-edited {
+  padding: 0 1rem;
+  margin-right: auto;
+  color: #999;
+}
+
+.feed-comment-item-upper span {
+  font-style: italic;
+  margin-left: auto;
+}
+
+.feed-comment-item-buttons {
+  width: 95%;
+  border-top: 2px solid #bbb;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.feed-comment-item-buttons > * {
+  padding-top: 1.5rem;
+  border: none;
+  font-size: 1.6rem;
+  cursor: pointer;
+}
+
+.feed-post-add-comment {
+  margin: 0 1.5rem;
+  display: flex;
+  flex-direction: column;
+  margin-top: 1.5rem;
+  align-items: center;
+  padding-bottom: 0.5rem;
+  gap: 1.5rem;
+}
+
+.feed-post-comment-input {
+  width: 95%;
+  border-radius: 2rem;
+  border: 2px solid #bbb;
+  padding: 1rem;
+  flex: 1;
+  margin-top: 0.25rem;
+  font: inherit;
+}
+
+.feed-add-comment-button {
+  background-color: rgba(0, 82, 158, 0.8);
+  border: 3px solid #00529f;
+  border-radius: 100rem;
+  font-size: 1.7rem;
+  color: #fff;
+  padding: 0.9rem 1.8rem;
+  position: relative;
+  cursor: pointer;
+}
+
+.feed-add-comment-button:hover {
+  background-color: #00529f;
+  bottom: 0.1rem;
+}
+
+.feed-comment-item-input.comment-input-active {
+  border: 2px solid #00529f;
+  padding: 1rem 2rem;
+}
+
+.comment-item-save-cancel {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.comment-item-save-cancel > * {
+  font-size: 1.6rem;
+  border-radius: 2rem;
+  padding: 0.5rem 0rem;
+  width: 8rem;
+  text-align: center;
+  cursor: pointer;
+  margin-bottom: 1.5rem;
+}

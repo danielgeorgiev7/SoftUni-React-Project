@@ -1,10 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { deletePost, editPost } from "../../services/postService";
-import AuthContext from "../../contexts/authContext";
 import { deleteLikes, putLikes } from "../../services/likeService";
-import CommentItem from "./CommentItem";
 import { deleteComments, postComments } from "../../services/commentService";
+import AuthContext from "../../contexts/authContext";
+import CommentItem from "./CommentItem";
 import postsDateFormatting from "../../utils/postsDateFormating";
+import "./FeedPost.css";
 
 export function FeedPost({ post }) {
   const {

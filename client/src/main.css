@@ -8,6 +8,7 @@ html {
   box-sizing: border-box;
   font-size: 62.5%;
   font-family: "Roboto", serif;
+  overflow-y: auto;
 }
 
 body {
@@ -15,4 +16,6 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  min-height: 100vh;
+  position: relative;
 }

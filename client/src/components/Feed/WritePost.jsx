@@ -1,8 +1,9 @@
 import { useContext } from "react";
-import useForm from "../../hooks/useForm";
 import { createPost } from "../../services/postService";
-import AuthContext from "../../contexts/authContext";
 import { postLikes } from "../../services/likeService";
+import useForm from "../../hooks/useForm";
+import AuthContext from "../../contexts/authContext";
+import "./WritePost.css";
 
 function WritePost() {
   const { setPosts, setErrorMessage, errorMessage, setLikes } =

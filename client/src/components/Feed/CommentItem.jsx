@@ -1,6 +1,7 @@
 import { useState } from "react";
 import postsDateFormatting from "../../utils/postsDateFormating";
 import { putComments } from "../../services/commentService";
+import "./CommentItem.css";
 
 function CommentItem({ commentObj, userId, deleteCommentHandler }) {
   const [editable, setEditable] = useState(false);
