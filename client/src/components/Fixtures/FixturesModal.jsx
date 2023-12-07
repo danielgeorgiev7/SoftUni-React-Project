@@ -1,183 +1,210 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { formatDate } from "../../utils/DateFormatting";
 import "./FixturesModal.css";
 import Summary from "./Modal/Summary";
 import Statistics from "./Modal/Statistics";
 import Squads from "./Modal/Squads";
+import Loading from "../Loading/Loading";
+import FootballContext from "../../contexts/footballContext";
+import { useParams } from "react-router-dom";
+/* eslint-disable react-hooks/exhaustive-deps */
 
 export function FixturesModal({
-  fixture,
-  modalOpen,
   outOfModalHandle,
   buttonClicked,
   setButtonClicked,
 }) {
+  const { id } = useParams();
+  const { getCurrentFixture, currentFixture } = useContext(FootballContext);
+  const isLoaded = Number(id) === currentFixture?.fixture.id;
+
   useEffect(
     function () {
-      if (modalOpen) {
-        document.body.classList.add("no-scroll");
-      } else {
+      document.body.classList.add("no-scroll");
+      getCurrentFixture(id);
+      return () => {
         document.body.classList.remove("no-scroll");
-      }
+      };
     },
-    [modalOpen]
+    [id]
   );
 
-  if (fixture === null) return;
+  const homeLineups = currentFixture?.lineups["0"];
+  const awayLineups = currentFixture?.lineups["1"];
 
-  const homeLineups = fixture.lineups["0"];
-  const awayLineups = fixture.lineups["1"];
-
-  const date = formatDate(fixture.fixture.date);
+  const date = currentFixture?.fixture.date
+    ? formatDate(currentFixture.fixture.date)
+    : null;
   let display1 = null;
   let display2 = null;
-  if (fixture.league.name === "UEFA Champions League") {
-    [display1, display2] = fixture.league.round.split(" - ");
+  if (currentFixture?.league.name === "UEFA Champions League") {
+    [display1, display2] = currentFixture.league.round.split(" - ");
     display1 = " - " + display1;
     display2 = " - " + display2 + " of 6";
   }
-  if (fixture.league.name === "La Liga") {
+  if (currentFixture?.league.name === "La Liga") {
     display1 = " - Round ";
-    display2 = fixture.league.round.split(" - ")[1];
+    display2 = currentFixture.league.round.split(" - ")[1];
   }
-  if (fixture.league.name === "Friendlies Clubs") {
+  if (currentFixture?.league.name === "Friendlies Clubs") {
     display1 = "Club Friendlies";
     display2 = "";
   }
 
   return (
     <>
-      <div
-        className={modalOpen ? "modal-outside-blur" : "hidden"}
-        onClick={outOfModalHandle}
-      ></div>
+      <div className={"modal-outside-blur"} onClick={outOfModalHandle}></div>
 
-      <div className={`modal-wrapper${!modalOpen ? " hidden" : ""}`}>
+      <div className={"modal-wrapper"}>
         <div className="modal">
-          <div className="modal-content">
+          <div
+            className={
+              currentFixture?.fixture.status.short === "FT"
+                ? "modal-content loading-big"
+                : "modal-content loading-small"
+            }
+          >
             <a className="x-button" onClick={outOfModalHandle}>
               ×
             </a>
-            <img
-              src={
-                (fixture.fixture.id === 1030303 &&
-                  "/rose-bowl-california.jpg") ||
-                (fixture.fixture.id === 1030312 && "/nrg-stadium-texas.jpg") ||
-                (fixture.fixture.id === 1030323 &&
-                  "/camping-stadium-florida.jpg") ||
-                (fixture.fixture.id === 1117081 && "/att-stadium-texas.jpg") ||
-                "/" +
-                  fixture.teams.home.name.toLowerCase().split(" ").join("-") +
-                  ".jpg"
-              }
-              alt={`${fixture.teams.home.name} stadium`}
-              className={`stadium-img ${
-                buttonClicked === "summary" ? "stadium-img-fix" : ""
-              }`}
-            />
-            <div className="fixtures-modal-venue">
-              <p>
-                <span>Venue: </span>
-                {fixture.fixture.venue.name}, {fixture.fixture.venue.city}
-              </p>
-            </div>
-            <div className="fixtures-modal-upper-info">
-              <div className="span-holder">
-                <span>
-                  {display1 !== "Club Friendlies" &&
-                    display2 !== "" &&
-                    fixture.league.name}
-                  {display1 !== null && display2 !== null
-                    ? display1 + display2
-                    : " - " + fixture.league.round}
-                </span>
-                <p>
-                  <span>Referee: </span>
-                  {fixture.fixture.referee
-                    ? fixture.fixture.referee
-                    : "Not Stated"}
-                </p>
-              </div>
-              {fixture.fixture.status.short === "TBD" ? (
-                fixture.fixture.status.long
-              ) : (
-                <span>{date}</span>
-              )}
-            </div>
-            <div className="fixtures-modal-teams">
-              <div
-                className={`fixtures-modal-home-team ${
-                  fixture.teams.home.id === 541 && "real-blue"
-                } ${fixture.teams.home.winner ? "winner" : "loser"}`}
-              >
-                <p className="fixtures-modal-home-name">
-                  {fixture.teams.home.name}
-                </p>
-                <img src={fixture.teams.home.logo} alt="Home team logo" />
-                <span>{fixture.goals.home} </span>
-              </div>
-              <span>—</span>
-              <div
-                className={`fixtures-modal-away-team ${
-                  fixture.teams.away.id === 541 && "real-blue"
-                } ${fixture.teams.away.winner ? "winner" : "loser"}`}
-              >
-                <span>{fixture.goals.away} </span>
-                <img src={fixture.teams.away.logo} alt="Away team logo" />
-                <p className="fixtures-modal-away-name">
-                  {fixture.teams.away.name}
-                </p>
-              </div>
-            </div>
-            <div className="more-info">
-              <p>
-                {fixture.fixture.status.short !== "TBD"
-                  ? fixture.fixture.status.long
-                  : ""}
-              </p>
-            </div>
-            {fixture.fixture.status.short.toLowerCase() === "ft" && (
-              <div className="fixtures-modal-buttons">
-                <button
-                  className={buttonClicked === "summary" ? "isActive" : ""}
-                  onClick={() => setButtonClicked("summary")}
-                >
-                  Summary
-                </button>
-                <button
-                  className={buttonClicked === "stats" ? "isActive" : ""}
-                  onClick={() => setButtonClicked("stats")}
-                >
-                  Statistics
-                </button>
-                <button
-                  className={buttonClicked === "squads" ? "isActive" : ""}
-                  onClick={() => setButtonClicked("squads")}
-                >
-                  Squads
-                </button>
-              </div>
+            {!isLoaded ? (
+              <Loading />
+            ) : (
+              <>
+                <img
+                  src={
+                    (currentFixture.fixture.id === 1030303 &&
+                      "/rose-bowl-california.jpg") ||
+                    (currentFixture.fixture.id === 1030312 &&
+                      "/nrg-stadium-texas.jpg") ||
+                    (currentFixture.fixture.id === 1030323 &&
+                      "/camping-stadium-florida.jpg") ||
+                    (currentFixture.fixture.id === 1117081 &&
+                      "/att-stadium-texas.jpg") ||
+                    "/" +
+                      currentFixture.teams.home.name
+                        .toLowerCase()
+                        .split(" ")
+                        .join("-") +
+                      ".jpg"
+                  }
+                  alt={`${currentFixture.teams.home.name} stadium`}
+                  className={`stadium-img ${
+                    buttonClicked === "summary" ? "stadium-img-fix" : ""
+                  }`}
+                />
+                <div className="fixtures-modal-venue">
+                  <p>
+                    <span>Venue: </span>
+                    {currentFixture.fixture.venue.name},{" "}
+                    {currentFixture.fixture.venue.city}
+                  </p>
+                </div>
+                <div className="fixtures-modal-upper-info">
+                  <div className="span-holder">
+                    <span>
+                      {display1 !== "Club Friendlies" &&
+                        display2 !== "" &&
+                        currentFixture.league.name}
+                      {display1 !== null && display2 !== null
+                        ? display1 + display2
+                        : " - " + currentFixture.league.round}
+                    </span>
+                    <p>
+                      <span>Referee: </span>
+                      {currentFixture.fixture.referee
+                        ? currentFixture.fixture.referee
+                        : "Not Stated"}
+                    </p>
+                  </div>
+                  {currentFixture.fixture.status.short === "TBD" ? (
+                    currentFixture.fixture.status.long
+                  ) : (
+                    <span>{date}</span>
+                  )}
+                </div>
+                <div className="fixtures-modal-teams">
+                  <div
+                    className={`fixtures-modal-home-team ${
+                      currentFixture.teams.home.id === 541 && "real-blue"
+                    } ${currentFixture.teams.home.winner ? "winner" : "loser"}`}
+                  >
+                    <p className="fixtures-modal-home-name">
+                      {currentFixture.teams.home.name}
+                    </p>
+                    <img
+                      src={currentFixture.teams.home.logo}
+                      alt="Home team logo"
+                    />
+                    <span>{currentFixture.goals.home} </span>
+                  </div>
+                  <span>—</span>
+                  <div
+                    className={`fixtures-modal-away-team ${
+                      currentFixture.teams.away.id === 541 && "real-blue"
+                    } ${currentFixture.teams.away.winner ? "winner" : "loser"}`}
+                  >
+                    <span>{currentFixture.goals.away} </span>
+                    <img
+                      src={currentFixture.teams.away.logo}
+                      alt="Away team logo"
+                    />
+                    <p className="fixtures-modal-away-name">
+                      {currentFixture.teams.away.name}
+                    </p>
+                  </div>
+                </div>
+                <div className="more-info">
+                  <p>
+                    {currentFixture.fixture.status.short !== "TBD"
+                      ? currentFixture.fixture.status.long
+                      : ""}
+                  </p>
+                </div>
+                {currentFixture.fixture.status.short.toLowerCase() === "ft" && (
+                  <div className="fixtures-modal-buttons">
+                    <button
+                      className={buttonClicked === "summary" ? "isActive" : ""}
+                      onClick={() => setButtonClicked("summary")}
+                    >
+                      Summary
+                    </button>
+                    <button
+                      className={buttonClicked === "stats" ? "isActive" : ""}
+                      onClick={() => setButtonClicked("stats")}
+                    >
+                      Statistics
+                    </button>
+                    <button
+                      className={buttonClicked === "squads" ? "isActive" : ""}
+                      onClick={() => setButtonClicked("squads")}
+                    >
+                      Squads
+                    </button>
+                  </div>
+                )}
+                {buttonClicked === "summary" &&
+                  currentFixture.fixture.status.short === "FT" && (
+                    <Summary
+                      fixture={currentFixture}
+                      homeLineups={homeLineups}
+                      awayLineups={awayLineups}
+                    />
+                  )}
+                {buttonClicked === "stats" &&
+                  currentFixture.fixture.status.short === "FT" && (
+                    <Statistics fixture={currentFixture} />
+                  )}
+                {buttonClicked === "squads" &&
+                  currentFixture.fixture.status.short === "FT" && (
+                    <Squads
+                      fixture={currentFixture}
+                      homeLineups={homeLineups}
+                      awayLineups={awayLineups}
+                    />
+                  )}
+              </>
             )}
-            {buttonClicked === "summary" &&
-              fixture.fixture.status.short === "FT" && (
-                <Summary
-                  fixture={fixture}
-                  homeLineups={homeLineups}
-                  awayLineups={awayLineups}
-                />
-              )}
-            {buttonClicked === "stats" &&
-              fixture.fixture.status.short === "FT" && (
-                <Statistics fixture={fixture} />
-              )}
-            {buttonClicked === "squads" &&
-              fixture.fixture.status.short === "FT" && (
-                <Squads
-                  fixture={fixture}
-                  homeLineups={homeLineups}
-                  awayLineups={awayLineups}
-                />
-              )}
           </div>
         </div>
       </div>

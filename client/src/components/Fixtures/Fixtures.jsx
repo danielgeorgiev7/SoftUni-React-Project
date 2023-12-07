@@ -1,45 +1,45 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router";
+import { useLocation } from "react-router-dom";
 import FixturesPanel from "./FixturesPanel";
 import Checkbox from "./Checkbox";
 import FixturesModal from "./FixturesModal";
 import FootballContext from "../../contexts/footballContext";
-import "./Fixtures.css";
-import { getFixtureInfo } from "../../services/footballAPI";
 import Loading from "../Loading/Loading";
+import "./Fixtures.css";
 
 function Fixtures() {
   const navigate = useNavigate();
   const { fixtures, previousFixtures } = useContext(FootballContext);
   const [checkboxChecked, setCheckboxChecked] = useState(false);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [currentFixture, setCurrentFixture] = useState(null);
   const [buttonClicked, setButtonClicked] = useState("summary");
+  const location = useLocation();
+  const isModalHidden =
+    location.pathname.split("/")[2] === "" ||
+    location.pathname.split("/")[2] === undefined;
+  console.log(isModalHidden);
 
-  if (fixtures === null || previousFixtures === null) return <Loading />;
+  if (location.pathname.split("/")[2] !== "")
+    if (!fixtures || !previousFixtures) return <Loading />;
 
   async function detailsBtnClickHandler(fixture) {
-    const fixtureResult = await getFixtureInfo(fixture.fixture.id);
-    setCurrentFixture(fixtureResult["0"]);
-    setModalOpen(true);
     navigate(`/fixtures/${fixture.fixture.id}`);
   }
 
   async function OutOfModalHandle() {
-    setModalOpen(false);
     setButtonClicked("summary");
     navigate("/fixtures");
   }
 
   return (
     <>
-      <FixturesModal
-        fixture={currentFixture}
-        modalOpen={modalOpen}
-        outOfModalHandle={OutOfModalHandle}
-        buttonClicked={buttonClicked}
-        setButtonClicked={setButtonClicked}
-      ></FixturesModal>
+      {!isModalHidden && (
+        <FixturesModal
+          outOfModalHandle={OutOfModalHandle}
+          buttonClicked={buttonClicked}
+          setButtonClicked={setButtonClicked}
+        ></FixturesModal>
+      )}
 
       <div className="fixtures-container">
         <div className="fixtures">
@@ -62,9 +62,6 @@ function Fixtures() {
                   <FixturesPanel
                     fixture={fixture}
                     key={fixture.fixture?.id}
-                    setModalOpen={setModalOpen}
-                    id={fixture.fixture?.id}
-                    setCurrentFixture={setCurrentFixture}
                     detailsBtnClickHandler={detailsBtnClickHandler}
                   />
                 ))}
@@ -77,9 +74,6 @@ function Fixtures() {
               <FixturesPanel
                 fixture={fixture}
                 key={fixture.fixture?.id}
-                setModalOpen={setModalOpen}
-                id={fixture.fixture?.id}
-                setCurrentFixture={setCurrentFixture}
                 detailsBtnClickHandler={detailsBtnClickHandler}
               />
             ))}

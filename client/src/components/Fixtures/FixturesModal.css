@@ -171,21 +171,26 @@
 .fixtures-modal-buttons {
   display: flex;
   justify-content: center;
+  width: 100%;
+  background-color: #eee;
+  border-top: 2px solid #aaa;
+  border-bottom: 2px solid #aaa;
+  padding: 0.5rem;
 }
 
 .fixtures-modal-buttons > * {
-  background-color: #ddd;
-  border: 2px solid #bbb;
-  color: #333;
-  font-size: 1.8rem;
+  background-color: #666;
+  border: 2px solid #444;
+  color: #fff;
+  font-size: 2rem;
   margin: 1rem 2rem;
   border-radius: 100px;
-  width: 12rem;
-  padding: 0.5rem 1rem;
+  width: 13rem;
+  padding: 0.6rem 1.2rem;
 }
 
 .fixtures-modal-buttons > *:hover {
-  background-color: #ccc;
+  background-color: #444;
   cursor: pointer;
 }
 
@@ -213,5 +218,15 @@
   border-radius: 50%;
   background-color: #ddd;
   top: 5rem;
-  right: 57rem;
+  right: 67.5rem;
+}
+
+.loading-small .loading-wrapper {
+  width: 80rem;
+  height: 69.6rem;
+}
+
+.loading-big .loading-wrapper {
+  width: 81.2rem;
+  height: calc(100vh - 8rem);
 }
