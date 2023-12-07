@@ -21,16 +21,21 @@ export function FeedPost({ post }) {
   const ownerUsername = JSON.parse(localStorage.auth).username;
   const ownerImg = JSON.parse(localStorage.auth).img;
 
-  const [editable, setEditable] = useState(false);
   const [postContent, setPostContent] = useState(post.content);
   const [beforeEditContent, setBeforeEditContent] = useState(post.content);
-  const [currentPostLikes, setCurrentPostLikes] = useState([]);
+  const [editable, setEditable] = useState(false);
   const [liked, setLiked] = useState(null);
-  const [currentPostComments, setCurrentPostComments] = useState([]);
+  const [currentPostLikes, setCurrentPostLikes] = useState([]);
   const [commentsOpen, setCommentsOpen] = useState(false);
+  const [currentPostComments, setCurrentPostComments] = useState([]);
   const [addCommentValue, setAddCommentValue] = useState("");
   const PostEditField = useRef();
   const AddCommentField = useRef(null);
+
+  const [errorMessage, setErrorMessage] = useState({
+    addComment: "",
+    postEdit: "",
+  });
   const [commentNewLiners, setCommentNewLiners] = useState({
     addComment: 0,
     postEdit: 0,
@@ -39,6 +44,40 @@ export function FeedPost({ post }) {
     addComment: { height: 4.1 + "rem" },
     postEdit: { height: 4.1 + "rem" },
   });
+
+  useEffect(() => {
+    const allPostLikes = getCurrentPostLikes(post._id)["0"];
+    setCurrentPostLikes(allPostLikes);
+
+    const allPostComments = getCurrentPostComments(post._id);
+    setCurrentPostComments(allPostComments);
+
+    if (allPostLikes?.likes) {
+      setLiked(allPostLikes?.likes.includes(userId));
+    }
+  }, [getCurrentPostLikes, getCurrentPostComments, post._id, userId]);
+
+  useEffect(
+    function () {
+      if (editable) {
+        PostEditField.current?.focus();
+        const inputElement = PostEditField.current;
+        inputElement.setSelectionRange(
+          inputElement.value.length,
+          inputElement.value.length
+        );
+      }
+      if (commentsOpen) {
+        AddCommentField.current?.focus();
+        const inputElement = PostEditField.current;
+        inputElement.setSelectionRange(
+          inputElement.value.length,
+          inputElement.value.length
+        );
+      }
+    },
+    [editable, commentsOpen]
+  );
 
   useEffect(
     function () {
@@ -71,7 +110,6 @@ export function FeedPost({ post }) {
           e.preventDefault();
         }
       }
-
       const addCommentLength = Math.ceil(addCommentValue.length / 39.9);
       if (addCommentLength + commentNewLiners.addComment > 1) {
         setStyle((prevState) => {
@@ -95,7 +133,6 @@ export function FeedPost({ post }) {
           };
         });
       }
-
       const postContentLength = Math.ceil(postContent.length / 44.9);
       if (postContentLength + commentNewLiners.postEdit > 1) {
         setStyle((prevState) => {
@@ -119,14 +156,12 @@ export function FeedPost({ post }) {
           };
         });
       }
-
       if (AddCommentField?.current) {
         AddCommentField.current.addEventListener("keydown", handleKeyDown);
       }
       if (PostEditField?.current) {
         PostEditField.current.addEventListener("keydown", handleKeyDown);
       }
-
       return () => {
         if (AddCommentField?.current) {
           AddCommentField.current.removeEventListener("keydown", handleKeyDown);
@@ -144,18 +179,6 @@ export function FeedPost({ post }) {
       commentNewLiners,
     ]
   );
-
-  useEffect(() => {
-    const allPostLikes = getCurrentPostLikes(post._id)["0"];
-    setCurrentPostLikes(allPostLikes);
-
-    const allPostComments = getCurrentPostComments(post._id);
-    setCurrentPostComments(allPostComments);
-
-    if (allPostLikes?.likes) {
-      setLiked(allPostLikes?.likes.includes(userId));
-    }
-  }, [getCurrentPostLikes, getCurrentPostComments, post._id, userId]);
 
   async function likeClickHandler(e) {
     e.preventDefault();
@@ -232,31 +255,6 @@ export function FeedPost({ post }) {
     setEditable(true);
   }
 
-  useEffect(
-    function () {
-      if (editable) {
-        PostEditField.current?.focus();
-        const inputElement = PostEditField.current;
-        inputElement.setSelectionRange(
-          inputElement.value.length,
-          inputElement.value.length
-        );
-      }
-    },
-    [editable]
-  );
-
-  function editCancelClickHandler() {
-    setCommentNewLiners((state) => {
-      return {
-        ...state,
-        postEdit: 0,
-      };
-    });
-    setPostContent(beforeEditContent);
-    setEditable(false);
-  }
-
   function deleteClickHandler() {
     const hasConfirmed = confirm(`Are you sure you want to delete this post?`);
     if (hasConfirmed) {
@@ -278,9 +276,27 @@ export function FeedPost({ post }) {
       });
       if (!result.code) {
         setEditable(false);
+        setErrorMessage((state) => {
+          return {
+            ...state,
+            postEdit: "",
+          };
+        });
+      } else {
+        setErrorMessage((state) => {
+          return {
+            ...state,
+            postEdit: "We're unable to post your comment right now.",
+          };
+        });
       }
-    } else if (postContent.trim() !== "") {
-      setEditable(false);
+    } else if (postContent.trim() === "") {
+      setErrorMessage((state) => {
+        return {
+          ...state,
+          postEdit: "Comment can't be blank.",
+        };
+      });
     }
     setCommentNewLiners((state) => {
       return {
@@ -289,6 +305,23 @@ export function FeedPost({ post }) {
       };
     });
     setPostContent(postContent.trim());
+  }
+
+  function editCancelClickHandler() {
+    setErrorMessage((state) => {
+      return {
+        ...state,
+        postEdit: "",
+      };
+    });
+    setCommentNewLiners((state) => {
+      return {
+        ...state,
+        postEdit: 0,
+      };
+    });
+    setPostContent(beforeEditContent);
+    setEditable(false);
   }
 
   async function addCommentHandler() {
@@ -302,10 +335,23 @@ export function FeedPost({ post }) {
       if (!result.code) {
         setCurrentPostComments((current) => [...current, result]);
         setComments((current) => [...current, result]);
+      } else {
+        setErrorMessage((state) => {
+          return {
+            ...state,
+            addComment: "Sorry, we couldn't add your comment",
+          };
+        });
       }
+    } else {
+      setErrorMessage((state) => {
+        return {
+          ...state,
+          addComment: "Comment can't be blank",
+        };
+      });
     }
     setAddCommentValue("");
-
     setCommentNewLiners((state) => {
       return {
         ...state,
@@ -324,6 +370,16 @@ export function FeedPost({ post }) {
         comments.filter((comment) => comment._id !== id)
       );
     }
+  }
+
+  function onChangeAddComment(e) {
+    setAddCommentValue(e.target.value);
+    setErrorMessage((state) => {
+      return {
+        ...state,
+        addComment: "",
+      };
+    });
   }
 
   return (
@@ -360,6 +416,14 @@ export function FeedPost({ post }) {
         <a onClick={editSaveClickHandler}>Save</a>
         <a onClick={editCancelClickHandler}>Cancel</a>
       </div>
+      <p
+        className={`error-placeholder ${
+          errorMessage.postEdit === "" ? "save-cancel-hidden" : ""
+        }`}
+        style={{ textAlign: "center" }}
+      >
+        {errorMessage.postEdit}
+      </p>
       {post.img && (
         <img
           className="feed-post-img"
@@ -421,8 +485,16 @@ export function FeedPost({ post }) {
               type="text"
               className="feed-post-comment-input"
               value={addCommentValue}
-              onChange={(e) => setAddCommentValue(e.target.value)}
+              onChange={onChangeAddComment}
             />
+            <p
+              className={`error-placeholder ${
+                errorMessage.addComment === "" ? "save-cancel-hidden" : ""
+              }`}
+              style={{ textAlign: "center", margin: 0.5 + "rem" }}
+            >
+              {errorMessage.addComment}
+            </p>
             <a className="feed-add-comment-button" onClick={addCommentHandler}>
               Add comment
             </a>

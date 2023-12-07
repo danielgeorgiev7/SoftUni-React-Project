@@ -26,18 +26,17 @@
   margin-top: 0.25rem;
   width: 100%;
   border-radius: 2rem;
-  padding: 0.65rem 1.3rem;
-  padding-bottom: 0;
+  padding: 0.6rem 1.2rem;
   border: none;
   color: #333;
   background-color: #eee;
   font-size: 1.7rem;
   resize: none;
+  overflow: hidden;
 }
 
 .feed-comment-item-input.comment-input-active {
   border: 2px solid #00529f;
-  padding: 0.65rem 1.3rem;
 }
 
 .feed-comment-item-img {
@@ -85,5 +84,4 @@
   width: 8rem;
   text-align: center;
   cursor: pointer;
-  margin-bottom: 1.5rem;
 }

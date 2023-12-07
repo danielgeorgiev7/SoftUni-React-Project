@@ -2,14 +2,17 @@ import { useEffect, useRef, useState } from "react";
 import postsDateFormatting from "../../utils/postsDateFormating";
 import { putComments } from "../../services/commentService";
 import "./CommentItem.css";
+/* eslint-disable react-hooks/exhaustive-deps */
 
 function CommentItem({ commentObj, userId, deleteCommentHandler }) {
   const [editable, setEditable] = useState(false);
   const [comment, setComment] = useState(commentObj.comment);
   const [beforeEdit, setBeforeEdit] = useState(commentObj.comment);
   const [edited, setEdited] = useState(commentObj.edited);
-  const CommentEditField = useRef();
+  const [commentNewLiners, setCommentNewLiners] = useState(0);
   const [style, setStyle] = useState({ height: 4 + "rem" });
+  const [errorMessage, setErrorMessage] = useState("");
+  const CommentEditField = useRef();
 
   useEffect(
     function () {
@@ -27,14 +30,44 @@ function CommentItem({ commentObj, userId, deleteCommentHandler }) {
 
   useEffect(
     function () {
-      const length = Math.ceil(comment.length / 38);
-      if (length > 1) {
-        setStyle({ height: 4 + (length - 1) * 2 + "rem" });
+      function handleKeyDown(e) {
+        if (e.key === "Enter") {
+          setCommentNewLiners((state) => state + 1);
+        }
+        if (e.key === "Backspace") {
+          const lastNewlineIndex = e.target.value.lastIndexOf("\n");
+          if (
+            lastNewlineIndex === e.target.value.length - 1 &&
+            commentNewLiners !== 0
+          ) {
+            setCommentNewLiners((state) => state - 1);
+          }
+        } else if (
+          e.key === " " &&
+          e.target.value[e.target.value.length - 1] === " "
+        ) {
+          e.preventDefault();
+        }
+      }
+
+      const length = Math.ceil(comment.length / 37.9);
+      if (length + commentNewLiners > 1) {
+        setStyle({ height: 4 + (length - 1 + commentNewLiners) * 2 + "rem" });
       } else {
         setStyle({ height: 4 + "rem" });
       }
+
+      if (CommentEditField?.current) {
+        CommentEditField?.current?.addEventListener("keydown", handleKeyDown);
+        return () => {
+          CommentEditField?.current?.removeEventListener(
+            "keydown",
+            handleKeyDown
+          );
+        };
+      }
     },
-    [comment.length]
+    [comment, commentNewLiners, CommentEditField]
   );
 
   function editCommentHandler() {
@@ -43,23 +76,29 @@ function CommentItem({ commentObj, userId, deleteCommentHandler }) {
   }
 
   async function editSaveClickHandler() {
-    if (comment !== beforeEdit && comment !== "") {
-      console.log(comment);
+    if (comment.trim() !== beforeEdit && comment.trim() !== "") {
       const result = await putComments(commentObj._id, {
         ...commentObj,
-        content: comment,
+        comment: comment.trim(),
         edited: true,
       });
       if (!result.code) {
         setEdited(true);
         setEditable(false);
+        setErrorMessage("");
+      } else {
+        setErrorMessage("We're unable to post your comment right now.");
       }
-    } else if (comment !== "") {
-      setEditable(false);
+    } else if (comment.trim() === "") {
+      setErrorMessage("Comment can't be blank.");
     }
+    setCommentNewLiners(0);
+    setComment(comment.trim());
   }
 
   function editCancelClickHandler() {
+    setErrorMessage("");
+    setCommentNewLiners(0);
     setComment(beforeEdit);
     setEditable(false);
   }
@@ -89,10 +128,13 @@ function CommentItem({ commentObj, userId, deleteCommentHandler }) {
       ></textarea>
       <p className="comment-item-edited">{edited && !editable && "Edited"}</p>
       {editable && (
-        <div className="comment-item-save-cancel">
-          <a onClick={editSaveClickHandler}>Save</a>
-          <a onClick={editCancelClickHandler}>Cancel</a>
-        </div>
+        <>
+          <div className="comment-item-save-cancel">
+            <a onClick={editSaveClickHandler}>Save</a>
+            <a onClick={editCancelClickHandler}>Cancel</a>
+          </div>
+          <p className="error-placeholder">{errorMessage}</p>
+        </>
       )}
       {commentObj._ownerId === userId && (
         <div className="feed-comment-item-buttons">

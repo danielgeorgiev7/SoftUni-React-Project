@@ -14,10 +14,12 @@ export default function useForm(submitHandler, asyncSubmitBool, initialValues) {
                 e.target.value = "@" + e.target.value;
             }
         }
-        setValues(state => ({
-            ...state,
-            [e.target.name]: e.target.value
-        }));
+        else {
+            setValues(state => ({
+                ...state,
+                [e.target.name]: e.target.value
+            }));
+        }
         setErrorMessage("");
     };
 

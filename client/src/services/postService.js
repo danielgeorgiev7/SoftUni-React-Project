@@ -5,7 +5,7 @@ export const createPost = ({ ownerUsername, content, ownerImg, img, likes }) => 
     const result = request.post(baseUrl, true, {
         ownerUsername,
         ownerImg,
-        content,
+        content: content.trim(),
         img,
         likes,
     });

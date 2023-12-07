@@ -4,6 +4,7 @@ import { postLikes } from "../../services/likeService";
 import useForm from "../../hooks/useForm";
 import AuthContext from "../../contexts/authContext";
 import "./WritePost.css";
+/* eslint-disable react-hooks/exhaustive-deps */
 
 function WritePost({ WritePostField }) {
   const { setPosts, setErrorMessage, errorMessage, setLikes } =
@@ -11,7 +12,7 @@ function WritePost({ WritePostField }) {
   const ownerUsername = JSON.parse(localStorage.auth).username;
   const ownerImg = JSON.parse(localStorage.auth).img;
   const [style, setStyle] = useState({ height: 7 + "rem" });
-
+  const [commentNewLiners, setCommentNewLiners] = useState(0);
   const { values, onChange, onSubmit } = useForm(createPost, true, {
     ownerUsername,
     ownerImg,
@@ -21,19 +22,52 @@ function WritePost({ WritePostField }) {
 
   useEffect(
     function () {
+      function handleKeyDown(e) {
+        if (e.key === "Enter") {
+          setCommentNewLiners((state) => state + 1);
+        }
+        if (e.key === "Backspace") {
+          const lastNewlineIndex = e.target.value.lastIndexOf("\n");
+          if (
+            lastNewlineIndex === e.target.value.length - 1 &&
+            commentNewLiners !== 0
+          ) {
+            setCommentNewLiners((state) => state - 1);
+          }
+        } else if (
+          e.key === " " &&
+          e.target.value[e.target.value.length - 1] === " "
+        ) {
+          e.preventDefault();
+        }
+      }
       const length = Math.ceil(values.content.length / 40.9);
-      if (length > 2) {
-        setStyle({ height: 7 + (length - 2) * 2.3 + "rem" });
+      if (length + commentNewLiners > 2) {
+        setStyle({ height: 7 + (length - 2 + commentNewLiners) * 2.3 + "rem" });
       } else {
         setStyle({ height: 7 + "rem" });
       }
+
+      if (WritePostField?.current) {
+        WritePostField?.current?.addEventListener("keydown", handleKeyDown);
+        return () => {
+          WritePostField?.current?.removeEventListener(
+            "keydown",
+            handleKeyDown
+          );
+        };
+      }
     },
-    [values.content.length]
+    [values.content.length, commentNewLiners, WritePostField]
   );
 
   async function onSubmitHandler(e) {
     e.preventDefault();
-    if (values.content === "" && values.img === "") {
+    const isContentEmpty = /^\s*$/.test(values.content);
+    if (isContentEmpty && values.img === "") {
+      setErrorMessage("Post can't be empty without a linked photo.");
+      setCommentNewLiners(0);
+      values.content = "";
       return;
     } else {
       const postResult = await onSubmit();
@@ -42,6 +76,7 @@ function WritePost({ WritePostField }) {
       } else {
         setErrorMessage(postResult.message);
       }
+      setCommentNewLiners(0);
       const likesResult = await postLikes(postResult._id, []);
       if (!likesResult.code) {
         setLikes((state) => [...state, likesResult]);
