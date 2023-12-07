@@ -5,6 +5,7 @@ import {
   getFixtureInfo,
   getFixtures,
   getLaLiga,
+  getPlayer,
   getPreviousFixtures,
 } from "../services/footballAPI";
 
@@ -16,29 +17,29 @@ export const FootballProvider = ({ children }) => {
   const [previousFixtures, setPreviousFixtures] = useState(null);
   const [currentFixture, setCurrentFixture] = useState(null);
   const [players, setPlayers] = useState(null);
+  const [currentPlayer, setCurrentPlayer] = useState(null);
   const [laLigaTable, setLaLigaTable] = useState(null);
   const [CLGroups, setCLGroups] = useState(null);
-
   /* eslint-disable react-hooks/exhaustive-deps */
 
   useEffect(function () {
-    getFixtures().then((fixturesData) =>
-      hasError(fixturesData)
-        ? setErrorMessage(fixturesData.errorMessage || "Fixtures couldn't load")
-        : setFixtures(fixturesData)
-    );
-    getPreviousFixtures().then((prevFixturesData) =>
-      hasError(prevFixturesData)
-        ? setErrorMessage(
-            prevFixturesData.errorMessage || "Previous Fixtures couldn't load"
-          )
-        : setPreviousFixtures(prevFixturesData)
-    );
-    // getAllPlayers().then((playersData) =>
-    //   hasError(playersData)
-    //     ? setErrorMessage(playersData.errorMessage || "Players couldn't load")
-    //     : setPlayers(playersData)
+    // getFixtures().then((fixturesData) =>
+    //   hasError(fixturesData)
+    //     ? setErrorMessage(fixturesData.errorMessage || "Fixtures couldn't load")
+    //     : setFixtures(fixturesData)
     // );
+    // getPreviousFixtures().then((prevFixturesData) =>
+    //   hasError(prevFixturesData)
+    //     ? setErrorMessage(
+    //         prevFixturesData.errorMessage || "Previous Fixtures couldn't load"
+    //       )
+    //     : setPreviousFixtures(prevFixturesData)
+    // );
+    getAllPlayers().then((playersData) =>
+      hasError(playersData)
+        ? setErrorMessage(playersData.errorMessage || "Players couldn't load")
+        : setPlayers(playersData)
+    );
     // getLaLiga().then((laLigaData) =>
     //   hasError(laLigaData)
     //     ? setErrorMessage(
@@ -65,6 +66,15 @@ export const FootballProvider = ({ children }) => {
     }
   }
 
+  async function getCurrentPlayer(id) {
+    if (currentPlayer === null || currentPlayer.player.id !== id) {
+      const result = await getPlayer(id);
+      if (!hasError(result)) {
+        setCurrentPlayer(result["0"]);
+      }
+    }
+  }
+
   function hasError(requestData) {
     if (
       requestData.code ||
@@ -87,6 +97,9 @@ export const FootballProvider = ({ children }) => {
     currentFixture,
     setCurrentFixture,
     getCurrentFixture,
+    currentPlayer,
+    setCurrentPlayer,
+    getCurrentPlayer,
   };
 
   return (

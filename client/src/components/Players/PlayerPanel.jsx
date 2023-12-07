@@ -1,5 +1,17 @@
+// import { useEffect } from "react";
+import { useEffect } from "react";
 import "./PlayerPanel.css";
-function PlayerPanel({ player, detailsOnClickHandler }) {
+function PlayerPanel({ player, detailsOnClickHandler, setPlayerPositions }) {
+  /* eslint-disable react-hooks/exhaustive-deps */
+
+  useEffect(function () {
+    setPlayerPositions((state) => {
+      return {
+        ...state,
+        [player.id]: player.position,
+      };
+    });
+  }, []);
   return (
     <div className="players-panel">
       <div className="players-panel-img-wrapper">

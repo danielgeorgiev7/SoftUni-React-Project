@@ -1,19 +1,22 @@
-import PlayersModal from "./PlayersModal";
-import PlayerPanel from "./PlayerPanel";
-import "./Players.css";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router";
+import { useLocation } from "react-router-dom";
+import PlayersModal from "./PlayersModal";
+import PlayerPanel from "./PlayerPanel";
 import FootballContext from "../../contexts/footballContext";
-import { getPlayer } from "../../services/footballAPI";
 import Loading from "../Loading/Loading";
+import "./Players.css";
 
 function Players() {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [currentPlayer, setCurrentPlayer] = useState(null);
-  const [currentPlayerPosition, setCurrentPlayerPosition] = useState(null);
   const [buttonClicked, setButtonClicked] = useState("la-liga");
-  const navigate = useNavigate();
   const { players } = useContext(FootballContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [playerPositions, setPlayerPositions] = useState({});
+  const isModalHidden =
+    location.pathname.split("/")[2] === "" ||
+    location.pathname.split("/")[2] === undefined;
+
   if (!players) return <Loading />;
 
   let goalkeepers = players["0"].players.filter(
@@ -30,26 +33,23 @@ function Players() {
   );
 
   async function OutOfModalHandle() {
-    setModalOpen(false);
+    navigate("/players");
   }
 
   async function detailsOnClickHandler(player) {
-    const playerResult = await getPlayer(player.id);
-    setModalOpen(true);
-    setCurrentPlayer(playerResult);
     navigate(`/players/${player.id}`);
-    setCurrentPlayerPosition(player.position);
   }
   return (
     <>
-      <PlayersModal
-        player={currentPlayer}
-        modalOpen={modalOpen}
-        outOfModalHandle={OutOfModalHandle}
-        playerPosition={currentPlayerPosition}
-        buttonClicked={buttonClicked}
-        setButtonClicked={setButtonClicked}
-      ></PlayersModal>
+      {!isModalHidden && (
+        <PlayersModal
+          outOfModalHandle={OutOfModalHandle}
+          buttonClicked={buttonClicked}
+          setButtonClicked={setButtonClicked}
+          playerPositions={playerPositions}
+        ></PlayersModal>
+      )}
+
       <div className="players">
         <h2 className="players-heading">Goalkeepers</h2>
         <div className="players-panel-wrapper">
@@ -58,6 +58,7 @@ function Players() {
               player={goalkeeper}
               key={`players-panel-${goalkeeper.id}`}
               detailsOnClickHandler={detailsOnClickHandler}
+              setPlayerPositions={setPlayerPositions}
             />
           ))}
         </div>
@@ -68,6 +69,7 @@ function Players() {
               player={defender}
               key={`players-panel-${defender.id}`}
               detailsOnClickHandler={detailsOnClickHandler}
+              setPlayerPositions={setPlayerPositions}
             />
           ))}
         </div>
@@ -78,6 +80,7 @@ function Players() {
               player={midfielder}
               key={`players-panel-${midfielder.id}`}
               detailsOnClickHandler={detailsOnClickHandler}
+              setPlayerPositions={setPlayerPositions}
             />
           ))}
         </div>
@@ -88,6 +91,7 @@ function Players() {
               player={attacker}
               key={`players-panel-${attacker.id}`}
               detailsOnClickHandler={detailsOnClickHandler}
+              setPlayerPositions={setPlayerPositions}
             />
           ))}
         </div>

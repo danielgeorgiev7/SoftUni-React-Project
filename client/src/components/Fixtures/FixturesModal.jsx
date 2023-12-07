@@ -1,12 +1,12 @@
 import { useContext, useEffect } from "react";
 import { formatDate } from "../../utils/DateFormatting";
+import { useParams } from "react-router-dom";
 import "./FixturesModal.css";
 import Summary from "./Modal/Summary";
 import Statistics from "./Modal/Statistics";
 import Squads from "./Modal/Squads";
 import Loading from "../Loading/Loading";
 import FootballContext from "../../contexts/footballContext";
-import { useParams } from "react-router-dom";
 /* eslint-disable react-hooks/exhaustive-deps */
 
 export function FixturesModal({

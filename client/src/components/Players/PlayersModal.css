@@ -95,3 +95,13 @@
   background-color: #00529f;
   cursor: auto;
 }
+
+.loading-gk .loading-wrapper {
+  width: 80rem;
+  height: 66.1rem;
+}
+
+.loading-player .loading-wrapper {
+  width: 80rem;
+  height: 83.3rem;
+}

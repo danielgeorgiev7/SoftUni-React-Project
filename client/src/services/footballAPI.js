@@ -36,7 +36,6 @@ export async function getAllPlayers() {
 
 export async function getPlayer(id) {
     const data = await apiCall(`https://api-football-v1.p.rapidapi.com/v3/players?season=2023&id=${id}`);
-
     return data;
 }
 

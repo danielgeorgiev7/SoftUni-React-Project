@@ -17,7 +17,7 @@ function Fixtures() {
   const isModalHidden =
     location.pathname.split("/")[2] === "" ||
     location.pathname.split("/")[2] === undefined;
-  console.log(isModalHidden);
+  // console.log(isModalHidden);
 
   if (location.pathname.split("/")[2] !== "")
     if (!fixtures || !previousFixtures) return <Loading />;
