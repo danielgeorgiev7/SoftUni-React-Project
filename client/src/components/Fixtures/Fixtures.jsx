@@ -6,6 +6,7 @@ import FixturesModal from "./FixturesModal";
 import FootballContext from "../../contexts/footballContext";
 import "./Fixtures.css";
 import { getFixtureInfo } from "../../services/footballAPI";
+import Loading from "../Loading/Loading";
 
 function Fixtures() {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ function Fixtures() {
   const [currentFixture, setCurrentFixture] = useState(null);
   const [buttonClicked, setButtonClicked] = useState("summary");
 
-  if (fixtures === null || previousFixtures === null) return;
+  if (fixtures === null || previousFixtures === null) return <Loading />;
 
   async function detailsBtnClickHandler(fixture) {
     const fixtureResult = await getFixtureInfo(fixture.fixture.id);

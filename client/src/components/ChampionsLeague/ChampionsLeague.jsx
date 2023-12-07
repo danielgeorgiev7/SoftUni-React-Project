@@ -2,9 +2,10 @@ import { useContext } from "react";
 import CLItem from "./CLItem";
 import "./ChampionsLeague.css";
 import FootballContext from "../../contexts/footballContext";
+import Loading from "../Loading/Loading";
 function ChampionsLeague() {
   const { CLGroups } = useContext(FootballContext);
-  if (!CLGroups) return;
+  if (!CLGroups) return <Loading />;
   return (
     <>
       <h2 className="cl-h2">Champions League Group Stage</h2>

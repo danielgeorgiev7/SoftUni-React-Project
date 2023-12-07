@@ -5,6 +5,7 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router";
 import FootballContext from "../../contexts/footballContext";
 import { getPlayer } from "../../services/footballAPI";
+import Loading from "../Loading/Loading";
 
 function Players() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -13,7 +14,7 @@ function Players() {
   const [buttonClicked, setButtonClicked] = useState("la-liga");
   const navigate = useNavigate();
   const { players } = useContext(FootballContext);
-  if (!players) return;
+  if (!players) return <Loading />;
 
   let goalkeepers = players["0"].players.filter(
     (player) => player.position === "Goalkeeper"

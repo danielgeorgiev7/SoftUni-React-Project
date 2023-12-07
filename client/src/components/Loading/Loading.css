@@ -1,0 +1,61 @@
+.loading-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading-wrapper .loading-card {
+  display: flex;
+  padding: 24px;
+  border-radius: 5px;
+  min-height: 300px;
+  min-width: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-wrapper .loading-card .loading {
+  position: relative;
+  height: 0;
+  width: 0;
+}
+
+.loading-wrapper .loading-card .loading span {
+  display: block;
+  height: 25px; /* Adjust the height of the dots */
+  width: 25px; /* Adjust the width of the dots */
+  background: #00529f;
+  position: absolute;
+  border-radius: 50%;
+}
+
+.loading-wrapper .loading-card .loading span:nth-of-type(1) {
+  left: -80px; /* Adjust the left position for more space */
+  animation: loader1Anim 1s linear;
+  animation-delay: 0s;
+  animation-iteration-count: infinite;
+  animation-direction: forwards;
+}
+
+.loading-wrapper .loading-card .loading span:nth-of-type(2) {
+  left: -30px; /* Adjust the left position for more space */
+  animation: loader1Anim 1s linear;
+  animation-delay: 0.2s;
+  animation-iteration-count: infinite;
+  animation-direction: forwards;
+}
+
+.loading-wrapper .loading-card .loading span:nth-of-type(3) {
+  left: 20px;
+  animation: loader1Anim 1s linear;
+  animation-delay: 0.4s;
+  animation-iteration-count: infinite;
+  animation-direction: forwards;
+}
+
+@keyframes loader1Anim {
+  42% {
+    transform: translateY(-60px); /* Adjust the translateY for more space */
+  }
+}

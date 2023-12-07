@@ -68,7 +68,7 @@ export function FeedPost({ post }) {
         );
       }
       if (commentsOpen) {
-        AddCommentField.current?.focus();
+        AddCommentField.current?.focus({ preventScroll: true });
         const inputElement = PostEditField.current;
         inputElement.setSelectionRange(
           inputElement.value.length,

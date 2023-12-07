@@ -2,9 +2,10 @@ import { useContext } from "react";
 import "./LaLiga.css";
 import LaLigaItem from "./LaLigaItem";
 import FootballContext from "../../contexts/footballContext";
+import Loading from "../Loading/Loading";
 function LaLiga() {
   const { laLigaTable } = useContext(FootballContext);
-  if (!laLigaTable) return;
+  if (!laLigaTable) return <Loading />;
   return (
     <div className="standings-container">
       <h2>La Liga Standings</h2>
