@@ -1,7 +1,6 @@
-# SoftUni-React-Project
-Vista Madridista Website Documentation
+# Vista Madridista Website Documentation
 
-Project Overview
+## Project Overview
 
 Vista Madridista is a platform dedicated to fans of Real Madrid, providing a space for users to engage with each other through posts, comments, and likes.
 
