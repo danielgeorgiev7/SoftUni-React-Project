@@ -41,8 +41,8 @@ export function FeedPost({ post }) {
     postEdit: 0,
   });
   const [style, setStyle] = useState({
-    addComment: { height: 4.1 + "rem" },
-    postEdit: { height: 4.1 + "rem" },
+    addComment: { height: 4.75 + "rem" },
+    postEdit: { height: 4.75 + "rem" },
   });
 
   useEffect(() => {
@@ -62,7 +62,7 @@ export function FeedPost({ post }) {
       if (editable) {
         PostEditField.current?.focus();
         const inputElement = PostEditField.current;
-        inputElement.setSelectionRange(
+        inputElement?.setSelectionRange(
           inputElement.value.length,
           inputElement.value.length
         );
@@ -70,7 +70,7 @@ export function FeedPost({ post }) {
       if (commentsOpen) {
         AddCommentField.current?.focus({ preventScroll: true });
         const inputElement = PostEditField.current;
-        inputElement.setSelectionRange(
+        inputElement?.setSelectionRange(
           inputElement.value.length,
           inputElement.value.length
         );
@@ -110,15 +110,15 @@ export function FeedPost({ post }) {
           e.preventDefault();
         }
       }
-      const addCommentLength = Math.ceil(addCommentValue.length / 39.9);
+      const addCommentLength = Math.ceil(addCommentValue.length / 41.9);
       if (addCommentLength + commentNewLiners.addComment > 1) {
         setStyle((prevState) => {
           return {
             ...prevState,
             addComment: {
               height:
-                4.1 +
-                (addCommentLength - 1 + commentNewLiners.addComment) * 2 +
+                4.25 +
+                (addCommentLength - 1 + commentNewLiners.addComment) * 2.48 +
                 "rem",
             },
           };
@@ -128,20 +128,20 @@ export function FeedPost({ post }) {
           return {
             ...prevState,
             addComment: {
-              height: 4.1 + "rem",
+              height: 4.25 + "rem",
             },
           };
         });
       }
-      const postContentLength = Math.ceil(postContent.length / 44.9);
+      const postContentLength = Math.ceil(postContent.length / 41.9);
       if (postContentLength + commentNewLiners.postEdit > 1) {
         setStyle((prevState) => {
           return {
             ...prevState,
             postEdit: {
               height:
-                4.1 +
-                (postContentLength - 1 + commentNewLiners.postEdit) * 2.2 +
+                4.75 +
+                (postContentLength - 1 + commentNewLiners.postEdit) * 2.59 +
                 "rem",
             },
           };
@@ -151,7 +151,7 @@ export function FeedPost({ post }) {
           return {
             ...prevState,
             postEdit: {
-              height: 4.1 + "rem",
+              height: 4.75 + "rem",
             },
           };
         });
@@ -269,7 +269,10 @@ export function FeedPost({ post }) {
   }
 
   async function editSaveClickHandler() {
-    if (postContent.trim() !== beforeEditContent && postContent.trim() !== "") {
+    if (
+      (postContent.trim() !== beforeEditContent && postContent.trim() !== "") ||
+      post.img !== ""
+    ) {
       const result = await editPost(post._id, {
         ...post,
         content: postContent.trim(),
@@ -391,22 +394,23 @@ export function FeedPost({ post }) {
           Posted on: <span>{postsDateFormatting(post._createdOn)}</span>
         </p>
       </div>
-      <div className="feed-post-content-wrapper">
-        {post.content !== "" && (
-          <textarea
-            name="postEdit"
-            type="text"
-            readOnly={!editable}
-            disabled={!editable}
-            style={style.postEdit}
-            className={`feed-post-content${post.img ? "-with-img" : ""} ${
-              editable ? "post-input-editable" : ""
-            }`}
-            onChange={(e) => setPostContent(e.target.value)}
-            value={postContent}
-            ref={PostEditField}
-          />
-        )}
+      <div
+        className="feed-post-content-wrapper"
+        style={!editable && postContent === "" ? { display: "none" } : {}}
+      >
+        <textarea
+          name="postEdit"
+          type="text"
+          readOnly={!editable}
+          disabled={!editable}
+          style={style.postEdit}
+          className={`feed-post-content ${
+            editable ? "post-input-editable" : ""
+          }`}
+          onChange={(e) => setPostContent(e.target.value)}
+          value={postContent}
+          ref={PostEditField}
+        />
       </div>
       <div
         className={`edit-btn-save-cancel ${
@@ -431,7 +435,10 @@ export function FeedPost({ post }) {
           alt={`${post.ownerUsername}'s attached to post photo`}
         />
       )}
-      <div className="feed-post-buttons">
+      <div
+        className="feed-post-buttons"
+        style={!commentsOpen ? { borderTop: "2px solid #bbb" } : {}}
+      >
         <button
           className={liked === true ? "feed-post-like-btn" : ""}
           onClick={likeClickHandler}

@@ -10,7 +10,7 @@ function CommentItem({ commentObj, userId, deleteCommentHandler }) {
   const [beforeEdit, setBeforeEdit] = useState(commentObj.comment);
   const [edited, setEdited] = useState(commentObj.edited);
   const [commentNewLiners, setCommentNewLiners] = useState(0);
-  const [style, setStyle] = useState({ height: 4 + "rem" });
+  const [style, setStyle] = useState({ height: 4.5 + "rem" });
   const [errorMessage, setErrorMessage] = useState("");
   const CommentEditField = useRef();
 
@@ -52,9 +52,11 @@ function CommentItem({ commentObj, userId, deleteCommentHandler }) {
 
       const length = Math.ceil(comment.length / 37.9);
       if (length + commentNewLiners > 1) {
-        setStyle({ height: 4 + (length - 1 + commentNewLiners) * 2 + "rem" });
+        setStyle({
+          height: 4.5 + (length - 1 + commentNewLiners) * 2.45 + "rem",
+        });
       } else {
-        setStyle({ height: 4 + "rem" });
+        setStyle({ height: 4.5 + "rem" });
       }
 
       if (CommentEditField?.current) {
@@ -126,7 +128,7 @@ function CommentItem({ commentObj, userId, deleteCommentHandler }) {
         onChange={(e) => setComment(e.target.value)}
         ref={CommentEditField}
       ></textarea>
-      <p className="comment-item-edited">{edited && !editable && "Edited"}</p>
+      {edited && !editable && <p className="comment-item-edited">Edited</p>}
       {editable && (
         <>
           <div className="comment-item-save-cancel">

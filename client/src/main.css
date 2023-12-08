@@ -8,8 +8,6 @@ html {
   box-sizing: border-box;
   font-size: 62.5%;
   font-family: "Roboto", serif;
-  overflow-y: auto;
-  overflow-x: hidden;
 }
 
 body {

@@ -23,23 +23,23 @@ export const FootballProvider = ({ children }) => {
   /* eslint-disable react-hooks/exhaustive-deps */
 
   useEffect(function () {
-    // getFixtures().then((fixturesData) =>
-    //   hasError(fixturesData)
-    //     ? setErrorMessage(fixturesData.errorMessage || "Fixtures couldn't load")
-    //     : setFixtures(fixturesData)
-    // );
-    // getPreviousFixtures().then((prevFixturesData) =>
-    //   hasError(prevFixturesData)
-    //     ? setErrorMessage(
-    //         prevFixturesData.errorMessage || "Previous Fixtures couldn't load"
-    //       )
-    //     : setPreviousFixtures(prevFixturesData)
-    // );
-    getAllPlayers().then((playersData) =>
-      hasError(playersData)
-        ? setErrorMessage(playersData.errorMessage || "Players couldn't load")
-        : setPlayers(playersData)
+    getFixtures().then((fixturesData) =>
+      hasError(fixturesData)
+        ? setErrorMessage(fixturesData.errorMessage || "Fixtures couldn't load")
+        : setFixtures(fixturesData)
     );
+    getPreviousFixtures().then((prevFixturesData) =>
+      hasError(prevFixturesData)
+        ? setErrorMessage(
+            prevFixturesData.errorMessage || "Previous Fixtures couldn't load"
+          )
+        : setPreviousFixtures(prevFixturesData)
+    );
+    // getAllPlayers().then((playersData) =>
+    //   hasError(playersData)
+    //     ? setErrorMessage(playersData.errorMessage || "Players couldn't load")
+    //     : setPlayers(playersData)
+    // );
     // getLaLiga().then((laLigaData) =>
     //   hasError(laLigaData)
     //     ? setErrorMessage(

@@ -120,7 +120,9 @@ function Header() {
             </>
           )}
           {loggedIn && (
-            <li className="hello-user">Logged as {user?.username}</li>
+            <li className="hello-user">
+              <p>Logged in as {user?.username}</p>
+            </li>
           )}
         </ul>
       </nav>

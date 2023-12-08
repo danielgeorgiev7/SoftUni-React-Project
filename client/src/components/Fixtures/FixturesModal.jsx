@@ -18,13 +18,16 @@ export function FixturesModal({
   const { getCurrentFixture, currentFixture } = useContext(FootballContext);
   const isLoaded = Number(id) === currentFixture?.fixture.id;
 
+  useEffect(function () {
+    document.body.classList.add("no-scroll");
+    return () => {
+      document.body.classList.remove("no-scroll");
+    };
+  }, []);
+
   useEffect(
     function () {
-      document.body.classList.add("no-scroll");
       getCurrentFixture(id);
-      return () => {
-        document.body.classList.remove("no-scroll");
-      };
     },
     [id]
   );

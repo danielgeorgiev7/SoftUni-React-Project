@@ -77,7 +77,7 @@ function Register() {
             name="username"
             onChange={onChange}
             value={values.username}
-            autoComplete="username"
+            autoComplete="off"
             ref={registerFirstInput}
           />
           <label htmlFor="register-email">Email address:</label>
