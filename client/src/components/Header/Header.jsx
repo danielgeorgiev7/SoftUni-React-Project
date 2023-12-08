@@ -119,7 +119,7 @@ function Header() {
               </li>
             </>
           )}
-          {loggedIn && (
+          {loggedIn && user?.username && (
             <li className="hello-user">
               <p>Logged in as {user?.username}</p>
             </li>

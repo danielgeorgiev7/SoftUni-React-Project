@@ -5,7 +5,11 @@ import FootballContext from "../../contexts/footballContext";
 import Loading from "../Loading/Loading";
 function ChampionsLeague() {
   const { CLGroups } = useContext(FootballContext);
+
+  if (typeof CLGroups === "string")
+    return <p className="error-placeholder main-error">{CLGroups}</p>;
   if (!CLGroups) return <Loading />;
+
   return (
     <>
       <h2 className="cl-h2">Champions League Group Stage</h2>

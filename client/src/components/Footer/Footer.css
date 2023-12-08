@@ -51,7 +51,8 @@ footer {
 }
 
 .profile-wrapper + footer,
-.header + footer,
-.loading-wrapper + footer {
+.loading-wrapper + footer,
+.main-error + footer,
+.header + footer {
   position: absolute;
 }

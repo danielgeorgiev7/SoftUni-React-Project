@@ -6,13 +6,16 @@ import postsDateFormatting from "../../utils/postsDateFormating";
 import "./Profile.css";
 
 function Profile() {
-  const { user } = useContext(AuthContext);
+  const { user, errorMessage } = useContext(AuthContext);
   // const { user, setUser } = useContext(AuthContext);
   // const accessToken = localStorage.getItem("accessToken");
   // const [inputValue, setInputValue] = useState("");
   // const [previewDisabled, setPreviewDisabled] = useState(false);
   // const [customPhoto, setCustomPhoto] = useState(user?.img);
   // const [imgError, setImgError] = useState("");
+
+  if (errorMessage !== "")
+    return <p className="error-placeholder main-error">{errorMessage}</p>;
 
   if (user === null) return;
   // function previewClickHandler() {

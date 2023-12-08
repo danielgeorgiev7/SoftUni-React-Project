@@ -24,37 +24,41 @@ export const FootballProvider = ({ children }) => {
 
   useEffect(function () {
     getFixtures().then((fixturesData) =>
-      hasError(fixturesData)
-        ? setErrorMessage(fixturesData.errorMessage || "Fixtures couldn't load")
-        : setFixtures(fixturesData)
+      setFixtures(
+        hasError(fixturesData)
+          ? fixturesData?.message || "Fixtures couldn't load"
+          : fixturesData
+      )
     );
     getPreviousFixtures().then((prevFixturesData) =>
-      hasError(prevFixturesData)
-        ? setErrorMessage(
-            prevFixturesData.errorMessage || "Previous Fixtures couldn't load"
-          )
-        : setPreviousFixtures(prevFixturesData)
+      setPreviousFixtures(
+        hasError(prevFixturesData)
+          ? prevFixturesData?.message || "Previous Fixtures couldn't load"
+          : prevFixturesData
+      )
     );
-    // getAllPlayers().then((playersData) =>
-    //   hasError(playersData)
-    //     ? setErrorMessage(playersData.errorMessage || "Players couldn't load")
-    //     : setPlayers(playersData)
-    // );
-    // getLaLiga().then((laLigaData) =>
-    //   hasError(laLigaData)
-    //     ? setErrorMessage(
-    //         laLigaData.errorMessage || "La Liga standings couldn't load"
-    //       )
-    //     : setLaLigaTable(laLigaData)
-    // );
-    // getChampionsLeague().then((championsLeagueData) =>
-    //   hasError(championsLeagueData)
-    //     ? setErrorMessage(
-    //         championsLeagueData.errorMessage ||
-    //           "Champions league groups couldn't load"
-    //       )
-    //     : setCLGroups(championsLeagueData)
-    // );
+    getAllPlayers().then((playersData) =>
+      setPlayers(
+        hasError(playersData)
+          ? playersData?.message || "Players couldn't load"
+          : playersData
+      )
+    );
+    getLaLiga().then((laLigaData) =>
+      setLaLigaTable(
+        hasError(laLigaData)
+          ? laLigaData?.message || "La Liga standings couldn't load"
+          : laLigaData
+      )
+    );
+    getChampionsLeague().then((championsLeagueData) =>
+      setCLGroups(
+        hasError(championsLeagueData)
+          ? championsLeagueData?.message ||
+              "Champions league groups couldn't load"
+          : championsLeagueData
+      )
+    );
   }, []);
 
   async function getCurrentFixture(id) {
@@ -77,8 +81,8 @@ export const FootballProvider = ({ children }) => {
 
   function hasError(requestData) {
     if (
-      requestData.code ||
       requestData.length === 0 ||
+      requestData instanceof Error ||
       requestData instanceof Promise
     )
       return true;

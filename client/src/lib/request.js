@@ -22,18 +22,24 @@ export const buildOptions = (authenticationBool, data) => {
 };
 
 const request = async (method, url, authenticationBool, data) => {
-    const response = await fetch(url, {
-        ...buildOptions(authenticationBool, data),
-        method,
-    });
+    try {
+        const response = await fetch(url, {
+            ...buildOptions(authenticationBool, data),
+            method,
+        });
 
-    if (response.status === 204) {
-        return {};
+
+        if (response.status === 204) {
+            return {};
+        }
+
+        const result = await response.json();
+
+        return result;
     }
-
-    const result = await response.json();
-
-    return result;
+    catch (err) {
+        return err;
+    }
 };
 
 export const get = request.bind(null, 'GET');

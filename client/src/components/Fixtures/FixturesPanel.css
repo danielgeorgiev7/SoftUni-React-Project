@@ -10,7 +10,7 @@
   display: flex;
   justify-content: space-between;
   padding: 1.25rem 1.75rem;
-  font-size: 1.6rem;
+  font-size: 1.73rem;
   text-transform: uppercase;
   font-weight: 500;
   color: #333;
@@ -41,6 +41,7 @@
 
 .fixture-panel .home-team,
 .fixture-panel .away-team {
+  font-weight: 500;
   display: flex;
   align-items: center;
   gap: 1.2rem;
@@ -55,9 +56,10 @@
   align-items: center;
   justify-content: center;
   margin-left: auto;
-  font-size: 1.7rem;
+  font-size: 1.9rem;
   padding-right: 1.8rem;
   position: relative;
+  padding-top: 0.1rem;
 }
 
 .fixture-panel .loser .stats {
@@ -72,8 +74,8 @@
   content: "▶";
   position: absolute;
   top: 0.2rem;
-  left: 1.2rem;
-  font-size: 1.4rem;
+  left: 1.3rem;
+  font-size: 1.5rem;
   transform: rotate(180deg);
 }
 .fixture-panel .time {
@@ -85,7 +87,7 @@
 }
 
 .fixture-panel .time p {
-  font-size: 1.35rem;
+  font-size: 1.45rem;
 }
 
 .fixture-panel .time p + p {
@@ -106,7 +108,7 @@
 
 .fixture-panel .details-btn {
   margin-top: 1.2rem;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   padding: 0.6rem 1.7rem;
   border: none;
   background-color: #00529f;

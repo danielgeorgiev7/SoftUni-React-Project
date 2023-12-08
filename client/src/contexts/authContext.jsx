@@ -30,22 +30,22 @@ export const AuthProvider = ({ children }) => {
     function () {
       if (loggedIn) {
         getPosts().then((posts) =>
-          posts.code
-            ? setErrorMessage(posts.message)
+          posts instanceof Error
+            ? setErrorMessage(posts)
             : setPosts(posts.reverse())
         );
         getLikes().then((likes) =>
-          likes.code
+          likes instanceof Error
             ? setErrorMessage(likes.message)
             : setLikes(Object.values(likes))
         );
         getComments().then((comments) =>
-          comments.code
+          comments instanceof Error
             ? setErrorMessage(likes.message)
             : setComments(Object.values(comments))
         );
         getUser().then((user) =>
-          user.code ? setErrorMessage(user.message) : setUser(user)
+          user instanceof Error ? setErrorMessage(user.message) : setUser(user)
         );
       }
     },

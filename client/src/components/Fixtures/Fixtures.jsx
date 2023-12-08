@@ -17,10 +17,13 @@ function Fixtures() {
   const isModalHidden =
     location.pathname.split("/")[2] === "" ||
     location.pathname.split("/")[2] === undefined;
-  // console.log(isModalHidden);
 
-  if (location.pathname.split("/")[2] !== "")
-    if (!fixtures || !previousFixtures) return <Loading />;
+  if (typeof fixtures === "string")
+    return <p className="error-placeholder main-error">{fixtures}</p>;
+  if (typeof previousFixtures === "string")
+    return <p className="error-placeholder main-error">{previousFixtures}</p>;
+
+  if (!fixtures || !previousFixtures) return <Loading />;
 
   async function detailsBtnClickHandler(fixture) {
     navigate(`/fixtures/${fixture.fixture.id}`);

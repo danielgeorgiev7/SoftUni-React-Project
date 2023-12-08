@@ -17,6 +17,8 @@ function Players() {
     location.pathname.split("/")[2] === "" ||
     location.pathname.split("/")[2] === undefined;
 
+  if (typeof players === "string")
+    return <p className="error-placeholder main-error">{players}</p>;
   if (!players) return <Loading />;
 
   let goalkeepers = players["0"].players.filter(

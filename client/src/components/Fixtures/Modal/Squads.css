@@ -11,9 +11,9 @@
   font-weight: 600;
   text-transform: uppercase;
   border-radius: 2rem;
-  font-size: 2rem;
-  padding: 0.5rem;
-  width: 70rem;
+  font-size: 2.2rem;
+  padding: 0.6rem;
+  width: 75rem;
 }
 .real-madrid-squad h2,
 .other-club-squad h2 {
@@ -23,7 +23,7 @@
 
 .real-madrid-squad,
 .other-club-squad {
-  margin: 1.5rem;
+  margin: 1.5rem 0;
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -39,14 +39,14 @@
 }
 
 .coach img {
-  height: 7rem;
-  width: 7rem;
+  height: 8rem;
+  width: 8rem;
   border-radius: 50%;
   border: 4px solid #ddd;
 }
 
 .coach-textbox {
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -54,7 +54,7 @@
 
 .coach-textbox p:nth-child(1) {
   font-weight: 600;
-  font-size: 1.8rem;
+  font-size: 2rem;
   padding-bottom: 0.3rem;
 }
 

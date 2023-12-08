@@ -4,12 +4,16 @@ import FeedPost from "./FeedPost";
 import WritePost from "./WritePost";
 import AuthContext from "../../contexts/authContext";
 function Feed() {
-  const { posts } = useContext(AuthContext);
+  const { posts, errorMessage } = useContext(AuthContext);
   const WritePostField = useRef();
 
   useEffect(function () {
-    WritePostField.current.focus();
+    WritePostField?.current?.focus();
   }, []);
+
+  if (errorMessage !== "")
+    return <p className="error-placeholder main-error">{errorMessage}</p>;
+
   return (
     <div className="feed-section">
       <div className="feed-wrapper">

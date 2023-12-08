@@ -5,7 +5,11 @@ import FootballContext from "../../contexts/footballContext";
 import Loading from "../Loading/Loading";
 function LaLiga() {
   const { laLigaTable } = useContext(FootballContext);
+
+  if (typeof laLigaTable === "string")
+    return <p className="error-placeholder main-error">{laLigaTable}</p>;
   if (!laLigaTable) return <Loading />;
+
   return (
     <div className="standings-container">
       <h2>La Liga Standings</h2>
