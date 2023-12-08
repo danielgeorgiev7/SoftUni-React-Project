@@ -23,7 +23,7 @@ function SquadsPlayer({ fixture, playerInfo, teamId }) {
     if (playerRatingStatus < 6) playerRatingStatus = "poor";
   }
   return (
-    <div className="player">
+    <div className="player-section">
       <img src={morePlayerInfo.player.photo} alt={playerInfo.name} />
       <div className="player-textbox">
         <p>
