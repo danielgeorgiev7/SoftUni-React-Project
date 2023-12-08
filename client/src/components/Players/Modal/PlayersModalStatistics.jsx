@@ -17,7 +17,7 @@ function PlayersModalStatistics({ stats }) {
         <div className="players-modal-stats-overall">
           <p>Participation</p>
           <span>Appearances: {stats.games.appearences || "0"}</span>
-          <span>Minutes: {stats.games.minutes || "0"}</span>
+          <span>Minutes: {stats.games.minutes || "0"}&apos;</span>
         </div>
 
         <div className="players-modal-stats-goals">

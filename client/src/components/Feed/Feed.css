@@ -1,5 +1,6 @@
 .feed-section {
   display: flex;
+  min-height: 69.6vh;
 }
 
 .feed-wrapper {

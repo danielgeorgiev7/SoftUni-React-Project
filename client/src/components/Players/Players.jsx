@@ -9,10 +9,10 @@ import "./Players.css";
 
 function Players() {
   const [buttonClicked, setButtonClicked] = useState("la-liga");
+  const [playerPositions, setPlayerPositions] = useState({});
   const { players } = useContext(FootballContext);
   const navigate = useNavigate();
   const location = useLocation();
-  const [playerPositions, setPlayerPositions] = useState({});
   const isModalHidden =
     location.pathname.split("/")[2] === "" ||
     location.pathname.split("/")[2] === undefined;
@@ -36,6 +36,7 @@ function Players() {
 
   async function OutOfModalHandle() {
     navigate("/players");
+    setButtonClicked("la-liga");
   }
 
   async function detailsOnClickHandler(player) {
