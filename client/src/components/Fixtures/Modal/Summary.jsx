@@ -69,7 +69,7 @@ function Summary({ fixture, homeLineups, awayLineups }) {
             <img src={homeLineups.coach.photo} alt={homeLineups.coach.name} />
             <div className="coaches-text">
               <p>{homeLineups.coach.name}</p>
-              <p>Fixture formation:</p>
+              <p>fixture formation:</p>
               <p>{homeLineups.formation}</p>
             </div>
           </div>
@@ -77,7 +77,7 @@ function Summary({ fixture, homeLineups, awayLineups }) {
             <img src={awayLineups.coach.photo} alt={awayLineups.coach.name} />
             <div className="coaches-text">
               <p>{awayLineups.coach.name}</p>
-              <p>Fixture formation:</p>
+              <p>fixture formation:</p>
               <p>{awayLineups.formation}</p>
             </div>
           </div>

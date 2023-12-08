@@ -59,11 +59,7 @@ export function FixturesModal({
       <div className={"modal-outside-blur"} onClick={outOfModalHandle}></div>
 
       <div className={"modal-wrapper"}>
-        <div
-          className={`modal ${
-            currentFixture?.fixture.status.short !== "FT" ? "modal-down" : ""
-          }`}
-        >
+        <div className="modal">
           <div
             className={
               currentFixture?.fixture.status.short === "FT"
