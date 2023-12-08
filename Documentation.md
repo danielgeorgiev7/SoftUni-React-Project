@@ -48,7 +48,7 @@ React: Used for building the user interface.
 
 State Management:
 
-Utilizes React Context or Redux for managing the global state.
+Utilizes React Context for managing the global state.
 
 Routing:
 
