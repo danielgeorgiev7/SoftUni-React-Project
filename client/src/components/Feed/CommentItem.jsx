@@ -1,7 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import postsDateFormatting from "../../utils/postsDateFormating";
 import { putComments } from "../../services/commentService";
 import "./CommentItem.css";
+import AuthContext from "../../contexts/authContext";
 /* eslint-disable react-hooks/exhaustive-deps */
 
 function CommentItem({ commentObj, userId, deleteCommentHandler }) {
@@ -13,6 +14,7 @@ function CommentItem({ commentObj, userId, deleteCommentHandler }) {
   const [style, setStyle] = useState({ height: 4.5 + "rem" });
   const [errorMessage, setErrorMessage] = useState("");
   const CommentEditField = useRef();
+  const { comments, setComments } = useContext(AuthContext);
 
   useEffect(
     function () {
@@ -88,6 +90,13 @@ function CommentItem({ commentObj, userId, deleteCommentHandler }) {
         setEdited(true);
         setEditable(false);
         setErrorMessage("");
+        commentObj.edited = true;
+        commentObj.comment = comment;
+        setComments((commentsState) =>
+          commentsState.map((currentComment) =>
+            currentComment._id === commentObj._id ? commentObj : currentComment
+          )
+        );
       } else {
         setErrorMessage("We're unable to post your comment right now.");
       }
