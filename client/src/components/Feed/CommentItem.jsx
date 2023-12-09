@@ -14,7 +14,7 @@ function CommentItem({ commentObj, userId, deleteCommentHandler }) {
   const [style, setStyle] = useState({ height: 4.5 + "rem" });
   const [errorMessage, setErrorMessage] = useState("");
   const CommentEditField = useRef();
-  const { comments, setComments } = useContext(AuthContext);
+  const { setComments } = useContext(AuthContext);
 
   useEffect(
     function () {
