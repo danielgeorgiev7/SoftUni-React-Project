@@ -260,12 +260,11 @@ export function FeedPost({ post }) {
     if (hasConfirmed) {
       deleteLikes(currentPostLikes?._id);
       setLikes((state) => state.filter((like) => like.postId !== post._id));
+      deletePost(post._id);
+      setPosts((state) =>
+        state.filter((statePost) => statePost._id !== post._id)
+      );
     }
-
-    deletePost(post._id);
-    setPosts((state) =>
-      state.filter((statePost) => statePost._id !== post._id)
-    );
   }
 
   async function editSaveClickHandler() {

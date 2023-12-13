@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { getPosts } from "../services/postService";
 import { getLikes } from "../services/likeService";
 import { getComments } from "../services/commentService";
-import { getUser } from "../services/userService";
+import { getUser, getUserImg, postUserImg } from "../services/userService";
 import * as authService from "../services/authService";
 import usePersistedState from "../hooks/usePersistedState";
 
@@ -18,7 +18,7 @@ export const AuthProvider = ({ children }) => {
   const [likes, setLikes] = useState([]);
   const [comments, setComments] = useState([]);
   const [user, setUser] = useState(null);
-
+  const [userImg, setUserImg] = useState(null);
   /* eslint-disable react-hooks/exhaustive-deps */
 
   useEffect(function () {
@@ -52,6 +52,22 @@ export const AuthProvider = ({ children }) => {
     [loggedIn]
   );
 
+  useEffect(
+    function () {
+      const accessToken = localStorage.getItem("accessToken");
+      if (user !== null) {
+        getUserImg(accessToken).then((userImgData) =>
+          userImgData instanceof Error
+            ? setErrorMessage(userImgData.message)
+            : setUserImg(
+                userImgData.filter((each) => each._ownerId === user._id)["0"]
+              )
+        );
+      }
+    },
+    [user]
+  );
+
   const loginSubmitHandler = async (values) => {
     const result = await authService.login(values.email, values.password);
 
@@ -71,11 +87,13 @@ export const AuthProvider = ({ children }) => {
     const result = await authService.register(
       values.username,
       values.email,
-      values.password,
-      values.img
+      values.password
     );
+
     if (!result.code) {
       setAuth(result);
+
+      postUserImg("/default-user.png", result.accessToken);
 
       localStorage.setItem("accessToken", result.accessToken);
 
@@ -126,6 +144,8 @@ export const AuthProvider = ({ children }) => {
     getCurrentPostComments,
     user,
     setUser,
+    userImg,
+    setUserImg,
   };
 
   return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;

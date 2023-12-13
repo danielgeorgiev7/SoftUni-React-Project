@@ -13,7 +13,6 @@ function Register() {
     username: "",
     email: "",
     password: "",
-    img: "/default-user.png",
   });
   const [confirmPassword, setConfirmPassword] = useState("");
   const registerFirstInput = useRef();
@@ -28,7 +27,7 @@ function Register() {
     setErrorMessage("");
   }
 
-  function submitHandler(e) {
+  async function submitHandler(e) {
     e.preventDefault();
     if (values.username === "") {
       setErrorMessage("Username field is required");
