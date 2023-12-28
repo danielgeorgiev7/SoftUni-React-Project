@@ -40,6 +40,7 @@ export function FeedPost({ post }) {
     addComment: 0,
     postEdit: 0,
   });
+  3;
   const [style, setStyle] = useState({
     addComment: { height: 4.75 + "rem" },
     postEdit: { height: 4.75 + "rem" },

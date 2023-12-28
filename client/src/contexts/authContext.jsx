@@ -19,6 +19,7 @@ export const AuthProvider = ({ children }) => {
   const [comments, setComments] = useState([]);
   const [user, setUser] = useState(null);
   const [userImg, setUserImg] = useState(null);
+  const [allImages, setAllImages] = useState(null);
   /* eslint-disable react-hooks/exhaustive-deps */
 
   useEffect(function () {
@@ -29,23 +30,30 @@ export const AuthProvider = ({ children }) => {
   useEffect(
     function () {
       if (loggedIn) {
-        getPosts().then((posts) =>
-          posts instanceof Error
-            ? setErrorMessage(posts)
-            : setPosts(posts.reverse())
+        getPosts().then((postsData) =>
+          postsData instanceof Error
+            ? setErrorMessage(postsData)
+            : setPosts(postsData.reverse())
         );
-        getLikes().then((likes) =>
-          likes instanceof Error
-            ? setErrorMessage(likes.message)
-            : setLikes(Object.values(likes))
+        getLikes().then((likesData) =>
+          likesData instanceof Error
+            ? setErrorMessage(likesData.message)
+            : setLikes(Object.values(likesData))
         );
-        getComments().then((comments) =>
-          comments instanceof Error
-            ? setErrorMessage(likes.message)
-            : setComments(Object.values(comments))
+        getComments().then((commentsData) =>
+          commentsData instanceof Error
+            ? setErrorMessage(commentsData.message)
+            : setComments(Object.values(commentsData))
         );
-        getUser().then((user) =>
-          user instanceof Error ? setErrorMessage(user.message) : setUser(user)
+        getUser().then((userData) =>
+          userData instanceof Error
+            ? setErrorMessage(userData.message)
+            : setUser(userData)
+        );
+        getUserImg().then((userImagesData) =>
+          userImagesData instanceof Error
+            ? setErrorMessage(userImagesData.message)
+            : setAllImages(userImagesData)
         );
       }
     },
@@ -54,15 +62,9 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(
     function () {
-      const accessToken = localStorage.getItem("accessToken");
-      if (user !== null) {
-        getUserImg(accessToken).then((userImgData) =>
-          userImgData instanceof Error
-            ? setErrorMessage(userImgData.message)
-            : setUserImg(
-                userImgData.filter((each) => each._ownerId === user._id)["0"]
-              )
-        );
+      if (user !== null && allImages !== null) {
+        console.log(allImages);
+        setUserImg(allImages.filter((each) => each._ownerId === user._id)["0"]);
       }
     },
     [user]
@@ -146,6 +148,8 @@ export const AuthProvider = ({ children }) => {
     setUser,
     userImg,
     setUserImg,
+    allImages,
+    setAllImages,
   };
 
   return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;

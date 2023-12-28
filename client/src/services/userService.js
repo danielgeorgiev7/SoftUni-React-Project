@@ -32,14 +32,8 @@ export const putUserImg = async (id, photo, accessToken) => {
 };
 
 
-export const getUserImg = async (accessToken) => {
-    const result = await fetch(`http://localhost:3030/data/userphotos`, {
-        headers: {
-            'X-Authorization': accessToken,
-            "Content-Type": "application/json",
-        },
-        method: "GET",
-    })
+export const getUserImg = async () => {
+    const result = await fetch(`http://localhost:3030/data/userphotos`);
     const resultData = await result.json();
     return resultData;
 };
